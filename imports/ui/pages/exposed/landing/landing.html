@@ -1,0 +1,143 @@
+<template name="Landing">
+    <!-- <nav class="site-header fixed-top py-1">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+            <a class="py-2" href="#" aria-label="Product">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img"
+                    viewBox="0 0 24 24">
+                    <title>Product</title>
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path
+                        d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94">
+                    </path>
+                </svg>
+            </a>
+            <nav class="nav nav-masthead justify-content-center float-md-right">
+                <a class="nav-link link-light active" aria-current="page" href="#">Home</a>
+                <a class="nav-link link-light" href="#">Features</a>
+                <a class="nav-link link-light" href="#">Contact</a>
+                <button type="button" class="btn btn-outline-light py-1 px-3 rounded-pill">Dashboard</button>
+            </nav>
+        </div>
+    </nav> -->
+    <div id="landing-header" style="transition: all 200ms ease-in-out;"
+        class="fixed-top d-flex flex-column flex-md-row align-items-center text-white p-3 px-md-4">
+        <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="#">Features</a>
+            <a class="p-2 text-dark" href="#">Pricing</a>
+        </nav>
+        <a class="btn btn-outline-primary mr-3" href="#">Log In</a>
+        <a class="btn btn-outline-primary" href="#">Dashboard</a>
+    </div>
+
+    <div class="position-relative text-center bg-light d-flex align-content-center flex-nowrap p-3" style="height: 100vh !important;
+            background: linear-gradient(110deg, #020024 0%, #6dd6f3 0%, #0384d5 100%);">
+        <div class="col-md-5 p-lg-5 mx-auto my-5 d-flex align-content-center flex-wrap justify-content-center">
+            <h1 class="display-4 font-weight-normal text-white">Devxop</h1>
+            <p class="lead font-weight-normal text-white">Custom Web, App and Design solutions to meet your businessand
+                personal needs.</p>
+            <a class="btn btn-outline-light" href="#">Coming soon</a>
+        </div>
+    </div>
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Get in touch with us!</h1>
+        <p class="lead">Have a project in mind? Don't hesitate to Send us a message for more information about any
+            topic!</p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex align-content-center flex-wrap justify-content-center">
+                <div class="card mb-4 w-50 border-0">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">First and Last Name</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <p class="text-center">Your information will remain private within devxop.<br>
+                            You will not receive any newsletters from us.</p>
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-primary mb-3">Send Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 mb-3 text-center">
+            <div class="col">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Free</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>10 users included</li>
+                            <li>2 GB of storage</li>
+                            <li>Email support</li>
+                            <li>Help center access</li>
+                        </ul>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Pro</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>20 users included</li>
+                            <li>10 GB of storage</li>
+                            <li>Priority email support</li>
+                            <li>Help center access</li>
+                        </ul>
+                        <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+            <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Enterprise</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>30 users included</li>
+                <li>15 GB of storage</li>
+                <li>Phone and email support</li>
+                <li>Help center access</li>
+              </ul>
+              <button type="button" class="btn btn-lg btn-block btn-primary">Contact us</button>
+            </div>
+          </div>
+          </div>
+        </div>
+    </div> -->
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-5 p-lg-5 mx-auto d-flex align-content-center flex-wrap justify-content-center">
+                <img class="rounded mx-auto d-block mb-4" width="200" src="/img/pay-stripe.png">
+                <p class="w-100 text-center">© DEVXOP 2020 All rights reserved</p>
+            </div>
+        </div>
+    </div>
+
+
+</template>
