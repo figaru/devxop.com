@@ -1,59 +1,129 @@
-#landing-header.scrolling{
+@media (max-width: 576px) {
+    #landing-header.scrolling {
+        >img {
+            margin-bottom: 6px;
+        }
+
+        >a {
+            margin: 4px;
+        }
+    }
+
+}
+
+#landing-header.scrolling {
     background-color: var(--bs-white);
     box-shadow: var(--shadow-sm);
     border-bottom: var(--border-sm);
 
-    >h5{
+    >h5 {
         color: var(--bs-dark) !important;
     }
 
-    >img{
+    >img {
         opacity: 1;
     }
 
-    >nav{
+    >nav {
 
-        >a{
+        >a {
             color: var(--bs-dark) !important;
         }
     }
 
-    >a{
+    >a {
         /* color: var(--bs-white); */
         border-color: var(--bs-info);
         color: var(--bs-info);
+
+        transition: all 200ms ease-in-out;
     }
 
-    >a:hover{
+    >.btn-dashboard:hover {
+        filter: brightness(0.9);
+        background-color: var(--bs-green);
+    }
+
+    >.btn-dashboard {
+        background-color: var(--bs-green);
+        color: var(--bs-white);
+        border: 0;
+        outline: none;
+    }
+
+    >.btn-login:hover {
+        filter: brightness(0.9);
+        background-color: var(--bs-light);
+        color: var(--bs-dark)
+    }
+
+    >.btn-login {
+        background-color: var(--bs-light);
+        color: var(--bs-dark);
+        border: 0;
+        outline: none;
+    }
+
+    >a:hover {
         background-color: var(--bs-info);
         color: var(--bs-white);
     }
 }
 
-#landing-header{
-    >h5{
+#landing-header {
+    >h5 {
         color: var(--bs-white)
     }
 
-    >img{
+    >img {
         opacity: 0;
     }
 
-    >nav{
+    >nav {
 
-        >a{
+        >a {
             color: var(--bs-white);
         }
     }
 
-    >a{
+    >a {
         /* color: var(--bs-white); */
         border-color: var(--bs-white);
         color: var(--bs-white);
     }
 
-    >a:hover{
+    >a:hover {
         background-color: var(--bs-white);
         color: var(--bs-dark);
     }
+}
+
+.btn-contact:hover {
+    filter: brightness(0.9);
+    color: var(--bs-white);
+}
+
+.btn-contact {
+    background-color: var(--bs-orange) !important;
+    border: 0 !important;
+    outline: none !important;
+}
+
+.landing-banner {
+    height: 100vh !important;
+    background: linear-gradient(110deg, #020024 0%, #6dd6f3 0%, #0384d5 100%);
+
+    >.row {
+        max-width: 1400px;
+        margin: auto;
+        >.landing-image {
+            background-image: url('/img/landing_bg.png');
+            background-position: center right;
+            background-repeat: no-repeat;
+            background-size: contain;
+
+            max-width: 552px;
+        }
+    }
+
 }

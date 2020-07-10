@@ -1,0 +1,76 @@
+<template name="Media">
+    <div class="container">
+        <div class="row px-5 pt-5">
+            <div class="col-md-12 col-lg-4 mb-3">
+                <div class="card p-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Total Files</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Number of files associated to this user.</h6>
+                        <p class="card-text">{{stats.total_files}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4 mb-3">
+                <div class="card p-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Storage Used</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Storage currently used by your account.</h6>
+                        <p class="card-text">{{stats.storage_used}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4 mb-3">
+                <div class="card p-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Quota</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Maximum storage allowed to be used.</h6>
+                        <p class="card-text">1Gb</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row px-5">
+            <div class="col-md-12 col-lg-4 mb-3">
+                <div class="card p-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Quota</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Maximum storage allowed to be used.</h6>
+                        <p class="card-text">1Gb</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-8 mb-3">
+                <div class="card p-3">
+                    <div class="card-body text-center">
+                        <div class="media-upload">
+                            {{#with uploadProgress}}
+                            <div class="upload-progress">
+                                <div class="progress-name">
+                                    <h4>{{uploadProgress.name}}</h4>
+                                </div>
+                                <div class="progress-precent">
+                                    <h5>{{uploadProgress.percent}}%</h5>
+                                </div>
+                                {{> progress_input progress=uploadProgress.percent}}
+                            </div>
+                            {{else}}
+                            <div class="upload-icon">
+                                <i class="material-icons">
+                                    cloud_upload
+                                </i>
+                            </div>
+                            <div class="upload-description">
+                                <p>Click the button and select the file you want to upload to this account.</p>
+                            </div>
+                            <div class="upload-button">
+                                <input type='file' id="upload-input" hidden />
+                                <button class="btn btn-primary js-upload">Select File</button>
+                            </div>
+                            {{/with}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

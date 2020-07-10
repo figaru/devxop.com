@@ -1,3 +1,69 @@
 <template name="User_layout">
+    <div class="layout-header">
+        <div class="h-col" style="margin-right: 16px;">
+            <div id="toggle-drawer" class="btn-icon hovicon"><i class="material-icons">menu</i></div>
+        </div>
+        <!-- We stretch middle div to remaining space Flex-grow: 2 -->
+        <div class="h-col" style="flex-grow: 2;">
+            <h4>Devxop</h4>
+            <!-- <div class="ahs-button">
+                <i class="material-icons">menu</i>
+            </div> -->
+        </div>
+        <div class="h-col">
+            <div class="btn-icon hovicon"><i class="material-icons">notifications</i></div>
+            <div class="btn-icon hovicon"><i class="material-icons">account_circle</i></div>
+        </div>
+    </div>
 
+    <div class="layout-drawer toggled">
+        <div class="drawer">
+            <div class="account">
+                <div class="image">
+                    <img
+                        src="https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png">
+                    <div class="img-hover">
+                        <i class="material-icons">open_in_new</i>
+                    </div>
+                </div>
+                <div class="entity">Account</div>
+                <div class="name">John Doe</div>
+            </div>
+            <div class="item js-link" data-route="dashboard">
+                <i class="material-icons">dashboard</i>
+                <span>Dashboard</span>
+            </div>
+            <div class="item js-link" data-route="devices">
+                <i class="material-icons">devices</i>
+                <span>Devices</span>
+            </div>
+            <div class="item js-link" data-route="media">
+                <i class="material-icons">movie</i>
+                <span>Media</span>
+            </div>
+            <!-- <div class="item hoverable">
+                <i class="material-icons">settings</i>
+                <span>Profile</span>
+            </div> -->
+            <!-- <div class="item hoverable">
+                <i class="material-icons">assessment</i>
+                <span>Analytics</span>
+            </div> -->
+            <div class="footer-split"></div>
+            <div class="item">
+                <i class="material-icons">settings</i>
+                <span>Profile</span>
+            </div>
+            <!-- <div class="divider"></div>
+            <div class="acd-section">
+                <p>About Press Copyright Contact usCreators Advertise Developers</p>
+                <p>Terms Privacy Policy and Safety Test new features</p>
+                <p>© 2020 Devxop</p>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="layout-content">
+        {{> Template.dynamic template=main}}
+    </div>
 </template>

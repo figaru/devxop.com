@@ -2,7 +2,7 @@
 import '../../ui/layouts/index';
 import '../../ui/pages/index';
 
-import './routes.js';
+import './routes/index.js';
 
 
 
