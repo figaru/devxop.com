@@ -4,7 +4,39 @@
     border-bottom: var(--border-sm);
 
     >h5{
+        color: var(--bs-dark) !important;
+    }
+
+    >img{
+        opacity: 1;
+    }
+
+    >nav{
+
+        >a{
+            color: var(--bs-dark) !important;
+        }
+    }
+
+    >a{
+        /* color: var(--bs-white); */
+        border-color: var(--bs-info);
+        color: var(--bs-info);
+    }
+
+    >a:hover{
+        background-color: var(--bs-info);
+        color: var(--bs-white);
+    }
+}
+
+#landing-header{
+    >h5{
         color: var(--bs-white)
+    }
+
+    >img{
+        opacity: 0;
     }
 
     >nav{
@@ -15,6 +47,13 @@
     }
 
     >a{
+        /* color: var(--bs-white); */
+        border-color: var(--bs-white);
         color: var(--bs-white);
+    }
+
+    >a:hover{
+        background-color: var(--bs-white);
+        color: var(--bs-dark);
     }
 }
