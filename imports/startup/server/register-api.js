@@ -14,5 +14,5 @@ import '../../api/files/server/publications.js';
 import '../../api/jobs/server/publications.js'; */
 
 /* DEVICES */
-/* import '../../api/devices/devices.methods.js';
-import '../../api/devices/server/publications.js'; */
+import '../../api/devices/devices.js';
+import '../../api/devices/server/publications.js';

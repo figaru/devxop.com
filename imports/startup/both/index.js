@@ -3,3 +3,5 @@
 import '../../api/companies/companies.js';
 
 import '../../api/files/files.js';
+
+import '../../api/devices/devices.js';

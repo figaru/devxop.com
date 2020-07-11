@@ -1,0 +1,44 @@
+<template name="Devices">
+    <div class="container pt-5">
+        {{#each device in devices_list}}
+        <div class="row mb-1 mx-3 d-flex align-items-center device-row">
+            <div class="col-sm-12 col-md-6 px-0" style="border-right: 1px solid var(--bs-light);">
+                <div class="card card-clear-style">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            {{>item_files}}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{device.name}}</h5>
+                                <p class="card-text"><small class="text-muted">{{device.description}}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 px-0">
+                <div class="card card-clear-style">
+                    <div class="row g-0">
+                        <div class="col-sm-12 col-md-4">
+                            <div class="card-body">
+                                <p class="card-text"><small class="text-muted">status</small></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="card-body">
+                                <p class="card-text"><small class="text-muted">runtime</small></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="card-body">
+                                <i class="material-icons">edit</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</template>

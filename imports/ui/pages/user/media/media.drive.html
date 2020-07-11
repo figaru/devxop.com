@@ -2,10 +2,11 @@
     <div class="container">
         <div class="row px-1 pt-5">
             {{#each docFile in list_files}}
-            <div class="col-xs-12 col-md-6 col-lg-3">
-                <div class="card js-select-file" data-toggle="modal" data-target="#modalFile"
+            <div class="col-xs-12 col-md-6 col-lg-3 mb-1">
+                <div class="card card-hover js-select-file" data-toggle="modal" data-target="#modalFile"
                     data-file="{{docFile._id}}">
-                    {{> item_files file=docFile info=true}}
+                    {{> item_files file=docFile info=true classStyle="card-img-top" style="height: 160px"}}
+
                     <!-- {{>file_img file=docFile}} -->
                 </div>
             </div>
@@ -45,7 +46,7 @@
                                         {{> item_files file=editingFile fullscreen="true"}}
                                     </div>
                                     <!-- {{>img file=this.doc classStyle="img-full" fullscreen=true}} -->
-    
+
                                 </div>
                                 <div class="col-12 pt-3">
                                     <h6>Date Created</h6>
