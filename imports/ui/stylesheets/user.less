@@ -262,7 +262,9 @@
 }
 .layout-content {
     width: calc(100% - 240px);
-    height: calc(100% - 64px);
+    height: calc(100vh - 64px);
+    overflow: hidden;
+    overflow-y: auto;
     position: absolute;
     top: 64px;
     left: 240px;

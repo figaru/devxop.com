@@ -1,0 +1,76 @@
+<template name="Media_drive">
+    <div class="container">
+        <div class="row px-1 pt-5">
+            {{#each docFile in list_files}}
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="card js-select-file" data-toggle="modal" data-target="#modalFile"
+                    data-file="{{docFile._id}}">
+                    {{> item_files file=docFile info=true}}
+                    <!-- {{>file_img file=docFile}} -->
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalFile" tabindex="-1" aria-labelledby="modalFileLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl shadow-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFileLabel">{{editingFile.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-8">
+                            <div class="row">
+                                <div class="col-xs-12 pb-3">
+
+                                    {{> text_input eventId="fileEditEvent" maxLength=100 key="title" placeholder="Add a name that describes the file" value=editingFile.title
+                                    label="Name"}}
+                                </div>
+                                <div class="col-xs-12 pb-3">
+                                    {{>text_input eventId="fileEditEvent" style="min-height: 100px" maxLength=1000 key="description" placeholder="Describe what this image is..." value=editingFile.description
+                                    label="Description"}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div style="width: 100%; height: 180px;">
+                                        {{> item_files file=editingFile fullscreen="true"}}
+                                    </div>
+                                    <!-- {{>img file=this.doc classStyle="img-full" fullscreen=true}} -->
+    
+                                </div>
+                                <div class="col-12 pt-3">
+                                    <h6>Date Created</h6>
+                                    <div class="sub-label">{{parseDate editingFile.createdAt}}</div>
+                                </div>
+                                <div class="col-12 pt-3">
+                                    <h6>Size</h6>
+                                    <div class="sub-label">{{formatBytes editingFile.file.size}}</div>
+                                </div>
+                                <div class="col-12 pt-3">
+                                    <h6>Filename</h6>
+                                    <div class="sub-label">{{editingFile.file.name}}</div>
+                                </div>
+                                <div class="col-12 mt-5">
+                                    <button id="{{editingFile._id}}" class="btn btn-danger js-delete">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="file_img">
+    <img class="file-image">
+</template>

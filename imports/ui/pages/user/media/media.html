@@ -1,6 +1,6 @@
 <template name="Media">
     <div class="container">
-        <div class="row px-5 pt-5">
+        <div class="row px-1 pt-5">
             <div class="col-md-12 col-lg-4 mb-3">
                 <div class="card p-3">
                     <div class="card-body text-center">
@@ -15,7 +15,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Storage Used</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Storage currently used by your account.</h6>
-                        <p class="card-text">{{stats.storage_used}}</p>
+                        <p class="card-text">{{formatBytes stats.storage_used}}</p>
                     </div>
                 </div>
             </div>
@@ -29,13 +29,47 @@
                 </div>
             </div>
         </div>
-        <div class="row px-5">
+        <div class="row px-1">
             <div class="col-md-12 col-lg-4 mb-3">
-                <div class="card p-3">
+                <div class="card p-0">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Quota</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Maximum storage allowed to be used.</h6>
-                        <p class="card-text">1Gb</p>
+                        <div class="media-nav">
+                            <div class="nav-list">
+                                <div class="list-item js-link" data-route="media.drive" data-params='{"type": "videos"}'>
+                                    <i class="material-icons">folder</i>
+                                    <div class="info">
+                                        <div class="label">Videos</div>
+                                        <span>{{stats.video_items}} items</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="list-item js-link" data-route="media.drive" data-params='{"type": "images"}'>
+                                    <i class="material-icons">folder</i>
+                                    <div class="info">
+                                        <div class="label">Images</div>
+                                        <span>{{stats.image_items}} items</span>
+                                    </div>
+                                    
+                                </div>
+                                <!-- <div class="list-item js-link" data-route="media.collections">
+                                    <i class="material-icons">folder</i>
+                                    <div class="info">
+                                        <div class="label">Collections</div>
+                                        <span>{{stats.collection_items}} items</span>
+                                    </div>
+                                    
+                                </div> -->
+                                <div class="list-item js-link" data-route="media.drive" data-params='{"type": "other"}'>
+                                    <i class="material-icons">folder</i>
+                                    <div class="info">
+                                        <div class="label">Other</div>
+                                        <span>{{stats.other_items}} items</span>
+                                    </div>
+                                    
+                                </div>
+            
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import '../files.collection.js';
+import '../files.js';
 
 Meteor.publish('files.all', function () {
     //console.log(Files.find().fetch());

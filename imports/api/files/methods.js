@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { HTTP } from 'meteor/http';
-import './files.collection.js';
+import './files.js';
 
 const httpDeleteAsync = (url, data) =>
     new Promise((resolve, reject) => {

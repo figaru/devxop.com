@@ -6,9 +6,10 @@
     "test": "meteor test --once --driver-package meteortesting:mocha"
   },
   "dependencies": {
-    "@babel/runtime": "^7.8.3",
+    "@babel/runtime": "^7.10.4",
     "bcrypt": "^5.0.0",
     "bootstrap": "^5.0.0-alpha1",
+    "highcharts": "^8.1.2",
     "jquery": "^3.4.1",
     "meteor-node-stubs": "^1.0.0",
     "popper.js": "^1.16.1"

@@ -8,8 +8,6 @@ Template.Login.events({
 
         var email = tmpl.find("#input-email").value;
         var pass = tmpl.find("#input-pass").value;
-        console.log(email);
-        console.log(pass);
         if (email && pass) {
             Meteor.loginWithPassword(email.toLowerCase(), pass, function (err, res) {
                 if (err) {
@@ -17,10 +15,10 @@ Template.Login.events({
                     return;
                 }
                 else {
-                    console.log(err, res)
                     // if we are on the login route, we want to redirect the user
                     //return Router.go('user.dashboard');
-                    FlowRouter.path("dashboard");
+                    let path = FlowRouter.path("dashboard");
+                    FlowRouter.go(path);
                 }
             });
         } else {
