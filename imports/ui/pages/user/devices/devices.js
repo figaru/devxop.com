@@ -107,8 +107,12 @@ Template.Devices.helpers({
     },
     "get_view_files": function (device) {
         //let device = Template.instance().data.device;
-        if (device && "published_view" in device) {
-            return device.views[device.published_view].files;
+        if (device && device.published_view) {
+
+            if(device.published_view in device.views){
+                return device.views[device.published_view].files;
+            }
+            
         }
 
         return [];
@@ -117,8 +121,10 @@ Template.Devices.helpers({
         let tmpl = Template.instance();
         let device = DeviceEdit.findOne();
         //let view = tmpl.selectedDisplayView.get();
-        if (device && "published_view" in device) {
-            return device.views[device.published_view].files;
+        if (device && device.published_view) {
+            if(device.published_view in device.views){
+                return device.views[device.published_view].files;
+            }
         }
 
         return [];
