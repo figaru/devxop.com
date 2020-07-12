@@ -22,17 +22,20 @@
                     <div class="row g-0">
                         <div class="col-sm-12 col-md-4">
                             <div class="card-body">
-                                <p class="card-text"><small class="text-muted">status</small></p>
+                                <p class="card-text"><small class="text-muted">{{> status_device device=device}}</small>
+                                </p>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <div class="card-body">
-                                <p class="card-text"><small class="text-muted">runtime</small></p>
+                                <p class="card-text"><small
+                                        class="text-muted">{{> runtime_device device=device}}</small></p>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <div class="card-body">
-                                <i class="material-icons">edit</i>
+                                <i class="material-icons js-device-edit" data-device="{{device._id}}"
+                                    data-toggle="modal" data-target="#modalDevice">edit</i>
                             </div>
                         </div>
                     </div>
@@ -40,5 +43,163 @@
             </div>
         </div>
         {{/each}}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalDevice" tabindex="-1" aria-labelledby="modalDeviceLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl shadow-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDeviceLabel">{{editing_device.name}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-8">
+                            <div class="row">
+                                <div class="col-xs-12 pb-3">
+                                    <h5>Details</h5>
+                                </div>
+                                <div class="col-xs-12 pb-3">
+                                    {{> text_input eventId="deviceEdit" maxLength=100 key="name" placeholder="Add a name that describes the device" value=editing_device.name label="Name"}}
+                                </div>
+                                <div class="col-xs-12 pb-3">
+                                    {{> text_input eventId="deviceEdit" style="min-height: 30px" maxLength=500 key="description" placeholder="Describe what this device does" value=editing_device.description label="Description"}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 pb-1">
+                                    <h5>Display View</h5>
+                                    <div class="sub-label">Select the display template you want to edit for the current
+                                        device.</div>
+                                </div>
+                                <div class="col-xs-6 pb-3">
+                                    {{> dropdown_input eventId="deviceEdit" list=dropdownViewList label="Views" selected=editing_device.published_view}}
+                                </div>
+                            </div>
+                            {{#if displayViewEdit "video"}}
+                            <!-- <a class="btn btn-success" pd-popup-open="popupFileSelect" href="#">Open Modal</a> -->
+                            <!-- {{> select_files eventId="deviceEdit" key="file" fileType="video"}} -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="display-view-edit">
+                                        <div class="file-listing">
+                                            <div class="file-item">
+                                                <div class="add-file" pd-popup-open="popupFileSelect">
+                                                    <i class="material-icons">add_photo_alternate</i>
+                                                    <span>Add a file...</span>
+                                                </div>
+                                            </div>
+                                            {{#each fileId in editing_device.views.video.files}}
+                                            <div class="file-item">
+                                                {{> item_files file=fileId info=true}}
+                                                <div class="remove-file js-remove-file" data-file="{{fileId}}"
+                                                    data-index="{{@index}}">
+                                                    <i class="material-icons">delete</i>
+                                                </div>
+
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {{/if}}
+
+                            {{#if displayViewEdit "image"}}
+                            <!-- <a class="btn btn-success" pd-popup-open="popupFileSelect" href="#">Open Modal</a> -->
+                            <!-- {{> select_files eventId="deviceEdit" key="file" fileType="image"}} -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="display-view-edit">
+                                        <div class="file-listing">
+                                            <div class="file-item">
+                                                <div class="add-file" pd-popup-open="popupFileSelect">
+                                                    <i class="material-icons">add_photo_alternate</i>
+                                                    <span>Add a file...</span>
+                                                </div>
+                                            </div>
+                                            {{#each fileId in editing_device.views.image.files}}
+                                            <div class="file-item">
+                                                {{> item_files file=fileId info=true}}
+                                                <div class="remove-file js-remove-file" data-file="{{fileId}}"
+                                                    data-index="{{@index}}">
+                                                    <i class="material-icons">delete</i>
+                                                </div>
+
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 pt-4">
+                                    <h6>Media Interval</h6>
+                                    <div class="sub-label">Choose an interval time between image change.</div>
+
+                                </div>
+                                <div class="col-xs-6">
+                                    {{> dropdown_input eventId="deviceEdit" list=dropdownIntervalList label="Interval" selected=selectedInterval}}
+                                </div>
+                            </div>
+                            {{/if}}
+                            {{#if displayViewExists}}
+                            <div class="row">
+                                <div class="col-xs-12 pb-4 pt-4">
+
+                                    <h6>Status</h6>
+                                    {{#if displayViewPublished}}
+                                    <div class="sub-label">This display view is currently published to the device.</div>
+                                    {{else}}
+                                    <div class="sub-label">To make this display view visible in your device, you first
+                                        need
+                                        to publish it.</div>
+                                    <button class="btn btn-danger js-publish-displayView">Publish now!</button>
+
+                                    {{/if}}
+
+                                </div>
+                            </div>
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <!-- <div class="row">
+                                <div class="col-xs-12">
+                                    <div style="width: 100%; height: 180px;">
+                                        {{> item_files files=getViewFiles}}
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="row">
+                                <div class="col-xs-12 pt-3">
+                                    <div class="label">Status</div>
+                                    {{> status_device device=editing_device}}
+
+                                </div>
+                                <div class="col-xs-12 pt-3">
+                                    <div class="label">Runtime</div>
+                                    {{> runtime_device device=editing_device}}
+                                </div>
+                                <div class="col-xs-12 pt-3">
+                                    <div class="label">Published View</div>
+                                    <div class="sub-label">{{editing_device.published_view}}</div>
+                                </div>
+                                <div class="col-xs-12 pt-3">
+                                    <div class="label">Action</div>
+                                    <div class="sub-label"><button class="btn btn-secondary js-force-restart">Force Restart</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </template>
