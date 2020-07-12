@@ -1,0 +1,112 @@
+<template name="Products">
+    <div class="container p-3 py-4">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h3>Products</h3>
+            </div>
+            <div class="col-sm-12 col-md-6 d-flex justify-content-end">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalCreateProduct">Add
+                    Product</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <div class="card card-shadow p-0">
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2">
+                                <input type="checkbox">
+                            </div>
+                            <div class="col-sm-12 col-md-8">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        img here
+                                    </div>
+                                    <div class="col-sm-6">
+                                        Product Description
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-2">
+                                edit icon
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalCreateProduct" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl shadow-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-8">
+                            <div class="row">
+                                <div class="col-xs-12 pb-3">
+
+                                    {{> text_input eventId="productCreateEvent" maxLength=100 key="title" placeholder="Product name..."
+                                    label="Name"}}
+                                </div>
+                                <div class="col-xs-12 pb-3">
+                                    {{>text_input eventId="productCreateEvent" style="min-height: 100px" maxLength=1000 key="description" placeholder="Describe what this product..." label="Description"}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="media-upload">
+                                        {{#with uploadProgress}}
+                                        <div class="upload-progress">
+                                            <div class="progress-name">
+                                                <h4>{{uploadProgress.name}}</h4>
+                                            </div>
+                                            <div class="progress-precent">
+                                                <h5>{{uploadProgress.percent}}%</h5>
+                                            </div>
+                                            {{> progress_input progress=uploadProgress.percent}}
+                                        </div>
+                                        {{else}}
+                                        <div class="upload-icon">
+                                            <i class="material-icons">
+                                                add_a_photo
+                                            </i>
+                                        </div>
+                                        <div class="upload-description">
+                                            <p>Click the button and select the image...
+                                            </p>
+                                        </div>
+                                        <div class="upload-button">
+                                            <input type='file' id="upload-input" hidden />
+                                            <button class="btn btn-primary js-upload">Select Image</button>
+                                        </div>
+                                        {{/with}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="row">
+                                <div class="col-12">
+
+                                    <!-- {{>img file=this.doc classStyle="img-full" fullscreen=true}} -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

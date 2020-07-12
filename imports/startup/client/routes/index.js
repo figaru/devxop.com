@@ -8,3 +8,4 @@ import './exposed/landing';
 import './user/dashboard';
 import './user/media';
 import './user/devices';
+import './user/products';
