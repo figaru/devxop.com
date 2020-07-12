@@ -1,7 +1,9 @@
 import './devices.html';
 
-DEVICE_EDIT = "device.editing";
-DEVICE_EDIT_SELECTED_DISPLAY = "device.editing.selected.display";
+DeviceEdit = new Mongo.Collection(null);
+
+DEVICE_EDIT_ID = "device.editing";
+SELECTED_VIEW = "device.editing.selected.display";
 
 Template.Devices.onCreated(function () {
     this.editingFile = new ReactiveVar();
@@ -13,11 +15,25 @@ Template.Devices.onCreated(function () {
     this.device = new ReactiveVar(null);
 });
 
-Template.Devices.onRendered(function(){
+Template.Devices.onRendered(function () {
+    Session.set(DEVICE_EDIT_ID, null);
+    this.autorun(function () {
+        let deviceId = Session.get(DEVICE_EDIT_ID);
+        let view = Session.get(SELECTED_VIEW);
+        let device = Devices.findOne(deviceId);
+
+        if (device) {
+            device["selected_view"] = view;
+            DeviceEdit.remove({});
+            DeviceEdit.insert(device);
+        }
+
+    });
+
     $(document).on('deviceEdit', function (e, elem) {
         //subscribers = $('.subscribers-testEvent');
         //subscribers.trigger('testEventHandler', [eventInfo]);
-        let device = Session.get(DEVICE_EDIT);
+        let device = DeviceEdit.findOne();
         let target = $(elem);
         let key = target.data("key");
         let val = target.val();
@@ -31,17 +47,17 @@ Template.Devices.onRendered(function(){
         if (key == "display_view") {
             //set the current display view in edit mode
             //self.selectedDisplayView.set(val);
-            Session.set(DEVICE_EDIT_SELECTED_DISPLAY, val);
-            
+            Session.set(SELECTED_VIEW, val);
+            DeviceEdit.update(device._id, { $set: { "selected_view": val } });
             return;
         } else if (key == "interval") {
             //set the current view interval speed
-            let selectedView = Session.get(DEVICE_EDIT_SELECTED_DISPLAY);
+            let selectedView = device.selected_view;
             if (selectedView) {
                 data["views." + selectedView + ".interval"] = val;
             }
         } else if (key == "file") {
-            let selectedView = Session.get(DEVICE_EDIT_SELECTED_DISPLAY);
+            let selectedView = device.selected_view;
             let fileId = target.data("file");
 
             if (selectedView && fileId && device.views !== undefined && device.views[selectedView] !== undefined) {
@@ -87,11 +103,11 @@ Template.Devices.helpers({
         return Devices.find().fetch();
     },
     'editing_device': function () {
-        return Session.get(DEVICE_EDIT);
+        return DeviceEdit.findOne();
     },
-    "getViewFiles": function (device) {
+    "get_view_files": function (device) {
         //let device = Template.instance().data.device;
-        if (device && device.published_view !== undefined) {
+        if (device && "published_view" in device) {
             return device.views[device.published_view].files;
         }
 
@@ -99,9 +115,9 @@ Template.Devices.helpers({
     },
     "getViewFiles": function () {
         let tmpl = Template.instance();
-        let device = Session.get(DEVICE_EDIT);
+        let device = DeviceEdit.findOne();
         //let view = tmpl.selectedDisplayView.get();
-        if (device && device.published_view !== undefined) {
+        if (device && "published_view" in device) {
             return device.views[device.published_view].files;
         }
 
@@ -109,7 +125,7 @@ Template.Devices.helpers({
 
     },
     "publishedDisplayView": function () {
-        let device = Session.get(DEVICE_EDIT);
+        let device = DeviceEdit.findOne();
         if (device) {
             return device.published_view;
         }
@@ -117,35 +133,48 @@ Template.Devices.helpers({
         return "";
 
     },
-    "displayViewExists": function () {
-        return Session.get(DEVICE_EDIT_SELECTED_DISPLAY);
-    },
     "displayViewEdit": function (viewType) {
-        let selectedView = Session.get(DEVICE_EDIT_SELECTED_DISPLAY);
-        console.log(selectedView);
-        return typeof selectedView != "undefined" && selectedView === viewType ? true : false;
+        let device = DeviceEdit.findOne();
+        if (device) {
+            let selectedView = device.selected_view;
+            return typeof selectedView != "undefined" && selectedView === viewType ? true : false;
+        }
+
+        return false;
+
     },
     "displayViewPublished": function (viewType) {
-        let selectedView = Session.get(DEVICE_EDIT_SELECTED_DISPLAY);
-        let device = Session.get(DEVICE_EDIT);
+
+        let device = DeviceEdit.findOne();
+        let selectedView = device.selected_view;
         return typeof selectedView != "undefined" && selectedView === device.published_view ? true : false;
     },
     "selectedInterval": function () {
         //return interval based on selected display view
-        let selectedView = Session.get(DEVICE_EDIT_SELECTED_DISPLAY);
-        let device = Session.get(DEVICE_EDIT);
-        let interval = device.views[selectedView].interval;
+
+        let device = DeviceEdit.findOne();
+        let selectedView = device.selected_view;
+        if (selectedView) {
+            console.log(selectedView);
+
+            if ('views.' + selectedView + '.interval' in device) {
+                if (interval == 7000) {
+                    return "Fast(7sec)";
+                } else if (interval == 10000) {
+                    return "Medium(10sec)";
+                } else if (interval == 12000) {
+                    return "Slow(12sec)";
+                }
+            }
+            /* let interval = device.views[selectedView].interval;
 
         if (interval) {
             //console.log(interval);
-            if (interval == 7000) {
-                return "Fast(7sec)";
-            } else if (interval == 10000) {
-                return "Medium(10sec)";
-            } else if (interval == 12000) {
-                return "Slow(12sec)";
-            }
+            
+        } */
         }
+
+
     },
     "dropdownViewList": function () {
         return [
@@ -185,16 +214,12 @@ Template.Devices.helpers({
 Template.Devices.events({
     'click .js-device-edit': function (e, tmpl) {
         let deviceId = $(e.currentTarget).data("device");
-        let device = Devices.findOne(deviceId);
-
-        if(device){
-            Session.set(DEVICE_EDIT, device);
-        }
+        Session.set(DEVICE_EDIT_ID, deviceId);
     },
     'click .js-remove-file': function (e, tmpl) {
         let target = $(e.currentTarget);
-        let device = Session.get(DEVICE_EDIT);
-        let view = Session.get(DEVICE_EDIT_SELECTED_DISPLAY);
+        let device = DeviceEdit.findOne();
+        let view = device.selected_view
         let fileId = target.data("file");
         let index = target.data("index");
 
@@ -212,8 +237,8 @@ Template.Devices.events({
 
     },
     'click .js-publish-displayView': function (e, tmpl) {
-        let device = Session.get(DEVICE_EDIT);
-        let view = Session.get(DEVICE_EDIT_SELECTED_DISPLAY);
+        let device = DeviceEdit.findOne();
+        let view = device.selected_view
         if (view && device) {
             Devices.update(device._id, {
                 $set: {
@@ -225,7 +250,7 @@ Template.Devices.events({
     },
     'click .js-force-restart': function (e, tmpl) {
         let target = $(e.target);
-        let device = Session.get(DEVICE_EDIT);
+        let device = DeviceEdit.findOne();
         if (device) {
             target.attr("disabled", true);
 

@@ -5,13 +5,21 @@
             <div class="col-sm-12 col-md-6 px-0" style="border-right: 1px solid var(--bs-light);">
                 <div class="card card-clear-style">
                     <div class="row g-0">
-                        <div class="col-md-4">
-                            {{>item_files}}
+                        <div class="col-md-4 d-flex align-items-center justify-content-center p-4">
+                            <div style="width: 144px;
+                            height: 77px;">
+                                {{#with get_view_files device}}
+                                {{> item_files files=this}}
+                                {{else}}
+                                {{> item_files}}
+                                {{/with}}
+                            </div>
+
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{device.name}}</h5>
-                                <p class="card-text"><small class="text-muted">{{device.description}}</small></p>
+                        <div class="col-md-8 d-flex flex-column justify-content-center">
+                            <div class="card-body d-flex flex-column justify-content-center">
+                                <h5 class="card-title w-100">{{device.name}}</h5>
+                                <p class="card-text w-100"><small class="text-muted">{{device.description}}</small></p>
                             </div>
                         </div>
                     </div>
@@ -47,14 +55,16 @@
 
     <!-- Modal -->
     <div class="modal fade" id="modalDevice" tabindex="-1" aria-labelledby="modalDeviceLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl shadow-lg">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl shadow-lg mb-5">
             <div class="modal-content">
+                {{#with editing_device}}
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalDeviceLabel">{{editing_device.name}}</h5>
+                    <h5 class="modal-title" id="modalDeviceLabel">{{this.name}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-8">
@@ -63,10 +73,10 @@
                                     <h5>Details</h5>
                                 </div>
                                 <div class="col-xs-12 pb-3">
-                                    {{> text_input eventId="deviceEdit" maxLength=100 key="name" placeholder="Add a name that describes the device" value=editing_device.name label="Name"}}
+                                    {{> text_input eventId="deviceEdit" maxLength=100 key="name" placeholder="Add a name that describes the device" value=this.name label="Name"}}
                                 </div>
                                 <div class="col-xs-12 pb-3">
-                                    {{> text_input eventId="deviceEdit" style="min-height: 30px" maxLength=500 key="description" placeholder="Describe what this device does" value=editing_device.description label="Description"}}
+                                    {{> text_input eventId="deviceEdit" style="min-height: 30px" maxLength=500 key="description" placeholder="Describe what this device does" value=this.description label="Description"}}
                                 </div>
                             </div>
                             <div class="row">
@@ -76,23 +86,24 @@
                                         device.</div>
                                 </div>
                                 <div class="col-xs-6 pb-3">
-                                    {{> dropdown_input eventId="deviceEdit" list=dropdownViewList label="Views" selected=editing_device.published_view}}
+                                    {{> dropdown_input eventId="deviceEdit" list=dropdownViewList label="Views" selected=this.published_view}}
                                 </div>
                             </div>
                             {{#if displayViewEdit "video"}}
                             <!-- <a class="btn btn-success" pd-popup-open="popupFileSelect" href="#">Open Modal</a> -->
-                            <!-- {{> select_files eventId="deviceEdit" key="file" fileType="video"}} -->
+                            {{> select_files eventId="deviceEdit" key="file" fileType="video"}}
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="display-view-edit">
                                         <div class="file-listing">
                                             <div class="file-item">
-                                                <div class="add-file" pd-popup-open="popupFileSelect">
+                                                <div class="add-file" data-toggle="modal"
+                                                    data-target="#modalFileSelect">
                                                     <i class="material-icons">add_photo_alternate</i>
                                                     <span>Add a file...</span>
                                                 </div>
                                             </div>
-                                            {{#each fileId in editing_device.views.video.files}}
+                                            {{#each fileId in this.views.video.files}}
                                             <div class="file-item">
                                                 {{> item_files file=fileId info=true}}
                                                 <div class="remove-file js-remove-file" data-file="{{fileId}}"
@@ -111,18 +122,19 @@
 
                             {{#if displayViewEdit "image"}}
                             <!-- <a class="btn btn-success" pd-popup-open="popupFileSelect" href="#">Open Modal</a> -->
-                            <!-- {{> select_files eventId="deviceEdit" key="file" fileType="image"}} -->
+                            {{> select_files eventId="deviceEdit" key="file" fileType="image"}}
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="display-view-edit">
                                         <div class="file-listing">
                                             <div class="file-item">
-                                                <div class="add-file" pd-popup-open="popupFileSelect">
+                                                <div class="add-file" data-toggle="modal"
+                                                    data-target="#modalFileSelect">
                                                     <i class="material-icons">add_photo_alternate</i>
                                                     <span>Add a file...</span>
                                                 </div>
                                             </div>
-                                            {{#each fileId in editing_device.views.image.files}}
+                                            {{#each fileId in this.views.image.files}}
                                             <div class="file-item">
                                                 {{> item_files file=fileId info=true}}
                                                 <div class="remove-file js-remove-file" data-file="{{fileId}}"
@@ -148,7 +160,7 @@
                                 </div>
                             </div>
                             {{/if}}
-                            {{#if displayViewExists}}
+                            {{#if this.selected_view}}
                             <div class="row">
                                 <div class="col-xs-12 pb-4 pt-4">
 
@@ -168,38 +180,41 @@
                             {{/if}}
                         </div>
                         <div class="col-sm-12 col-md-4">
-                            <!-- <div class="row">
+                            <div class="row">
                                 <div class="col-xs-12">
                                     <div style="width: 100%; height: 180px;">
                                         {{> item_files files=getViewFiles}}
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <div class="row">
                                 <div class="col-xs-12 pt-3">
                                     <div class="label">Status</div>
-                                    {{> status_device device=editing_device}}
+                                    {{> status_device device=this}}
 
                                 </div>
                                 <div class="col-xs-12 pt-3">
                                     <div class="label">Runtime</div>
-                                    {{> runtime_device device=editing_device}}
+                                    {{> runtime_device device=this}}
                                 </div>
                                 <div class="col-xs-12 pt-3">
                                     <div class="label">Published View</div>
-                                    <div class="sub-label">{{editing_device.published_view}}</div>
+                                    <div class="sub-label">{{this.published_view}}</div>
                                 </div>
                                 <div class="col-xs-12 pt-3">
                                     <div class="label">Action</div>
-                                    <div class="sub-label"><button class="btn btn-secondary js-force-restart">Force Restart</button></div>
+                                    <div class="sub-label"><button class="btn btn-secondary js-force-restart">Force
+                                            Restart</button></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
+                {{/with}}
             </div>
+
         </div>
     </div>
 </template>

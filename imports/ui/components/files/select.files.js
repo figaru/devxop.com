@@ -15,6 +15,11 @@ Template.select_files.events({
         elem.data("key", tmpl.data.key);
         $(document).trigger(tmpl.data.eventId, [elem]);
 
-        tmpl.$(".popup-close").click();
+        tmpl.$(".js-close-modal").click();
+    },
+    'click .js-close-modal':function(){
+        var myModalEl = document.getElementById('modalFileSelect');
+        var modal = bootstrap.Modal.getInstance(myModalEl);
+        modal.hide();
     }
 })
