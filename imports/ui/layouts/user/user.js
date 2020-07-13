@@ -1,6 +1,13 @@
 import './user.html';
 
 Template.User_layout.events({
+    'click .js-logout': function () {
+        Meteor.logout(function () {
+            var path = FlowRouter.path("Landing");
+            //console.log(path);
+            FlowRouter.go(path);
+        });
+    },
     'click .js-link': function (e) {
         let target = $(e.currentTarget);
         let route = target.data("route");
@@ -32,7 +39,7 @@ Template.User_layout.events({
 
         if (drawer.hasClass("toggled")) {
             drawer.removeClass("toggled");
-            
+
             content.addClass("full");
         } else {
             drawer.addClass("toggled");
