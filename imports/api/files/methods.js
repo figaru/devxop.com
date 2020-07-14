@@ -4,19 +4,47 @@ import { HTTP } from 'meteor/http';
 import './files.js';
 
 const httpDeleteAsync = (url, data) =>
-    new Promise((resolve, reject) => {
-        HTTP.call("DELETE", url, {
-            data: data
-        }, (err, result) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(result);
-            }
-        });
+  new Promise((resolve, reject) => {
+    HTTP.call("DELETE", url, {
+      data: data
+    }, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
     });
+  });
+
+
+
+const httpTestAsync = (url, data) =>
+  new Promise((resolve, reject) => {
+    HTTP.call("GET", url, {
+      data: data
+    }, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+
+
+
 
 Meteor.methods({
+  'test.api': async function () {
+    try {
+      const response = await httpTestAsync(Meteor.settings.public.api.storage + "/files", {test: "test"});
+      console.log(response);
+      return response;
+    } catch (ex) {
+      console.log(ex);
+      throw new Meteor.Error('some-error', 'An error has happened');
+    }
+  },
   'files.remove': async function (id) {
 
     let file = Files.findOne(id);

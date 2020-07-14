@@ -16,7 +16,7 @@
             "test_pk": "pk_test_HRvNyr6bS6a9upJyTleR63VN"
         },
         "api": {
-            "storage": "http://localhost"
+            "storage": "http://127.0.0.1:5000"
         }
     }
 }
