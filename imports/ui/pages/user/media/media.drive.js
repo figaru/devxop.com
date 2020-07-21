@@ -240,7 +240,7 @@ Template.Media_drive.helpers({
         let queryType = fileType.substring(0, 3);
 
         if (fileType == "other") {
-            return Files.find({ "is_video": { $exists: false }, "is_image": { $exists: false }, "deleting": { $exists: false } });
+            return Files.find({ "is_video": false, "is_image": false, "deleting": { $exists: false } });
         } else {
             return Files.find({ "file.mimetype": { $regex: ".*" + queryType + ".*" }, "deleting": { $exists: false } })
         }

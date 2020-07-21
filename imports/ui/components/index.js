@@ -6,6 +6,12 @@ import './files/item.files.js';
 import './files/select.files.js';
 import './files/listing.files.js';
 import './form/text.input.js';
+import './form/number.input.js';
 import './form/dropdown.input.js';
 import './form/progress.input.js';
 import "./jobs/bar.jobs";
+
+import './media/media.upload.js';
+
+
+import './products/select.products.js';

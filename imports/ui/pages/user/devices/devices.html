@@ -56,7 +56,7 @@
     <!-- Modal -->
     <div class="modal fade" id="modalDevice" tabindex="-1" aria-labelledby="modalDeviceLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl shadow-lg mb-5">
-            <div class="modal-content">
+            <div class="modal-content pb-3 mb-3">
                 {{#with editing_device}}
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalDeviceLabel">{{this.name}}</h5>
@@ -91,14 +91,14 @@
                             </div>
                             {{#if displayViewEdit "video"}}
                             <!-- <a class="btn btn-success" pd-popup-open="popupFileSelect" href="#">Open Modal</a> -->
-                            {{> select_files eventId="deviceEdit" key="file" fileType="video"}}
+                            {{> select_files eventId="deviceEdit" modalId="deviceEditVideoSelect" key="file" fileType="video"}}
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="display-view-edit">
                                         <div class="file-listing">
                                             <div class="file-item">
                                                 <div class="add-file" data-toggle="modal"
-                                                    data-target="#modalFileSelect">
+                                                    data-target="#deviceEditVideoSelect">
                                                     <i class="material-icons">add_photo_alternate</i>
                                                     <span>Add a file...</span>
                                                 </div>
@@ -122,14 +122,14 @@
 
                             {{#if displayViewEdit "image"}}
                             <!-- <a class="btn btn-success" pd-popup-open="popupFileSelect" href="#">Open Modal</a> -->
-                            {{> select_files eventId="deviceEdit" key="file" fileType="image"}}
+                            {{> select_files eventId="deviceEdit" modalId="deviceEditImageSelect" key="file" fileType="image"}}
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="display-view-edit">
                                         <div class="file-listing">
                                             <div class="file-item">
                                                 <div class="add-file" data-toggle="modal"
-                                                    data-target="#modalFileSelect">
+                                                    data-target="#deviceEditImageSelect">
                                                     <i class="material-icons">add_photo_alternate</i>
                                                     <span>Add a file...</span>
                                                 </div>

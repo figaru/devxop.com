@@ -19,10 +19,11 @@ Template.Devices.onRendered(function () {
     Session.set(DEVICE_EDIT_ID, null);
     this.autorun(function () {
         let deviceId = Session.get(DEVICE_EDIT_ID);
-        let view = Session.get(SELECTED_VIEW);
         let device = Devices.findOne(deviceId);
-
+        let view = Session.get(SELECTED_VIEW);
         if (device) {
+            if(!view) view = device.published_view;
+            
             device["selected_view"] = view;
             DeviceEdit.remove({});
             DeviceEdit.insert(device);
@@ -161,9 +162,8 @@ Template.Devices.helpers({
         let device = DeviceEdit.findOne();
         let selectedView = device.selected_view;
         if (selectedView) {
-            console.log(selectedView);
-
-            if ('views.' + selectedView + '.interval' in device) {
+            if (selectedView in device.views) {
+                let interval = device.views[selectedView].interval;
                 if (interval == 7000) {
                     return "Fast(7sec)";
                 } else if (interval == 10000) {

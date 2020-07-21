@@ -1,0 +1,127 @@
+<template name="Collections">
+    <div class="container p-3 py-4">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h3>Collections</h3>
+            </div>
+            <div class="col-sm-12 col-md-6 d-flex justify-content-end">
+                <button class="btn btn-primary js-create-collection">Create Collection</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            {{#each collection in list_collections}}
+            <div class="col-sm-12 mb-3">
+                <div class="card card-shadow p-0">
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-1 py-4 d-flex flex-column justify-content-center">
+                                <input type="checkbox" disabled>
+                            </div>
+                            <div class="col-sm-12 col-md-8">
+                                <div class="row">
+                                    <div class="col-12 text-left">
+                                        <h4>{{collection.title}}</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 text-left">
+                                        <label>{{collection.description}}</label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm-12 col-md-2 py-4 d-flex flex-column justify-content-center">
+                                <i class="material-icons js-edit-collection" data-collection="{{collection._id}}"
+                                    data-toggle="modal" data-target="#modalEditCollection">edit</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalEditCollection" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl shadow-lg">
+            <div class="modal-content mb-3">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{editing_collection.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-xs-12 pb-3">
+                                    {{> text_input eventId="collectionEditEvent" maxLength=100 key="title" value=editing_collection.title placeholder="Collection name..."
+                                    label="Title"}}
+                                </div>
+                                <div class="col-xs-12 pb-3">
+                                    {{>text_input eventId="collectionEditEvent" style="min-height: 100px" maxLength=1000 key="description" value=editing_collection.description placeholder="Describe this collection..." label="Description"}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mb-2">
+
+                                </div>
+                                <div class="col-12">
+                                    <h4>{{editing_product.title}}</h4>
+                                    <label>{{editing_product.description}}</label>
+                                    {{#if editing_product.price}}
+                                    <h4>{{editing_product.price}}€</h4>
+                                    {{/if}}
+                                </div>
+
+                            </div>
+                            <div class="row p-2">
+                                <div class="col-12 p-2 px-4" style="background-color: var(--bs-light);">
+                                    {{#each productId in editing_collection.products}}
+                                    <div class="row mb-1">
+                                        <div class="col-sm-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    {{#with get_product productId}}
+                                                    {{this.title}}
+                                                    {{/with}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                    {{> select_products modalId="collectionSelectProduct" eventId="collectionEditEvent" key="products"}}
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card" style="background-color: var(--bs-primary);">
+                                                <div class="card-body">
+                                                    <div class="col-sm-12 d-flex flex-column justify-content-center align-items-center">
+                                                        <i class="material-icons text-white" data-toggle="modal"
+                                                            data-target="#collectionSelectProduct">add</i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-danger js-remove-collection">Delete Collection</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,5 +1,8 @@
 import './products.html';
 
+TempProduct = new Mongo.Collection(null);
+
+PRODUCT_EDIT_ID = "product.editing";
 
 Template.Products.onCreated(function () {
     this.uploading = new ReactiveVar(false);
@@ -7,73 +10,142 @@ Template.Products.onCreated(function () {
     this.uploadName = new ReactiveVar();
 });
 
-Template.Products.helpers({
-    'uploadProgress': function () {
-        let tmpl = Template.instance();
 
-        if (!tmpl.uploading.get())
-            return false;
+Template.Products.onRendered(function () {
 
-        return {
-            name: tmpl.uploadName.get(),
-            percent: tmpl.uploadPercent.get()
+    TempProduct.insert({ "title": "", "description": "" });
+
+    $(document).on('productEditEvent', function (e, elem) {
+        let target, key, val, data = {};
+
+        if (elem.not_element) {
+            //this is not a html element -> instead passing a direct data object
+            let objData = elem;
+
+            data[objData.key] = objData._id;
+
+        } else {
+            target = $(elem);
+            key = target.data("key");
+            val = target.val();
+
+            if (target.is('div')) {
+                //then it does not have value attr use data-value=""
+                val = target.data("value");
+            }
+
+            if(key == "file"){
+                let file = target.data("file");
+                val = file;
+                key = "img";
+            }
+
+            data[key] = val;
         }
+
+        Products.update(Session.get(PRODUCT_EDIT_ID), {
+            $set: data
+        })
+    });
+
+    $(document).on('productCreateEvent', function (e, elem) {
+        //subscribers = $('.subscribers-testEvent');
+        //subscribers.trigger('testEventHandler', [eventInfo]);
+        let tempProduct = TempProduct.findOne();
+
+        let target, key, val, data = {};
+
+        if (elem.not_element) {
+            //this is not a html element -> instead passing a direct data object
+            let objData = elem;
+
+            data[objData.key] = objData._id;
+
+        } else {
+            target = $(elem);
+            key = target.data("key");
+            val = target.val();
+
+            if (target.is('div')) {
+                //then it does not have value attr use data-value=""
+                val = target.data("value");
+            }
+
+            if(key == "file"){
+                let file = target.data("file");
+                val = file;
+                key = "img";
+            }
+
+            data[key] = val;
+        }
+
+
+        TempProduct.update(tempProduct._id, {
+            $set: data
+        })
+    });
+});
+
+Template.Products.helpers({
+    'list_products': function () {
+        return Products.find().fetch();
+    },
+    'editing_product': function () {
+        return Products.findOne({ "_id": Session.get(PRODUCT_EDIT_ID) });
+    },
+    'get_temp': function () {
+        return TempProduct.findOne();
+    },
+    'valid_to_create': function () {
+        let temp = TempProduct.findOne();
+        return temp && temp.title && temp.description && temp.price ? true : false;
     }
 });
 
 Template.Products.events({
-    'click .js-upload': function (e, tmpl) {
-        let target = tmpl.$("#upload-input");
-
-        target.click();
+    'click .js-edit-product': function (e, tmpl) {
+        let productId = $(e.currentTarget).data("product");
+        Session.set(PRODUCT_EDIT_ID, productId);
     },
-    'change #upload-input': function (e, tmpl) {
-        let input = $(e.target);
+    'click .js-remove-product': function (e, tmpl) {
+        let product = Products.findOne({ "_id": Session.get(PRODUCT_EDIT_ID) });
 
+        if (product) {
+            Products.remove(product._id);
 
-        if (!input.val()) return
+            let elemClose = tmpl.$(".close");
+            elemClose.data("saved", true);
+            elemClose.click();
+        }
+    },
+    'click .js-create-product': function (e, tmpl) {
+        let temp = TempProduct.findOne();
 
-        var fileName = input.val().replace(/^.*[\\\/]/, '')
-        tmpl.uploadName.set(fileName);
+        if (temp) {
+            delete temp._id
+            Products.insert(temp);
 
+            let elemClose = tmpl.$(".close");
+            elemClose.data("saved", true);
+            elemClose.click();
+        }
+    },
+    'click .close': function (e, tmpl) {
+        let tempProduct = TempProduct.findOne();
+        let isSaved = tmpl.$(".close").data("saved");
 
-        if (input[0].files && input[0].files[0]) {
-            tmpl.uploading.set(true);
-            //do your own request an handle the results
-            var file_data = input[0].files[0]; // Getting the properties of file from file field
-
-            var form_data = new FormData(); // Creating object of FormData class
-            form_data.append("file", file_data) // Appending parameter named file with properties of file_field to form_data
-            form_data.append("user_id", Meteor.userId()) // Adding extra parameters to form_data
-            $.ajax({
-                url: Meteor.settings.public.api.storage + "/files", // Upload Script
-                dataType: 'json',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data, // Setting the data attribute of ajax with file_data
-                type: 'post',
-                xhr: function () {
-                    var xhr = $.ajaxSettings.xhr();
-                    xhr.upload.onprogress = function (e) {
-                        // For uploads
-                        if (e.lengthComputable) {
-                            //(e.loaded / e.total) * 100;
-                            tmpl.uploadPercent.set((e.loaded / e.total) * 100);
-                        }
-                    };
-                    return xhr;
-                },
-                success: function (data) {
-                    // Do something after Ajax completes 
-                    console.log(data);
-                    tmpl.uploading.set(false);
-                },
-                error: function (err) {
-                    tmpl.uploading.set(false);
+        if (!isSaved && tempProduct.img) {
+            /* Meteor.call("files.remove", tempProduct.img, function (err, result) {
+                if (err) {
+                    //console.log(err);
+                } else {
+                    //console.log(result);
+                    //tmpl.$(".close").click();
                 }
-            });
-
+            }); */
+        } else {
+            tmpl.$(".close").data("saved", false);
         }
 
     }

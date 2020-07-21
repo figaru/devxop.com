@@ -10,25 +10,115 @@
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-sm-12">
+            {{#each product in list_products}}
+            <div class="col-sm-12 mb-3">
                 <div class="card card-shadow p-0">
                     <div class="card-body text-center">
                         <div class="row">
-                            <div class="col-sm-12 col-md-2">
-                                <input type="checkbox">
+                            <div class="col-sm-12 col-md-1 py-4 d-flex flex-column justify-content-center">
+                                <input type="checkbox" disabled>
                             </div>
-                            <div class="col-sm-12 col-md-8">
+                            <div class="col-sm-12 col-md-9 py-4">
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        img here
+                                    <div class="col-sm-12 col-md-4">
+                                        {{>item_files file=product.img classStyle="img-full"}}
                                     </div>
-                                    <div class="col-sm-6">
-                                        Product Description
+                                    <div class="col-sm-12 col-md-8">
+                                        <div class="row">
+                                            <div class="col-12 text-left">
+                                                <h4>{{product.title}}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 text-left">
+                                                <label>{{product.description}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 text-left">
+                                                <h4>{{product.price}}</h4>
+                                            </div>
+
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-2">
-                                edit icon
+                            <div class="col-sm-12 col-md-2 py-4 d-flex flex-column justify-content-center">
+                                <i class="material-icons js-edit-product" data-product="{{product._id}}"
+                                    data-toggle="modal" data-target="#modalEditProduct">edit</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalEditProduct" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl shadow-lg">
+            <div class="modal-content mb-3">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{editing_product.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-8">
+                            <div class="row">
+                                <div class="col-xs-12 pb-3">
+
+                                    {{> text_input eventId="productEditEvent" maxLength=100 key="title" value=editing_product.title placeholder="Product name..."
+                                    label="Title"}}
+                                </div>
+                                <div class="col-xs-12 pb-3">
+                                    {{>text_input eventId="productEditEvent" style="min-height: 100px" maxLength=1000 key="description" value=editing_product.description placeholder="Describe what this product..." label="Description"}}
+                                </div>
+                                <div class="col-xs-12 pb-3">
+                                    <div class="label">Price</div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">€</span>
+                                        {{>number_input eventId="productCreateEvent" value=editing_product.price style="outline: none; box-shadow: none;" styleClass="form-control" maxLength=100 key="price" label="Price"}}
+                                        <!-- <span class="input-group-text"></span> -->
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    {{>media_upload eventId="productEditEvent" key="img"}}
+                                </div>
+                                <div class="col-sm-6 d-flex flex-column justify-content-center align-content-center">
+                                    {{> select_files eventId="productEditEvent" modalId="productEditImg" key="file" fileType="image"}}
+                                    <p class="text-center">Choose existing image...</p>
+
+                                    <p class="text-center"><button class="btn btn-primary" data-toggle="modal"
+                                            data-target="#productEditImg">Select...</button></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    {{>item_files file=editing_product.img classStyle="img-full"}}
+                                </div>
+                                <div class="col-12">
+                                    <h4>{{editing_product.title}}</h4>
+                                    <label>{{editing_product.description}}</label>
+                                    {{#if editing_product.price}}
+                                    <h4>{{editing_product.price}}€</h4>
+                                    {{/if}}
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-danger js-remove-product">Delete Product</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -37,13 +127,9 @@
         </div>
     </div>
 
-
-
-
-    <!-- Modal -->
     <div class="modal fade" id="modalCreateProduct" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl shadow-lg">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl shadow-lg">
+            <div class="modal-content mb-3">
                 <div class="modal-header">
                     <h5 class="modal-title">New Product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -57,51 +143,55 @@
                                 <div class="col-xs-12 pb-3">
 
                                     {{> text_input eventId="productCreateEvent" maxLength=100 key="title" placeholder="Product name..."
-                                    label="Name"}}
+                                    label="Title"}}
                                 </div>
                                 <div class="col-xs-12 pb-3">
                                     {{>text_input eventId="productCreateEvent" style="min-height: 100px" maxLength=1000 key="description" placeholder="Describe what this product..." label="Description"}}
                                 </div>
+                                <div class="col-xs-12 pb-3">
+                                    <div class="label">Price</div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">€</span>
+                                        {{>number_input eventId="productCreateEvent" style="outline: none; box-shadow: none;" styleClass="form-control" maxLength=100 key="price" label="Price"}}
+                                        <!-- <span class="input-group-text"></span> -->
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="media-upload">
-                                        {{#with uploadProgress}}
-                                        <div class="upload-progress">
-                                            <div class="progress-name">
-                                                <h4>{{uploadProgress.name}}</h4>
-                                            </div>
-                                            <div class="progress-precent">
-                                                <h5>{{uploadProgress.percent}}%</h5>
-                                            </div>
-                                            {{> progress_input progress=uploadProgress.percent}}
-                                        </div>
-                                        {{else}}
-                                        <div class="upload-icon">
-                                            <i class="material-icons">
-                                                add_a_photo
-                                            </i>
-                                        </div>
-                                        <div class="upload-description">
-                                            <p>Click the button and select the image...
-                                            </p>
-                                        </div>
-                                        <div class="upload-button">
-                                            <input type='file' id="upload-input" hidden />
-                                            <button class="btn btn-primary js-upload">Select Image</button>
-                                        </div>
-                                        {{/with}}
-                                    </div>
+                                <div class="col-sm-6">
+                                    {{>media_upload eventId="productCreateEvent" key="img"}}
                                 </div>
+                                <div class="col-sm-6 d-flex flex-column justify-content-center align-content-center">
+                                    {{> select_files eventId="productCreateEvent" modalId="productCreateImg" key="file" fileType="image"}}
+                                    <p class="text-center">Choose existing image...</p>
+
+                                    <p class="text-center"><button class="btn btn-primary" data-toggle="modal"
+                                            data-target="#productCreateImg">Select...</button></p>
+                                </div>
+
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <div class="row">
-                                <div class="col-12">
-
-                                    <!-- {{>img file=this.doc classStyle="img-full" fullscreen=true}} -->
-
+                                <div class="col-12 mb-2">
+                                    {{#with get_temp.img}}
+                                    {{>item_files file=this classStyle="img-full"}}
+                                    {{/with}}
                                 </div>
+                                <div class="col-12">
+                                    <h4>{{get_temp.title}}</h4>
+                                    <label>{{get_temp.description}}</label>
+                                    {{#if get_temp.price}}
+                                    <h4>{{get_temp.price}}€</h4>
+                                    {{/if}}
+                                </div>
+                                <div class="col-12">
+                                    {{#if valid_to_create}}
+                                    <button class="btn btn-primary js-create-product">Create Product</button>
+                                    {{/if}}
+                                </div>
+
                             </div>
                         </div>
                     </div>

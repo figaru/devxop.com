@@ -8,5 +8,6 @@ import './exposed/not-found/not-found';
 import './user/dashboard/dashboard';
 import './user/devices/devices';
 import './user/products/products';
+import './user/collections/collections';
 import './user/media/media';
 import './user/media/media.drive';

@@ -10,6 +10,8 @@ UserRouter = FlowRouter.group({
         this.register('allFiles', Meteor.subscribe('files.all'));
         this.register('allJobs', Meteor.subscribe('jobs.all'));
         this.register('allDevices', Meteor.subscribe('devices.all'));
+        this.register('allProducts', Meteor.subscribe('products.all'));
+        this.register('allCollections', Meteor.subscribe('collections.all'));
     },
     triggersEnter: [function () {
         if (!Meteor.userId() && !Meteor.loggingIn()) {

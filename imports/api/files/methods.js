@@ -35,6 +35,9 @@ const httpTestAsync = (url, data) =>
 
 
 Meteor.methods({
+  'files.upload': function(){
+    console.log(data.length);
+  },
   'test.api': async function () {
     try {
       const response = await httpTestAsync(Meteor.settings.public.api.storage + "/files", {test: "test"});
@@ -48,7 +51,6 @@ Meteor.methods({
   'files.remove': async function (id) {
 
     let file = Files.findOne(id);
-
     if (file && file.user_id == this.userId) {
       let data = {
         'user_id': file.user_id,

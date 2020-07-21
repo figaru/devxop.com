@@ -17,9 +17,13 @@ Template.select_files.events({
 
         tmpl.$(".js-close-modal").click();
     },
-    'click .js-close-modal':function(){
-        var myModalEl = document.getElementById('modalFileSelect');
+    'click .js-close-modal':function(e, tmpl){
+        let modalId = tmpl.data.modalId;
+        var myModalEl = document.getElementById(modalId);
         var modal = bootstrap.Modal.getInstance(myModalEl);
-        modal.hide();
+        if(modal){
+            modal.hide();
+        }
+        
     }
 })

@@ -54,7 +54,7 @@ Template.number_input.events({
 
         
     },
-    'keyup .js-textbox': delay(function (e, template) {
+    'keyup .js-numberbox': delay(function (e, template) {
         let elem = $(e.target);
         //console.log(template.data.value != elem.val());
         //console.log(template.data.value +" : "+ elem.val());
