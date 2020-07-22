@@ -9,3 +9,5 @@ import '../../api/devices/devices.js';
 import '../../api/products/products.js';
 
 import '../../api/collections/collections.js';
+
+import '../../api/websites/websites.js';

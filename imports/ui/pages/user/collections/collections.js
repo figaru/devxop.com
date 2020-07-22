@@ -23,10 +23,8 @@ Template.Collections.onRendered(function () {
 
             let productsList = editCollection.products;
 
-            console.log(productsList);
-            console.log(productId);
-            productsList.push(productId);
-            
+            if (!productsList.includes(productId)) productsList.push(productId);
+
             val = productsList;
 
 
@@ -41,6 +39,18 @@ Template.Collections.onRendered(function () {
 });
 
 Template.Collections.events({
+    'click .js-remove-product': function (e) {
+        let target = $(e.currentTarget);
+        let editCollection = Collections.findOne({ "_id": Session.get(COLLECTION_EDIT_ID) });
+        let index = target.data("index");
+
+        let productsList = editCollection.products;
+        productsList.splice(index, 1);
+
+        Collections.update(editCollection._id, {
+            $set: { products: productsList }
+        });
+    },
     'click .js-edit-collection': function (e, tmpl) {
         let id = $(e.currentTarget).data("collection");
         Session.set(COLLECTION_EDIT_ID, id);
@@ -58,22 +68,31 @@ Template.Collections.events({
     }
 });
 
+Array.prototype.move = function (from, to) {
+    this.splice(to, 0, this.splice(from, 1)[0]);
+};
+
 Template.Collections.helpers({
     'list_collections': function () {
         return Collections.find().fetch();
     },
-    'get_product':function(id){
+    'get_product': function (id) {
         return Products.findOne(id);
     },
     'colletion_products_list': function () {
         let collection = Collections.findOne({ "_id": Session.get(COLLECTION_EDIT_ID) });
         let productIds = [];
+        let list = [];
 
         if (collection) {
             productIds = collection.products;
+            productIds.forEach(element => {
+                list.push(Products.findOne(element));
+            });
+
         }
 
-        return Products.find({ "_id": { "$in": productIds } })
+        return list;//Products.find({ "_id": { "$in": productIds } }).fetch();
     },
     'editing_collection': function () {
         return Collections.findOne({ "_id": Session.get(COLLECTION_EDIT_ID) });
