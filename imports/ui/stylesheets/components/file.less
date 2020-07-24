@@ -1,3 +1,51 @@
+
+
+.image-select:hover{
+    filter: brightness(0.95);
+}
+
+.image-select.small{
+    width: 96px;
+    height: 96px;
+}
+.image-select{
+    position: relative;
+    width: 206px;
+    height: 96px;
+    padding: 12px;
+    background-color: #eaf7ff;
+    cursor: pointer;
+
+    border-radius: 10px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    .image-frame{
+        position: relative;
+        border: 1px dashed  #fff;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        >i{
+            color:  #fff;
+        }
+    }
+}
+
+
+
+
+
+
+
+
 .thumbnail-wrapper:hover>.thumbnail-hover {
     opacity: .8;
 }

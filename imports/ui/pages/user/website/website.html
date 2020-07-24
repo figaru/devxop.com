@@ -14,13 +14,64 @@
                     <div class="card-body p-0">
                         <div class="row p-4">
                             <div class="col-sm-10 d-flex flex-column justify-content-center">
+                                <h5 class="mb-0">Setup</h5>
+                            </div>
+                            <div class="col-sm-2 d-flex flex-column justify-content-center align-items-center">
+                                <button
+                                    class="btn btn-primary p-0 rounded-circle d-flex flex-column justify-content-center"
+                                    type="button" data-toggle="collapse" data-target="#collapseSetup"
+                                    aria-expanded="false" aria-controls="collapseSetup">
+                                    <i class="material-icons p-2">keyboard_arrow_down</i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="collapse" id="collapseSetup">
+                            <hr class="mt-0">
+                            <div class="row p-4 pt-0">
+                                <div class="col-sm-12 mb-3">
+                                    <label>Setup your webpage's endpoint and brand name.</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>Name</label>
+                                    <p>Type in the name of your company or a name that describes it...</p>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control js-edit-website" data-key="name"
+                                            value="{{get_website.name}}" id="basic-url" aria-describedby="basic-addon3">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>Endpoint</label>
+                                    <p>The endpoint is the link where your webpage will be accessed from.</p>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon3">https://devxop.com/</span>
+                                        <input type="text" class="form-control js-edit-website" data-key="endpoint"
+                                            value="{{get_website.endpoint}}" id="basic-url"
+                                            aria-describedby="basic-addon3">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="row p-4">
+                            <div class="col-sm-10 d-flex flex-column justify-content-center">
                                 <h5 class="mb-0">Customize Your Look</h5>
                             </div>
                             <div class="col-sm-2 d-flex flex-column justify-content-center align-items-center">
-                                <button class="btn btn-primary" type="button" data-toggle="collapse"
-                                    data-target="#collapseCustomizeLook" aria-expanded="false"
-                                    aria-controls="collapseCustomizeLook">
-                                    Button with data-target
+                                <button
+                                    class="btn btn-primary p-0 rounded-circle d-flex flex-column justify-content-center"
+                                    type="button" data-toggle="collapse" data-target="#collapseCustomizeLook"
+                                    aria-expanded="false" aria-controls="collapseCustomizeLook">
+                                    <i class="material-icons p-2">keyboard_arrow_down</i>
                                 </button>
                             </div>
                         </div>
@@ -28,10 +79,75 @@
                         <div class="collapse" id="collapseCustomizeLook">
                             <hr class="mt-0">
                             <div class="row p-4 pt-0">
+                                <div class="col-sm-12 mb-3">
+                                    <label>Design your place on the page to match your brand.</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Cover</label>
+                                    {{> select_files eventId="websiteEditEvent" modalId="websiteCoverSelect" key="cover" fileType="image"}}
+                                    <div class="image-select" data-toggle="modal" data-target="#websiteCoverSelect"
+                                        style="background-image: url({{fileUrl get_website.cover 'thumb'}});">
+                                        <div class="image-frame">
+                                            <i class="material-icons">add</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Logo</label>
+                                    {{> select_files eventId="websiteEditEvent" modalId="websiteLogoSelect" key="logo" fileType="image"}}
+                                    <div class="image-select small" data-toggle="modal" data-target="#websiteLogoSelect"
+                                        style="background-image: url({{fileUrl get_website.logo 'thumb'}});">
+                                        <div class="image-frame">
+                                            <i class="material-icons">add</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="row p-4">
+                            <div class="col-sm-10 d-flex flex-column justify-content-center">
+                                <h5 class="mb-0">Products</h5>
+                            </div>
+                            <div class="col-sm-2 d-flex flex-column justify-content-center align-items-center">
+                                <button
+                                    class="btn btn-primary p-0 rounded-circle d-flex flex-column justify-content-center"
+                                    type="button" data-toggle="collapse" data-target="#collapseProducts"
+                                    aria-expanded="false" aria-controls="collapseProducts">
+                                    <i class="material-icons p-2">keyboard_arrow_down</i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="collapse" id="collapseProducts">
+                            <hr class="mt-0">
+                            <div class="row p-4 pt-0">
+                                <div class="col-sm-12 mb-3">
+                                    <label>Products you want to expose on your website</label>
+                                </div>
+                                <div class="col-sm-12 mb-3">
+                                    <label>Highlights</label>
+                                    <select class="form-control js-highlight-select" aria-label="Default select example">
+                                        {{#each collection in collections_list}}
+                                        <option selected="{{highlight_selected collection._id}}" value="{{collection._id}}">{{collection.title}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
                                 <div class="col-sm-12">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                    richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes
-                                    anderson cred nesciunt sapiente ea proident.
+                                    <label>Menu</label>
+                                    {{#each menu_collection}}
+                                        
+                                    {{/each}}
                                 </div>
                             </div>
                         </div>

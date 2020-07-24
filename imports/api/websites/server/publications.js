@@ -3,5 +3,5 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.publish('websites.all', function () {
-  return Products.find();
+  return Websites.find({user_id: this.userId});
 });
