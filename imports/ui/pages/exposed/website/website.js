@@ -3,7 +3,7 @@ import { find } from 'highcharts';
 
 
 const PRODUCT_HIGHLIGHTS = "products.highlights";
-const PORDUCT_MENUS = "products.menus";
+const PRODUCT_MENUS = "products.menus";
 
 Template.Website_public.onCreated(function () {
     let self = this;
@@ -71,7 +71,7 @@ Template.Website_public.onRendered(function () {
                     items: 1,
                     loop: false,
                     margin: 10,
-                    dots: true,
+                    dots: false,
                     responsive: {
                         300: {
                             items: 2
@@ -178,7 +178,37 @@ Template.Website_public.helpers({
         return Session.get(PRODUCT_HIGHLIGHTS);
     },
     "menus": function(){
+        let web = Websites.findOne();
 
+        if (web) {
+            let collections = Collections.find({ _id: { $in: web.menu } }).fetch();
+
+            if (collections) {
+                let menus = [];
+                collections.forEach(function(collection){
+
+                    let products = Products.find({ _id: { $in: collection.products } }).fetch();
+                    
+                    let productImg = Products.findOne({ _id: { $in: collection.products }, img: {$exists: true, $not: {$size: 0}} });
+
+                    if(productImg){
+                       collection.img = productImg.img; 
+                    }
+                    
+                    collection.products = products;
+                    menus.push(collection);
+                });
+
+                Session.set(PRODUCT_MENUS, menus);
+
+                console.log(menus);
+
+
+            }
+        }
+
+
+        return Session.get(PRODUCT_MENUS);
     }
 
 });

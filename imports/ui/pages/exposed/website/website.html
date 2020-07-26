@@ -72,19 +72,22 @@
         </div>
         <div class="container">
             <div class="row">
+                {{#each menu in menus}}
                 <div class="col-md-6 mb-3">
 
-                    <a data-toggle="modal" data-target="#menuRice" class="item-dishes">
+                    <a data-toggle="modal" data-target="#menu{{menu._id}}" class="item-dishes">
                         <div class="text">
                             <p class="dishes-price"><span class="material-icons">
                                     launch
                                 </span></p>
-                            <h2 class="dishes-heading">{{#if get_lang "en"}}Rice{{/if}}
-                                {{#if get_lang "pt"}}Arroz{{/if}}</h2>
+                            <h2 class="dishes-heading">{{#if get_lang "en"}}{{menu.title}}{{/if}}
+                                {{#if get_lang "pt"}} {{menu.title}} {{/if}}</h2>
                         </div>
-                        <img src="img/arroz.jpg" alt="" class="img-fluid">
+
+                        <img src="{{fileUrl menu.img 'thumb'}}" style="width: 100%;">
                     </a>
                 </div>
+                {{/each}}
 
             </div>
         </div>
@@ -328,57 +331,6 @@
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal fade" id="menuFish" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-xl modal-custom">
-            <!-- modal-dialog-centered -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{#if get_lang "en"}}Menu / Fish{{/if}}
-                        {{#if get_lang "pt"}}Ementa / Peixe{{/if}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="menu-listing">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="modal-lang" tabindex="-1" role="dialog" aria-labelledby="modal-lang" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title">Language / Linguagem</h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-center">
-                    <div class="row">
-                        <div class="col-12">
-                            <nav aria-label="Select language">
-                                <ul class="pagination pagination-md" style="justify-content: center;">
-                                    <li class="page-item" data-toggle="tooltip" data-placement="top" title="Português">
-                                        <a class="page-link js-select-lang" data-lang="pt">Português</a>
-                                    </li>
-                                    <li class="page-item" data-toggle="tooltip" data-placement="top" title="English">
-                                        <a class="page-link js-select-lang" data-lang="en">English</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="cookie-notice">
         <div class="cookie-notice-flex">
@@ -393,4 +345,45 @@
             </span>
         </div>
     </div>
+
+    {{#each menu in menus}}
+
+    <div class="modal fade" id="menu{{menu._id}}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl modal-custom">
+            <!-- modal-dialog-centered -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        {{#if get_lang "en"}}{{menu.title}}{{/if}}
+                        {{#if get_lang "pt"}}{{menu.title}}{{/if}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="menu-listing">
+                        {{#each product in menu.products}}
+                        <div class="item">
+                            <div class="item-content">
+                                <div class="item-heading">{{product.title}}</div>
+                    
+                                <div class="item-subheading">
+                                    {{#if get_lang "en"}} {{product.description}} {{/if}}
+                                    {{#if get_lang "pt"}} {{product.description}} {{/if}}
+                                </div>
+                                <div class="item-price">
+                                    {{product.price}}€
+                                </div>
+                            </div>
+                            {{#if product.img}}
+                            <div class="item-image"><img src="{{fileUrl product.img 'thumb'}}" alt="" class="img-fluid"></div>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
 </template>
