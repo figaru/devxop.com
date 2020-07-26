@@ -7,9 +7,10 @@ Template.registerHelper('getViewFiles', (device) => {
     
 });
 
-Template.registerHelper('fileUrl', (id, key) => { return fileUrl(id, key)});
+Template.registerHelper('fileUrl', (id, key) => {return fileUrl(id, key)});
 
 fileUrl = function(id, key){
+
     let file = Files.findOne({"_id": id});
 
     if(!file){
@@ -36,7 +37,7 @@ fileUrl = function(id, key){
         data["main"] = data.url + "/" + file.file.name; 
     }
 
-    //console.log(data);
+    //console.log(data[key]);
 
     if(key){
         return data[key];

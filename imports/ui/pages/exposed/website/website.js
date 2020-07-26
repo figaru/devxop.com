@@ -1,6 +1,10 @@
 import './website.html';
 import { find } from 'highcharts';
 
+
+const PRODUCT_HIGHLIGHTS = "products.highlights";
+const PORDUCT_MENUS = "products.menus";
+
 Template.Website_public.onCreated(function () {
     let self = this;
 
@@ -48,24 +52,39 @@ Template.Website_public.onCreated(function () {
     }
 });
 
-Template.Website_public.onRendered(function(){
-    $('.centernonloop').owlCarousel({
-        center: true,
-        items: 1,
-        loop: false,
-        margin: 10,
-        dots: true,
-        responsive: {
-            300: {
-                items: 2
-            },
-            600: {
-                items: 4
-            }
+
+Template.Website_public.onRendered(function () {
+    //instatiate session
+    Session.set(PRODUCT_HIGHLIGHTS, null);
+
+    let self = this;
+
+    self.autorun(function () {
+
+        let highlights = Session.get(PRODUCT_HIGHLIGHTS);
+
+        if (highlights) {
+            console.log("highlights have changed");
+            setTimeout(function () {
+                $('.centernonloop').owlCarousel({
+                    center: true,
+                    items: 1,
+                    loop: false,
+                    margin: 10,
+                    dots: true,
+                    responsive: {
+                        300: {
+                            items: 2
+                        },
+                        600: {
+                            items: 4
+                        }
+                    }
+                });
+            }, 200);
         }
+
     });
-
-
     var i = 0;
     $('.element-animate').waypoint(function (direction) {
         if (direction === 'down' && !$(this.element).hasClass('element-animated')) {
@@ -100,36 +119,66 @@ Template.Website_public.onRendered(function(){
 });
 
 Template.Website_public.helpers({
-    'get_cover': function(){
+    'get_img': function (id, key) {
+        console.log(id, key);
+        return fileUrl(id, "thumb");
+    },
+    'get_cover': function () {
         let web = Websites.findOne();
-        
-        if(web){
-            let file = Files.findOne({_id: web.cover});
-            if(file){
+
+        if (web) {
+            let file = Files.findOne({ _id: web.cover });
+            if (file) {
                 return fileUrl(file._id, "main");
             }
-            
+
         }
     },
-    'get_lang': function(lang){
+    'get_lang': function (lang) {
         return lang == "pt";
     },
-    'highlights': function(){
+    'highlights': function () {
         let web = Websites.findOne();
-        
-        if(web){
-            let collection = Collections.findOne({_id: {$in: web.highlights}});
 
-            if(collection){
+        if (web) {
+            let collection = Collections.findOne({ _id: { $in: web.highlights } });
 
-                let products = Products.find({_id: {$in: collection.products}}).fetch();
+            if (collection) {
 
-                return products;
+                let products = Products.find({ _id: { $in: collection.products } }).fetch();
+
+
+                if (products) {
+                    /* setTimeout(function () {
+                        $('.centernonloop').owlCarousel({
+                            center: true,
+                            items: 1,
+                            loop: false,
+                            margin: 10,
+                            dots: true,
+                            responsive: {
+                                300: {
+                                    items: 2
+                                },
+                                600: {
+                                    items: 4
+                                }
+                            }
+                        });
+                    }, 2000); */
+
+                    Session.set(PRODUCT_HIGHLIGHTS, products);
+                }
+
+
             }
         }
-            
 
-        return null;
+
+        return Session.get(PRODUCT_HIGHLIGHTS);
+    },
+    "menus": function(){
+
     }
 
 });

@@ -52,7 +52,7 @@
 
             {{#each product in highlights}}
             <a class="item-dishes bright">
-                <img src="{{fileUrl product._id 'thumb'}}" alt="" class="img-fluid">
+                <img src="{{fileUrl product.img 'thumb'}}" alt="" class="img-fluid">
             </a>
             {{/each}}
         </div>
@@ -83,59 +83,6 @@
                                 {{#if get_lang "pt"}}Arroz{{/if}}</h2>
                         </div>
                         <img src="img/arroz.jpg" alt="" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-md-6 mb-3">
-
-                    <a data-toggle="modal" data-target="#menuMeat" class="item-dishes">
-                        <div class="text">
-                            <p class="dishes-price"><span class="material-icons">
-                                    launch
-                                </span></p>
-                            <h2 class="dishes-heading">{{#if get_lang "en"}}Meat{{/if}}
-                                {{#if get_lang "pt"}}Carnes{{/if}}</h2>
-                        </div>
-                        <img src="img/piano.jpg" alt="" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-md-6 mb-3">
-
-                    <a data-toggle="modal" data-target="#menuFish" class="item-dishes">
-                        <div class="text">
-                            <p class="dishes-price"><span class="material-icons">
-                                    launch
-                                </span></p>
-                            <h2 class="dishes-heading">{{#if get_lang "en"}}Fish{{/if}}
-                                {{#if get_lang "pt"}}Peixe{{/if}}</h2>
-                        </div>
-                        <img src="img/salmao.jpg" alt="" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-md-6 mb-3">
-
-                    <a data-toggle="modal" data-target="#menuVegetarian" class="item-dishes">
-                        <div class="text">
-                            <p class="dishes-price"><span class="material-icons">
-                                    launch
-                                </span></p>
-                            <h2 class="dishes-heading">{{#if get_lang "en"}}Vegetarian{{/if}}
-                                {{#if get_lang "pt"}}Vegetariano{{/if}}</h2>
-                        </div>
-                        <img src="img/feijao.jpg" alt="" class="img-fluid">
-                    </a>
-                </div>
-
-                <div class="col-md-6 mb-3">
-
-                    <a data-toggle="modal" data-target="#menuSalads" class="item-dishes">
-                        <div class="text">
-                            <p class="dishes-price"><span class="material-icons">
-                                    launch
-                                </span></p>
-                            <h2 class="dishes-heading">{{#if get_lang "en"}}Salads{{/if}}
-                                {{#if get_lang "pt"}}Saladas{{/if}}</h2>
-                        </div>
-                        <img src="img/salada.jpg" alt="" class="img-fluid">
                     </a>
                 </div>
 

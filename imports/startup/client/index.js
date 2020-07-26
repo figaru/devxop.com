@@ -7,8 +7,8 @@ import '../../ui/utils/index';
 import './routes/index.js';
 
 
-import WayPoint from '/imports/ui/vendor/js/jquery.waypoints.min.js';
-import Carousel from '/imports/ui/vendor/js/owl.carousel.min.js';
+import WayPoint from '../../ui/vendors/js/jquery.waypoints.min.js';
+import Carousel from '../../ui/vendors/js/owl.carousel.min.js';
 
 $(document).ready(function () {
     window["WayPoint"] = WayPoint;
