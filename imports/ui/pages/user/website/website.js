@@ -1,5 +1,7 @@
 import './website.html';
 
+import '../../../stylesheets/templates/website.less';
+
 Template.Website.onRendered(function () {
     //function will create document if website does not exist
     Meteor.call("website.exists");
@@ -62,10 +64,26 @@ Template.Website.helpers({
             let option = website.highlights[0];
 
             return option == id ? "selected" : "";
-            
+
         }
 
         return;
+    },
+    'menu_collection': function () {
+        let website = Websites.findOne();
+
+        if (website && "menu" in website) {
+            let list = [];
+            website.menu.forEach(id => { //collection ID
+                list.push(Collections.findOne(id));
+            });
+
+            return list;
+
+        }
+
+        return [];
+
     }
 });
 
@@ -88,7 +106,7 @@ Template.Website.events({
         let target = $(e.target);
 
         let website = Websites.findOne();
-        let val = $( ".js-highlight-select option:selected" ).val();
+        let val = $(".js-highlight-select option:selected").val();
         let data = {}
 
         data["highlights"] = [val];
@@ -96,5 +114,42 @@ Template.Website.events({
         Websites.update(website._id, {
             $set: data
         })
+    },
+    'change .js-menu-select': function (e) {
+        let target = $(e.target);
+
+        let website = Websites.findOne();
+        let val = $(".js-menu-select option:selected").val();
+        let data = {}
+
+        let menu = website.menu;
+
+        if (!menu.includes(val)) {
+            menu.push(val);
+
+            data["menu"] = menu;
+
+            Websites.update(website._id, {
+                $set: data
+            })
+        }
+
+
+    },
+    'click .js-remove-menu': function(e){
+        let target = $(e.target);
+
+        let website = Websites.findOne();
+        let index = target.data("index");
+        let menu = website.menu;
+        let data = {};
+        menu.splice(index, 1);
+
+        data["menu"] = menu;
+
+        Websites.update(website._id, {
+            $set: data
+        })
+
     }
 });

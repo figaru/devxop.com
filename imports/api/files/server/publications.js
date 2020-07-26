@@ -13,3 +13,10 @@ Meteor.publish('files.allByType', function (type) {
 });
 
 
+Meteor.publish('files.find', function (array) {
+    //console.log(Collections.find({"_id": { "$in": collectionsArray }}).count());
+    return Files.find({"_id": { "$in": array }});
+  });
+  
+
+

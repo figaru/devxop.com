@@ -137,17 +137,34 @@
                                 </div>
                                 <div class="col-sm-12 mb-3">
                                     <label>Highlights</label>
-                                    <select class="form-control js-highlight-select" aria-label="Default select example">
+                                    <select class="form-control js-highlight-select"
+                                        aria-label="Default select example">
                                         {{#each collection in collections_list}}
-                                        <option selected="{{highlight_selected collection._id}}" value="{{collection._id}}">{{collection.title}}</option>
+                                        <option selected="{{highlight_selected collection._id}}"
+                                            value="{{collection._id}}">{{collection.title}}</option>
                                         {{/each}}
                                     </select>
                                 </div>
                                 <div class="col-sm-12">
                                     <label>Menu</label>
-                                    {{#each menu_collection}}
-                                        
-                                    {{/each}}
+                                    <div class="row">
+                                        {{#each collection in menu_collection}}
+                                        <div class="col-sm-3 d-flex flex-column justify-content-center align-items-center">
+                                            {{collection.title}}
+                                            <button class="btn btn-danger js-remove-menu" data-index="{{@index}}">Remove</button>
+                                        </div>
+                                        {{/each}}
+                                        <div class="col-sm-12">
+                                            <select class="form-control js-menu-select"
+                                                aria-label="Default select example">
+                                                {{#each collection in collections_list}}
+                                                <option value="{{collection._id}}">{{collection.title}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
