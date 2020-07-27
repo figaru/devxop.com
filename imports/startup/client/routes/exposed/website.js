@@ -7,6 +7,16 @@ ExposedRouter.route('/app/:website', {
         this.register('website', Meteor.subscribe('websites.getOne', params.website));
     },
     action(params) {
+
+        FlowRouter.subsReady("website", function() {
+            // do something
+
+            let web = Websites.findOne();
+
+            if(!web){
+                FlowRouter.go("/");
+            }
+        });
         BlazeLayout.render('Exposed_layout', { main: 'Website_public' });
     },
 });

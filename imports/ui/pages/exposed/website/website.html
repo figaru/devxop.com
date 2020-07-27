@@ -8,17 +8,47 @@
 
     </div>
     <button id="lang" type="button" class="btn js-select-lang" data-toggle="modal" data-target="#modal-lang">
-        <span data-toggle="tooltip" data-placement="bottom" title="Language" class="material-icons"
-            style="cursor: pointer; color: #fff;">g_translate</span>
+        <!-- <span data-toggle="tooltip" data-placement="bottom" title="Language" class="material-icons"
+            style="cursor: pointer; color: #fff;">g_translate</span> -->
+
+        <!-- <div id="google_translate_element"></div>
+
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ pageLanguage: "pt", layout: google.translate.TranslateElement.InlineLayout.SIMPLE, includedLanguages: "pt,en,es,fr" }, 'google_translate_element');
+
+
+                $(".goog-te-banner-frame").css("visibility", "hidden");
+                $("body").css("top", "0px");
+            }
+        </script>
+
+        <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ pageLanguage: 'pt', includedLanguages: 'en,es,pt,ru,fr,de', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+            }
+        </script>
+        <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+        <p></p>
+        
+            
+        <div id="google_translate_element" style="position: absolute; top: 0px !important"></div>
     </button>
 
-    <div class="page-banner">
+    <div class="page-banner" style="background-color: #333;">
 
         <div class="banner-content">
-            <div class="heading">Portuguse Lab
+            <div class="heading skiptranslate">{{web.title}}
                 <!-- <img src="img/pl-branco.png"> -->
             </div>
-            <div class="sub-heading">by Chef José Domingos</div>
+            <div class="sub-heading skiptranslate">{{web.sub_title}}</div>
             <div class="banner-actions">
                 <a href="#specialsJump" class="btn btn-outline-light">
                     {{#if get_lang "en"}}Our Specials{{/if}}
@@ -33,6 +63,10 @@
 
         <img src="{{get_cover}}" class="bg">
     </div>
+
+    <section class="section">
+
+    </section>
 
     <section class="section bg-light element-animate py-5">
         <div class="clearfix mb-5 pb-5 mt-5">
@@ -77,7 +111,7 @@
 
                     <a data-toggle="modal" data-target="#menu{{menu._id}}" class="item-dishes">
                         <div class="text">
-                            <p class="dishes-price"><span class="material-icons">
+                            <p class="dishes-price"><span class="material-icons skiptranslate">
                                     launch
                                 </span></p>
                             <h2 class="dishes-heading">{{#if get_lang "en"}}{{menu.title}}{{/if}}
@@ -98,8 +132,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 text-center heading-wrap">
-                        <h2>{{#if get_lang "en"}}About Us{{/if}}
-                            {{#if get_lang "pt"}}Sobre Nós{{/if}}</h2>
+                        <h2>Sobre Nós</h2>
 
                         <span class="back-text">{{#if get_lang "en"}}Come and join in this delicious gastronomic
                             experience <b class="text-yellow">#portugueselab</b>{{/if}}
@@ -111,88 +144,15 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <blockquote class="testimonial">
-                        <p>{{#if get_lang "en"}}
-                            Portuguese Lab arose from the need to bring high gastronomy/chef's cuisine to everyone. To
-                            show that this
-                            is not only a type of cuisine destined to some of us but instead, to all of us. The Chef's
-                            inspiration is
-                            typically Portuguese. Portuguese Lab then makes a bold proposal: the complete experience -
-                            traditional
-                            portuguese cuisine created in laboratory.{{/if}}
-                            {{#if get_lang "pt"}}
-                            O Portuguese Lab nasce do imperativo de levar a alta gastronomia a "cozinha de Chef" a
-                            todos. De mostrar
-                            que este não é um tipo de cozinha destinado só a alguns, pelo contrário, está ao alcance de
-                            todos. A
-                            inspiração do Chef é a culinária tipicamente portuguesa. O Portuguese Lab faz-lhe então uma
-                            proposta
-                            arrojada: a experiência completa - cozinha tradicional portuguesa criada em laboratório.
-                            {{/if}}</p>
-                        <!--  <div class="d-flex author">
-                  <img src="img/chef.jpg" alt="" class="mr-4">
-                </div> -->
-                    </blockquote>
-                </div>
-                <div class="col-md-4">
-                    <blockquote class="testimonial">
-                        <p>{{#if get_lang "en"}}
-                            Portuguese elements and traditions reign and inspire, they are everywhere. The products are
-                            carefully
-                            selected by the Chef and seek, to promote the local economy, our Algarve, where the
-                            Portuguese Lab is
-                            born. Portuguese tradition and flavor are the maximum, will be worked, conjugated, fused and
-                            combined in
-                            an original way by the hand of Chef José Domingos and his dedicated team.{{/if}}
-                            {{#if get_lang "pt"}}
-                            Os elementos e tradições portuguesas imperam e inspiram e estão por toda a parte. Os
-                            produtos são
-                            cuidadosamente seleccionados pelo Chef e procuram promover a economia local, a do nosso
-                            Algarve,
-                            precisamente onde nasce o Portuguese Lab. A tradição e sabor português são a máxima, serão
-                            trabalhados,
-                            conjugados, fundidos e combinados de forma original pela mão do Chef José Domingos e da sua
-                            dedicada
-                            equipa. {{/if}}</p>
-                        <!-- <div class="d-flex author">
-                  <img src="img/experience.jpg" alt="" class="mr-4">
-                </div> -->
+                        <p>TODO ABOUT INFO</p>
                         <div class="d-flex author">
                             <img src="img/jose.jpg" alt="" class="mr-4">
                             <div class="author-info">
                                 <h4>Chef José Domingos</h4>
                             </div>
                         </div>
-                    </blockquote>
-                </div>
-                <div class="col-md-4">
-                    <blockquote class="testimonial">
-                        <p>{{#if get_lang "en"}}
-                            ​Executive Chef with over thirty years of certified experience as chef, consultant, teacher
-                            and manager. A
-                            few dozen awards were collected among them several "Chef of the Year".Professor at the
-                            Escola de Hotelaria
-                            e Turismo do Algarve for approximately twenty years and owner of the <b
-                                class="text-yellow">Algarve
-                                Cuisine Academy</b>, a cooking
-                            school located in Faro with various intensive cooking courses for professionals or
-                            non-professionals as
-                            well as various workshops taught by the Chef and runned by Margarida Domingos.{{/if}}
-                            {{#if get_lang "pt"}}
-                            Chef executivo de cozinha com mais de trinta anos de experiência certificada como chef,
-                            consultor,
-                            formador/ professor e gestor. Algumas dezenas de prémios coleccionados entre eles diversos
-                            "Chef de
-                            Cozinha do Ano". Professor na Escola de Hotelaria e Turismo do Algarve há aproximadamente
-                            vinte anos e
-                            proprietário da <b class="text-yellow">Algarve Cuisine Academy</b>, uma escola de cozinha
-                            localizada em
-                            Faro com diversos cursos
-                            intensivos de cozinha para profissionais ou não profissionais assim como workshops diversos
-                            leccionados
-                            pelo Chef e administrada pela Margarida Domingos.{{/if}}</p>
-
                     </blockquote>
                 </div>
             </div>
@@ -204,31 +164,21 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 text-center heading-wrap">
-                        <h2>{{#if get_lang "en"}}Have you tried?{{/if}}
-                            {{#if get_lang "pt"}}Já provou?{{/if}}</h2>
+                        <h2>Já provou?</h2>
 
-                        <span class="back-text">{{#if get_lang "en"}}Leave us your opinion in any of our channels:
+                        <span class="back-text">
+                            Deixe-nos a sua opinião em qualquer um dos nossos canais:
                             <a href="https://www.facebook.com/ce.portugueselab" target="_blank"
-                                style="text-decoration: none;"><b class="text-yellow">Facebook</b></a>,
+                                style="text-decoration: none;"><b class="text-yellow skiptranslate">Facebook</b></a>,
                             <a href="https://www.instagram.com/ce.portugueselab" target="_blank"
-                                style="text-decoration: none;"><b class="text-yellow">Instagram</b></a>,
+                                style="text-decoration: none;"><b class="text-yellow skiptranslate">Instagram</b></a>,
                             <a href="https://www.tripadvisor.pt/Restaurant_Review-g262054-d15066105-Reviews-Portuguese_Lab-Almancil_Loule_Faro_District_Algarve.html"
-                                target="_blank" style="text-decoration: none;"><b class="text-yellow">Trip
+                                target="_blank" style="text-decoration: none;"><b class="text-yellow skiptranslate">Trip
                                     Advisor</b></a> ou
                             <a href="https://www.google.pt/search?ei=cTDPW82NG8LNgAbTzLCAAQ&q=portuguese+lab+restaurant+mar+shopping&oq=portuguese+lab+restaurant+"
-                                target="_blank" style="text-decoration: none;"><b class="text-yellow">Google</b></a>.
-                            {{/if}}
-                            {{#if get_lang "pt"}}Deixe-nos a sua opinião em qualquer um dos nossos canais:
-                            <a href="https://www.facebook.com/ce.portugueselab" target="_blank"
-                                style="text-decoration: none;"><b class="text-yellow">Facebook</b></a>,
-                            <a href="https://www.instagram.com/ce.portugueselab" target="_blank"
-                                style="text-decoration: none;"><b class="text-yellow">Instagram</b></a>,
-                            <a href="https://www.tripadvisor.pt/Restaurant_Review-g262054-d15066105-Reviews-Portuguese_Lab-Almancil_Loule_Faro_District_Algarve.html"
-                                target="_blank" style="text-decoration: none;"><b class="text-yellow">Trip
-                                    Advisor</b></a> ou
-                            <a href="https://www.google.pt/search?ei=cTDPW82NG8LNgAbTzLCAAQ&q=portuguese+lab+restaurant+mar+shopping&oq=portuguese+lab+restaurant+"
-                                target="_blank" style="text-decoration: none;"><b class="text-yellow">Google</b></a>.
-                            {{/if}}</span>
+                                target="_blank" style="text-decoration: none;"><b
+                                    class="text-yellow skiptranslate">Google</b></a>.
+                        </span>
                     </div>
                 </div>
             </div>
@@ -246,73 +196,48 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-5 mb-5">
-                    <h3>{{#if get_lang "en"}}About Us{{/if}}
-                        {{#if get_lang "pt"}}Sobre Nós{{/if}}</h3>
+                    <h3>Sobre Nós</h3>
                     <p class="mb-5">
-                        {{#if get_lang "en"}}​Executive Chef with over thirty years of certified experience as chef,
-                        consultant,
-                        teacher and manager. A few dozen awards were collected among them several "Chef of the
-                        Year".Professor at
-                        the Escola de Hotelaria e Turismo do Algarve for approximately twenty years and owner of the <b
-                            class="text-yellow">Algarve Cuisine
-                            Academy</b>, a cooking school located in Faro with various intensive cooking courses for
-                        professionals or
-                        non-professionals as well as various workshops taught by the Chef and runned by Margarida
-                        Domingos.{{/if}}
-
-                        {{#if get_lang "pt"}}​Chef executivo de cozinha com mais de trinta anos de experiência
-                        certificada como
-                        chef, consultor, formador/ professor e gestor. Algumas dezenas de prémios coleccionados entre
-                        eles diversos
-                        "Chef de Cozinha do Ano". Professor na Escola de Hotelaria e Turismo do Algarve há
-                        aproximadamente vinte
-                        anos e proprietário da <b class="text-yellow">Algarve Cuisine
-                            Academy</b>, uma escola de cozinha localizada em Faro com diversos cursos
-                        intensivos de cozinha para profissionais ou não profissionais assim como workshops diversos
-                        leccionados pelo
-                        Chef e administrada pela Margarida Domingos.{{/if}}
+                        TODO ABOUT INFO
                     </p>
-                    <ul class="list-unstyled footer-link d-flex footer-social">
+                    <ul class="list-unstyled footer-link d-flex footer-social skiptranslate">
+                        {{#if web.social_facebook}}
+                        <li><a href="https://www.facebook.com/ce.portugueselab" class="p-2"><span
+                                    class="fa fa-facebook"></span></a></li>
+                        {{/if}}
+
+                        {{#if web.social_mail}}
                         <li><a href="mailto:ce.portugueselab@gmail.com" class="p-2"><span
                                     class="fa fa-envelope"></span></a></li>
-                        <li><a href="https://www.facebook.com/ce.portugueselab" class="p-2"><span
-                                    class="fa fa-facebook"></span></a>
-                        </li>
+                        {{/if}}
+
+                        {{#if web.social_instagram}}
                         <li><a href="https://www.instagram.com/ce.portugueselab" class="p-2"><span
                                     class="fa fa-instagram"></span></a></li>
+                        {{/if}}
                     </ul>
                 </div>
                 <div class="col-md-7 mb-5">
                     <div class="mb-5">
-                        <h3>{{#if get_lang "en"}}Opening Hours{{/if}}
-                            {{#if get_lang "pt"}}Horas de Funcionamento{{/if}}</h3>
-                        <p><strong class="d-block">{{#if get_lang "en"}}Monday-Sunday{{/if}}
-                                {{#if get_lang "pt"}}Segunda - Domingo{{/if}}</strong> 11AM - 11PM</p>
+                        <h3>Horas de Funcionamento</h3>
+                        <p><strong class="d-block skiptranslate">TODO WORKING DAYS + HOURS</strong></p>
                     </div>
                     <div>
-                        <h3>{{#if get_lang "en"}}Contact Info{{/if}}
-                            {{#if get_lang "pt"}}Informação Contacto{{/if}}</h3>
-                        <span class="text-white">{{#if get_lang "en"}}We are located in the food court "Chefs
-                            Experience" in the Mar
-                            Shopping Loulé{{/if}}
-                            {{#if get_lang "pt"}}Estamos localizados na praça de alimentação "Chefs Experience" no Mar
-                            Shopping
-                            Loulé{{/if}}
+                        <h3>Informação Contacto</h3>
+                        <span class="text-white"> TODO EXTRA CONTANT INFO
                         </span>
                         <ul class="list-unstyled footer-link mt-3">
                             <li class="d-block">
-                                <span class="d-block">{{#if get_lang "en"}}Address{{/if}}
-                                    {{#if get_lang "pt"}}Morada{{/if}}</span>
-                                <span class="text-white">Avenida Algarve, Complexo Industrial IKEA, 8135-182 Almancil,
-                                    Portugal</span>
+                                <span class="d-block">Morada</span>
+                                <span class="text-white skiptranslate">Avenida Algarve, Complexo Industrial IKEA,
+                                    8135-182 Almancil, Portugal</span>
                             </li>
-                            <li class="d-block"><span class="d-block">{{#if get_lang "en"}}Call us{{/if}}
-                                    {{#if get_lang "pt"}}Ligue-nos{{/if}}</span><span class="text-white">+351 91 912 99
-                                    03 or
-                                    +351 91 99 63 564</span>
+                            <li class="d-block"><span class="d-block">Ligue-nos</span>
+                                <span class="text-white skiptranslate">+351 91 912 99 03 or +351 91 99 63 564</span>
                             </li>
-                            <li class="d-block"><span class="d-block">E-mail:</span><span
-                                    class="text-white">ce.portugueselab@gmail.com</span>
+                            <li class="d-block">
+                                <span class="d-block">E-mail:</span>
+                                <span class="text-white skiptranslate">ce.portugueselab@gmail.com</span>
                             </li>
                         </ul>
                     </div>
@@ -322,7 +247,7 @@
             </div>
             <div class="row">
                 <div class="col-12 text-md-center text-left">
-                    <p>
+                    <p class="skiptranslate">
                         Copyright © 2020 All rights reserved |
                         Developed by <a href="https://devxop.com" target="_blank">Devxop</a>
                     </p>
@@ -366,7 +291,7 @@
                         <div class="item">
                             <div class="item-content">
                                 <div class="item-heading">{{product.title}}</div>
-                    
+
                                 <div class="item-subheading">
                                     {{#if get_lang "en"}} {{product.description}} {{/if}}
                                     {{#if get_lang "pt"}} {{product.description}} {{/if}}
@@ -376,7 +301,8 @@
                                 </div>
                             </div>
                             {{#if product.img}}
-                            <div class="item-image"><img src="{{fileUrl product.img 'thumb'}}" alt="" class="img-fluid"></div>
+                            <div class="item-image"><img src="{{fileUrl product.img 'thumb'}}" alt="" class="img-fluid">
+                            </div>
                             {{/if}}
                         </div>
                         {{/each}}
