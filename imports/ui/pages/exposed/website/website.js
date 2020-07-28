@@ -175,6 +175,12 @@ Template.Website_public.onRendered(function () {
 
 });
 
+Template.Website_public.events({
+    'click .js-clear-translate': function(){
+        $("iframe").contents().find('.goog-close-link').click();
+    }
+});
+
 Template.Website_public.helpers({
     'web': function () {
         return Websites.findOne();

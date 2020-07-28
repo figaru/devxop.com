@@ -29,7 +29,7 @@
         <div id="google_translate_element"></div>
         <script type="text/javascript">
             function googleTranslateElementInit() {
-                new google.translate.TranslateElement({ pageLanguage: 'pt', includedLanguages: 'en,es,pt,ru,fr,de', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+                new google.translate.TranslateElement({ pageLanguage: 'pt', includedLanguages: 'en,es,pt,ru,fr,de,none', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
             }
         </script>
         <script type="text/javascript"
@@ -114,8 +114,7 @@
                             <p class="dishes-price"><span class="material-icons skiptranslate">
                                     launch
                                 </span></p>
-                            <h2 class="dishes-heading">{{#if get_lang "en"}}{{menu.title}}{{/if}}
-                                {{#if get_lang "pt"}} {{menu.title}} {{/if}}</h2>
+                            <h2 class="dishes-heading" lang="pt">{{menu.title}}</h2>
                         </div>
 
                         <img src="{{fileUrl menu.img 'thumb'}}" style="width: 100%;">
