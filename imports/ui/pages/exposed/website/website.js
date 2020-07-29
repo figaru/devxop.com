@@ -67,23 +67,32 @@ Template.Website_public.onRendered(function () {
 
         if (highlights) {
             console.log("highlights have changed");
-            setTimeout(function () {
-                $('.centernonloop').owlCarousel({
-                    center: true,
-                    items: 1,
-                    loop: false,
-                    margin: 10,
-                    dots: false,
-                    responsive: {
-                        300: {
-                            items: 2
-                        },
-                        600: {
-                            items: 4
+
+            if ($('.centernonloop.owl-loaded').length) {
+                //owl already laoadded
+                //reload page
+                location.reload();
+            } else {
+                setTimeout(function () {
+                    $('.centernonloop').owlCarousel({
+                        center: true,
+                        items: 1,
+                        loop: false,
+                        margin: 10,
+                        dots: false,
+                        responsive: {
+                            300: {
+                                items: 2
+                            },
+                            600: {
+                                items: 4
+                            }
                         }
-                    }
-                });
-            }, 200);
+                    });
+                }, 400);
+            }
+
+
         }
 
     });
@@ -178,7 +187,7 @@ Template.Website_public.onRendered(function () {
 });
 
 Template.Website_public.events({
-    'click .js-clear-translate': function(){
+    'click .js-clear-translate': function () {
         $("iframe").contents().find('.goog-close-link').click();
     }
 });

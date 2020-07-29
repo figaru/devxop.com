@@ -242,7 +242,7 @@ html {
 
 
 
-.banner {
+.banner-content {
     display: flex;
     position: absolute;
     z-index: 200;
@@ -257,12 +257,14 @@ html {
 
     >.heading {
         display: flex;
-        width: fit-content;
-
+        width: 350px;
         font-size: 40px;
         color: #fff;
         line-height: 1.2;
         font-weight: 800 !important;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: clip;
         text-transform: uppercase;
 
         >img {}
@@ -282,6 +284,9 @@ html {
     >.banner-actions {
 
 
+        >.btn:last-child{
+            margin-right: 0px;
+        }
         >.btn {
             margin-right: 20px;
             border-radius: 0;
@@ -1021,6 +1026,7 @@ html {
     right: 16px !important;
     top: 20px;
     z-index: 1000;
+    width: max-content;
 
     height: fit-content;
   }
@@ -1052,11 +1058,20 @@ html {
   .goog-te-menu-value:before {
     font-family: 'Material Icons';
     content: "\E927";
-    margin-right: 16px;
+    /* margin-right: 16px; */
     font-size: 2rem;
     vertical-align: -10px;
   }
   
+  .goog-te-menu-value span:nth-child(1){
+      display: none;
+  }
+
+  .goog-te-menu-value > img{
+    display: none;
+    margin: 0;
+  }
+
   .goog-te-menu-value span:nth-child(5) {
     display: none;
   }
@@ -1064,6 +1079,7 @@ html {
   .goog-te-menu-value span:nth-child(3) {
     border: none !important;
     font-family: 'Material Icons';
+    display: none;
   }
   .goog-te-menu-value span:nth-child(3):after {
     font-family: 'Material Icons';
@@ -1096,16 +1112,16 @@ html {
     #google_translate_element {
       bottom: calc(100% - 50% - 53px);
       left: 16px !important;
-      width: 100% !important;
+      /* width: 100% !important; */
     }
     #google_translate_element goog-te-gadget {
-      width: 100% !important;
+      /* width: 100% !important; */
     }
     #google_translate_element .skiptranslate {
-      width: 100% !important;
+      /* width: 100% !important; */
     }
     #google_translate_element .goog-te-gadget-simple {
-      width: calc(100% - 32px) !important;
+      /* width: calc(100% - 32px) !important; */
       text-align: center;
     }
   }
