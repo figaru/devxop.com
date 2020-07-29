@@ -54,6 +54,8 @@ Template.Website_public.onCreated(function () {
 
 
 Template.Website_public.onRendered(function () {
+    $("#__blaze-root").css("overflow-x", "hidden");
+
     //instatiate session
     Session.set(PRODUCT_HIGHLIGHTS, null);
 

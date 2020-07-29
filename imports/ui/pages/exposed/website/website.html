@@ -7,24 +7,7 @@
     <div class="nav-bar">
 
     </div>
-    <button id="lang" type="button" class="btn js-select-lang" data-toggle="modal" data-target="#modal-lang">
-        <!-- <span data-toggle="tooltip" data-placement="bottom" title="Language" class="material-icons"
-            style="cursor: pointer; color: #fff;">g_translate</span> -->
-
-        <!-- <div id="google_translate_element"></div>
-
-        <script type="text/javascript">
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({ pageLanguage: "pt", layout: google.translate.TranslateElement.InlineLayout.SIMPLE, includedLanguages: "pt,en,es,fr" }, 'google_translate_element');
-
-
-                $(".goog-te-banner-frame").css("visibility", "hidden");
-                $("body").css("top", "0px");
-            }
-        </script>
-
-        <script type="text/javascript"
-            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+    <!-- <button id="lang" type="button" class="btn js-select-lang" data-toggle="modal" data-target="#modal-lang">
 
         <div id="google_translate_element"></div>
         <script type="text/javascript">
@@ -40,9 +23,16 @@
         
             
         <div id="google_translate_element" style="position: absolute; top: 0px !important"></div>
-    </button>
+    </button> -->
 
     <div class="page-banner" style="background-color: #333;">
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ pageLanguage: 'pt', includedLanguages: 'en,es,pt,ru,fr,de,none', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+            }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
         <div class="banner-content">
             <div class="heading skiptranslate">{{web.title}}
