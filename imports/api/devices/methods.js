@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 
 Meteor.methods({
     'devices.version.update': function (deviceId, vId) {
-        console.log(vId);
+        //console.log(vId);
         if (typeof vId === undefined || vId >= 2147483647) { //int32 max numbe
             //reset version
             Devices.update(deviceId, {

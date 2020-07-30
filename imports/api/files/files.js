@@ -22,7 +22,6 @@ Files.allow({
     update: function (userId, doc) {
         
         if (doc["user_id"] == userId) {
-            console.log("update");
             return true;
         }
 

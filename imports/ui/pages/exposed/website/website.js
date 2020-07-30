@@ -30,7 +30,7 @@ Template.Website_public.onCreated(function () {
                 if (products.ready()) {
                     console.log("> Received products. \n\n");
 
-                    let filesArray = [web.logo, web.cover];
+                    let filesArray = [web.content_menu_img, web.testimonial_img, web.logo, web.cover];
                     Products.find().fetch().forEach(product => {
                         //get product image
                         filesArray.push(product.img);
@@ -197,7 +197,6 @@ Template.Website_public.helpers({
         return Websites.findOne();
     },
     'get_img': function (id, key) {
-        console.log(id, key);
         return fileUrl(id, "thumb");
     },
     'get_cover': function () {
@@ -205,6 +204,17 @@ Template.Website_public.helpers({
 
         if (web) {
             let file = Files.findOne({ _id: web.cover });
+            if (file) {
+                return fileUrl(file._id, "main");
+            }
+
+        }
+    },
+    'get_logo': function () {
+        let web = Websites.findOne();
+
+        if (web) {
+            let file = Files.findOne({ _id: web.logo });
             if (file) {
                 return fileUrl(file._id, "main");
             }

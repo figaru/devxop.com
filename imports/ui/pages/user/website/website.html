@@ -34,7 +34,8 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <label>Page Title</label>
-                                    <p>Type in the name of your webpage. This name will show up has the page's title.</p>
+                                    <p>Type in the name of your webpage. This name will show up has the page's title.
+                                    </p>
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control js-edit-website" data-key="title"
                                             value="{{get_website.title}}">
@@ -73,55 +74,194 @@
                     <div class="card-body p-0">
                         <div class="row p-4">
                             <div class="col-sm-10 d-flex flex-column justify-content-center">
-                                <h5 class="mb-0">Social Media</h5>
+                                <h5 class="mb-0">Content</h5>
                             </div>
                             <div class="col-sm-2 d-flex flex-column justify-content-center align-items-center">
                                 <button
                                     class="btn btn-primary p-0 rounded-circle d-flex flex-column justify-content-center"
-                                    type="button" data-toggle="collapse" data-target="#collapseSocial"
-                                    aria-expanded="false" aria-controls="collapseSocial">
+                                    type="button" data-toggle="collapse" data-target="#collapseContent"
+                                    aria-expanded="false" aria-controls="collapseContent">
                                     <i class="material-icons p-2">keyboard_arrow_down</i>
                                 </button>
                             </div>
                         </div>
 
-                        <div class="collapse" id="collapseSocial">
+                        <div class="collapse" id="collapseContent">
                             <hr class="mt-0">
                             <div class="row p-4 pt-0">
-                                <div class="col-sm-12 mb-3">
-                                    <label>Add social media buttons in your app.</label>
-                                    <p>Type in the url's of the correspondant social media icons. Empty fields will not be visible in the app.</p>
-                                </div>
-                                <div class="col-sm-12">
-                                    <label>Facebook</label>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control js-edit-website" data-key="social_facebook"
-                                            value="{{get_website.social_facebook}}">
+
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" id="info-tab" data-toggle="tab" href="#infoTab"
+                                            role="tab" aria-controls="home" aria-selected="true">General</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#socialTab"
+                                            role="tab" aria-controls="profile" aria-selected="false">Social Media</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contactTab"
+                                            role="tab" aria-controls="contact" aria-selected="false">Contact Info</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="infoTab" role="tabpanel"
+                                        aria-labelledby="home-tab">
+                                        <div class="row py-3">
+                                            <div class="col-sm-12 mb-3">
+                                                <label>Information to populate the page with text regarding your
+                                                    company.</label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>About Subtitle</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        placeholder="ex. Learn more about our gastronomic experience at #portugueselab"
+                                                        data-key="content_about_subtitle"
+                                                        value="{{get_website.content_about_subtitle}}">
+                                                </div>
+                                                <label>About Content</label>
+                                                <div class="input-group mb-3">
+                                                    <textarea class="form-control js-edit-website"
+                                                        placeholder="Anything you can tell the public about you and this page..."
+                                                        data-key="content_about">{{get_website.content_about}}</textarea>
+
+                                                </div>
+                                                <label>About Image</label>
+                                                <div class="input-group mb-3">
+                                                    {{> select_files eventId="websiteEditEvent" modalId="websiteAboutImgSelect" key="content_about_img" fileType="image"}}
+                                                    <div class="image-select" data-toggle="modal"
+                                                        data-target="#websiteAboutImgSelect"
+                                                        style="background-image: url({{fileUrl get_website.content_about_img 'thumb'}});">
+                                                        <div class="image-frame">
+                                                            <i class="material-icons">add</i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <label>About Note</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        placeholder="ex. Come and visit us now!"
+                                                        data-key="content_about_note"
+                                                        value="{{get_website.content_about_note}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="socialTab" role="tabpanel"
+                                        aria-labelledby="profile-tab">
+                                        <!-- SOCIAL INPUTS -->
+                                        <div class="row py-3">
+                                            <div class="col-sm-12 mb-3">
+                                                <label>Add social media buttons in your app.</label>
+                                                <p>Type in the url's of the correspondant social media icons. Empty
+                                                    fields will not
+                                                    be visible in the app.</p>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>Facebook</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        data-key="social_facebook"
+                                                        value="{{get_website.social_facebook}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>Instagram</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        data-key="social_instagram"
+                                                        value="{{get_website.social_instagram}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>Google</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        data-key="social_google" value="{{get_website.social_google}}">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>Trip Advisor</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        data-key="social_trip" value="{{get_website.social_trip}}">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>Testimonial Image</label>
+                                                <p>Add an image of testimonials from your clients. 
+                                                    Think about creating a collage of all the comments, photos and ratings that your clients add in your social links.</p>
+                                                <div class="input-group mb-3">
+                                                    {{> select_files eventId="websiteEditEvent" modalId="websiteTestimonialImgSelect" key="testimonial_img" fileType="image"}}
+                                                    <div class="image-select" data-toggle="modal"
+                                                        data-target="#websiteTestimonialImgSelect"
+                                                        style="background-image: url({{fileUrl get_website.testimonial_img 'thumb'}});">
+                                                        <div class="image-frame">
+                                                            <i class="material-icons">add</i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="contactTab" role="tabpanel"
+                                        aria-labelledby="contact-tab">
+
+                                        <div class="row py-3">
+                                            <div class="col-sm-12 mb-3">
+                                                <label>Fill in this important information regarding your location and
+                                                    contant information.</label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>Working Time</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        placeholder="ex. Mon - Sun, 11am - 11pm" data-key="working_time"
+                                                        value="{{get_website.working_time}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>Email address</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        placeholder="ex. john.doe@work.com" data-key="email_address"
+                                                        value="{{get_website.email_address}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>Physical Address</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        placeholder="ex. Avenida Algarve, Almancil, Portugal"
+                                                        data-key="physical_address"
+                                                        value="{{get_website.physical_address}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>Telephone</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        placeholder="ex. +351 911 123 123 / +351 289 123 123"
+                                                        data-key="telephone_number"
+                                                        value="{{get_website.telephone_number}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>Extra information</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control js-edit-website"
+                                                        placeholder="ex. Take-away also available at this location..."
+                                                        data-key="contact_extra" value="{{get_website.contact_extra}}">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <label>Instagram</label>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control js-edit-website" data-key="social_instagram"
-                                            value="{{get_website.social_instagram}}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <label>Google</label>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control js-edit-website" data-key="social_google"
-                                            value="{{get_website.social_google}}">
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <label>Trip Advisor</label>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control js-edit-website" data-key="social_trip"
-                                            value="{{get_website.social_trip}}">
-                                        
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
 
@@ -213,8 +353,8 @@
                                     <select class="form-control js-highlight-select"
                                         aria-label="Default select example">
                                         {{#each collection in collections_list}}
-                                        <option selected="{{highlight_selected collection._id}}"
-                                            value="{{collection._id}}">{{collection.title}}</option>
+                                        <option {{highlight_selected collection._id}} value="{{collection._id}}">
+                                            {{collection.title}}</option>
                                         {{/each}}
                                     </select>
                                 </div>
@@ -222,9 +362,11 @@
                                     <label>Menu</label>
                                     <div class="row">
                                         {{#each collection in menu_collection}}
-                                        <div class="col-sm-3 d-flex flex-column justify-content-center align-items-center">
+                                        <div
+                                            class="col-sm-3 d-flex flex-column justify-content-center align-items-center">
                                             {{collection.title}}
-                                            <button class="btn btn-danger js-remove-menu" data-index="{{@index}}">Remove</button>
+                                            <button class="btn btn-danger js-remove-menu"
+                                                data-index="{{@index}}">Remove</button>
                                         </div>
                                         {{/each}}
                                         <div class="col-sm-12">

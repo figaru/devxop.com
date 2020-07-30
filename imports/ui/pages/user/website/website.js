@@ -31,7 +31,7 @@ Template.Website.onRendered(function () {
                 val = target.data("value");
             }
 
-            if (key == "cover" || key == "logo") {
+            if (key == "cover" || key == "logo" || key == "content_about_img" || key == "testimonial_img") {
                 let file = target.data("file");
                 val = file;
                 //key = "img";

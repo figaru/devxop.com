@@ -23,9 +23,9 @@ fileUrl = function(id, key){
 
     if(file.is_image){
         data["type"] = "image";
-        data["preload"] = data.url + "/preload.jpeg";
-        data["thumb"] = data.url + "/thumb.jpeg";
-        data["main"] = data.url + "/main.jpeg";
+        data["preload"] = data.url + "/preload." + file.extension;
+        data["thumb"] = data.url + "/thumb." + file.extension;
+        data["main"] = data.url + "/main." + file.extension;
     }else if(file.is_video){
         data["type"] = "video";
         data["preload"] = data.url + "/preload.jpeg";

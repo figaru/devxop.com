@@ -35,17 +35,20 @@
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
         <div class="banner-content">
-            <div class="heading skiptranslate">{{web.title}}
+            <div class="heading skiptranslate d-flex flex-column justify-content-center">
+                {{#if web.logo}}
+                    <img src="{{get_logo}}" style="width: 100%; min-width: 275px; max-width: 475px;">
+                {{else}}
+                    {{web.title}}
+                {{/if}}
                 <!-- <img src="img/pl-branco.png"> -->
             </div>
             <div class="sub-heading skiptranslate">{{web.sub_title}}</div>
             <div class="banner-actions">
                 <a href="#specialsJump" class="btn btn-outline-light">
-                    {{#if get_lang "en"}}Our Specials{{/if}}
-                    {{#if get_lang "pt"}}Pratos Especiais{{/if}}</a>
+                    Pratos Especiais</a>
                 <a href="#menuJump" class="btn btn-outline-light">
-                    {{#if get_lang "en"}}Our Menu{{/if}}
-                    {{#if get_lang "pt"}}A Nossa Ementa{{/if}}
+                    A Nossa Ementa
                 </a>
             </div>
         </div>
@@ -117,33 +120,43 @@
     </section>
 
     <section class="section bg-light element-animate fadeInUp element-animated my-5 py-5">
-        <div class="clearfix mb-5 mt-5 pb-5">
+        <div class="clearfix mb-3 mt-5 pb-5">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 text-center heading-wrap">
                         <h2>Sobre Nós</h2>
 
-                        <span class="back-text">{{#if get_lang "en"}}Come and join in this delicious gastronomic
-                            experience <b class="text-yellow">#portugueselab</b>{{/if}}
-                            {{#if get_lang "pt"}}Venha também você participar desta deliciosa experiência gastronómica
-                            no <b class="text-yellow">#portugueselab</b>{{/if}}</span>
+                        <span class="back-text">{{{web.content_about_subtitle}}}</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-4 d-flex flex-column justify-content-center">
                     <blockquote class="testimonial">
-                        <p>TODO ABOUT INFO</p>
-                        <div class="d-flex author">
-                            <img src="img/jose.jpg" alt="" class="mr-4">
+                        <div class="d-flex flex-row justify-content-center align-items-center author">
+                            {{#if web.content_about_img}}
+                            <img src="{{fileUrl web.content_about_img 'main'}}" alt="" class="mr-4" style="width: 325px; height: 325px;">
+                            {{/if}}
+                        </div>
+                    </blockquote>
+                </div>
+                <div class="col-md-8 d-flex flex-column justify-content-center">
+                    <blockquote class="testimonial">
+                        <p>{{{web.content_about}}}</p>
+                    </blockquote>
+                </div>
+                <div class="col-md-12 d-flex flex-column justify-content-center">
+                    <blockquote class="testimonial">
+                        <div class="d-flex flex-column justify-content-center align-items-end author">
                             <div class="author-info">
-                                <h4>Chef José Domingos</h4>
+                                <h3>{{web.content_about_note}}</h3>
                             </div>
                         </div>
                     </blockquote>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -156,29 +169,39 @@
                         <h2>Já provou?</h2>
 
                         <span class="back-text">
-                            Deixe-nos a sua opinião em qualquer um dos nossos canais:
-                            <a href="https://www.facebook.com/ce.portugueselab" target="_blank"
-                                style="text-decoration: none;"><b class="text-yellow skiptranslate">Facebook</b></a>,
-                            <a href="https://www.instagram.com/ce.portugueselab" target="_blank"
-                                style="text-decoration: none;"><b class="text-yellow skiptranslate">Instagram</b></a>,
-                            <a href="https://www.tripadvisor.pt/Restaurant_Review-g262054-d15066105-Reviews-Portuguese_Lab-Almancil_Loule_Faro_District_Algarve.html"
+                            Deixe-nos a sua opinião em qualquer um dos nossos canais <br>
+                            {{#if web.social_facebook}}
+                            <a href="{{web.social_facebook}}" target="_blank"
+                                style="text-decoration: none;"><b class="text-yellow skiptranslate">Facebook</b></a> /
+                            {{/if}}    
+                            {{#if web.social_instagram}}
+                            <a href="{{web.social_instagram}}" target="_blank"
+                                style="text-decoration: none;"><b class="text-yellow skiptranslate">Instagram</b></a> /
+                            {{/if}}
+                            {{#if web.social_trip}}
+                            <a href="{{web.social_trip}}"
                                 target="_blank" style="text-decoration: none;"><b class="text-yellow skiptranslate">Trip
-                                    Advisor</b></a> ou
-                            <a href="https://www.google.pt/search?ei=cTDPW82NG8LNgAbTzLCAAQ&q=portuguese+lab+restaurant+mar+shopping&oq=portuguese+lab+restaurant+"
+                                    Advisor</b></a> /
+                            {{/if}}
+                            {{#if web.social_google}}
+                            <a href="{{web.social_google}}"
                                 target="_blank" style="text-decoration: none;"><b
-                                    class="text-yellow skiptranslate">Google</b></a>.
+                                    class="text-yellow skiptranslate">Google</b></a>
+                            {{/if}}
                         </span>
                     </div>
                 </div>
             </div>
         </div>
+        {{#if web.testimonial_img}}
         <div class="container">
             <div class="row">
                 <div class="col-md-12" style="text-align: center;">
-                    <img src="/img/reviews.png" class="img-fluid" style="margin: auto;">
+                    <img src="{{fileUrl web.testimonial_img 'main'}}" class="img-fluid" style="margin: auto; max-width: 80%;">
                 </div>
             </div>
         </div>
+        {{/if}}
     </section>
 
     <footer class="site-footer" role="contentinfo">
@@ -187,21 +210,21 @@
                 <div class="col-md-5 mb-5">
                     <h3>Sobre Nós</h3>
                     <p class="mb-5">
-                        TODO ABOUT INFO
+                        {{web.content_about}}
                     </p>
                     <ul class="list-unstyled footer-link d-flex footer-social skiptranslate">
                         {{#if web.social_facebook}}
-                        <li><a href="https://www.facebook.com/ce.portugueselab" class="p-2"><span
+                        <li><a href="{{web.social_facebook}}" target="_blank" class="p-2"><span
                                     class="fa fa-facebook"></span></a></li>
                         {{/if}}
 
-                        {{#if web.social_mail}}
-                        <li><a href="mailto:ce.portugueselab@gmail.com" class="p-2"><span
+                        {{#if web.email_address}}
+                        <li><a href="mailto:{{web.email_address}}" target="_blank" class="p-2"><span
                                     class="fa fa-envelope"></span></a></li>
                         {{/if}}
 
                         {{#if web.social_instagram}}
-                        <li><a href="https://www.instagram.com/ce.portugueselab" class="p-2"><span
+                        <li><a href="{{web.social_instagram}}" target="_blank" class="p-2"><span
                                     class="fa fa-instagram"></span></a></li>
                         {{/if}}
                     </ul>
@@ -209,24 +232,23 @@
                 <div class="col-md-7 mb-5">
                     <div class="mb-5">
                         <h3>Horas de Funcionamento</h3>
-                        <p><strong class="d-block skiptranslate">TODO WORKING DAYS + HOURS</strong></p>
+                        <p><strong class="d-block skiptranslate">{{web.working_time}}</strong></p>
                     </div>
                     <div>
                         <h3>Informação Contacto</h3>
-                        <span class="text-white"> TODO EXTRA CONTANT INFO
+                        <span class="text-white"> {{web.contact_extra}}
                         </span>
                         <ul class="list-unstyled footer-link mt-3">
                             <li class="d-block">
                                 <span class="d-block">Morada</span>
-                                <span class="text-white skiptranslate">Avenida Algarve, Complexo Industrial IKEA,
-                                    8135-182 Almancil, Portugal</span>
+                                <span class="text-white skiptranslate">{{web.physical_address}}</span>
                             </li>
                             <li class="d-block"><span class="d-block">Ligue-nos</span>
-                                <span class="text-white skiptranslate">+351 91 912 99 03 or +351 91 99 63 564</span>
+                                <span class="text-white skiptranslate">{{web.telephone_number}}</span>
                             </li>
                             <li class="d-block">
                                 <span class="d-block">E-mail:</span>
-                                <span class="text-white skiptranslate">ce.portugueselab@gmail.com</span>
+                                <span class="text-white skiptranslate">{{web.email_address}}</span>
                             </li>
                         </ul>
                     </div>
