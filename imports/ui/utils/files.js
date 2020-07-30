@@ -28,8 +28,8 @@ fileUrl = function(id, key){
         data["main"] = data.url + "/main." + file.extension;
     }else if(file.is_video){
         data["type"] = "video";
-        data["preload"] = data.url + "/preload.jpeg";
-        data["thumb"] = data.url + "/thumb.jpeg";
+        data["preload"] = data.url + "/preload.png";
+        data["thumb"] = data.url + "/thumb.png";
         data["preview"] = data.url + "/preview.gif";
         data["video"] = data.url + "/video." + file.extension;
     }else{
