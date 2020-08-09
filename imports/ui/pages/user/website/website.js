@@ -63,11 +63,12 @@ Template.Website.helpers({
         if (website && "highlights" in website) {
             let option = website.highlights[0];
 
-            return option == id ? "selected" : "";
+
+            return Collections.findOne(option);/*  == id ? "selected" : ""; */
 
         }
 
-        return;
+        return ;
     },
     'menu_collection': function () {
         let website = Websites.findOne();
@@ -102,11 +103,11 @@ Template.Website.events({
             $set: data
         })
     },
-    'change .js-highlight-select': function (e) {
+    'click .js-highlight-select': function (e) {
         let target = $(e.target);
 
         let website = Websites.findOne();
-        let val = $(".js-highlight-select option:selected").val();
+        let val = target.data("collection");
         let data = {}
 
         data["highlights"] = [val];
@@ -115,11 +116,11 @@ Template.Website.events({
             $set: data
         })
     },
-    'change .js-menu-select': function (e) {
+    'click .js-menu-select': function (e) {
         let target = $(e.target);
 
         let website = Websites.findOne();
-        let val = $(".js-menu-select option:selected").val();
+        let val = target.data("collection");
         let data = {}
 
         let menu = website.menu;

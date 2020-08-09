@@ -3,7 +3,7 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.publish('products.all', function () {
-  return Products.find();
+  return Products.find({"user_id": this.userId});
 });
 
 

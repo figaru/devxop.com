@@ -37,7 +37,7 @@
         <div class="banner-content">
             <div class="heading skiptranslate d-flex flex-column justify-content-center">
                 {{#if web.logo}}
-                    <img src="{{get_logo}}" style="width: 100%; min-width: 275px; max-width: 475px;">
+                    <img src="{{web.logo}}" style="width: 100%; min-width: 275px; max-width: 475px;">
                 {{else}}
                     {{web.title}}
                 {{/if}}
@@ -54,7 +54,7 @@
         </div>
 
 
-        <img src="{{get_cover}}" class="bg">
+        <img src="{{web.cover}}" class="bg">
     </div>
 
     <section class="section">
@@ -77,9 +77,15 @@
 
         <div class="owl-carousel centernonloop">
 
-            {{#each product in highlights}}
+            {{#each product in web.highlights.products}}
             <a class="item-dishes bright">
-                <img src="{{fileUrl product.img 'thumb'}}" alt="" class="img-fluid">
+                <div class="text d-flex flex-column justify-content-end" style="height: 100%;">
+                    <h5 class="dishes-heading d-flex flex-row justify-content-end mx-2" lang="pt">{{product.title}}</h5>
+                    <h4 class="dishes-heading d-flex flex-row justify-content-end mx-2 mb-1">{{product.price}}€</h4>
+                </div>
+                <img src="{{product.img}}" alt="" class="img-fluid">
+                <!-- <h3 class="dishes-heading" lang="pt">{{product.title}}</h3>
+                <h4 class="dishes-heading">{{product.price}}</h4> -->
             </a>
             {{/each}}
         </div>
@@ -91,15 +97,14 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 text-center heading-wrap">
-                        <h2 id="menuJump">{{#if get_lang "en"}}Our Menu{{/if}}
-                            {{#if get_lang "pt"}}A Ementa{{/if}}</h2>
+                        <h2 id="menuJump">Ementa</h2>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                {{#each menu in menus}}
+                {{#each menu in web.menu}}
                 <div class="col-md-6 mb-3">
 
                     <a data-toggle="modal" data-target="#menu{{menu._id}}" class="item-dishes">
@@ -110,7 +115,7 @@
                             <h2 class="dishes-heading" lang="pt">{{menu.title}}</h2>
                         </div>
 
-                        <img src="{{fileUrl menu.img 'thumb'}}" style="width: 100%;">
+                        <img src="{{menu.img}}" style="width: 100%;">
                     </a>
                 </div>
                 {{/each}}
@@ -137,7 +142,7 @@
                     <blockquote class="testimonial">
                         <div class="d-flex flex-row justify-content-center align-items-center author">
                             {{#if web.content_about_img}}
-                            <img src="{{fileUrl web.content_about_img 'main'}}" alt="" class="mr-4" style="width: 325px; height: 325px;">
+                            <img src="{{web.content_about_img}}" alt="" class="mr-4" style="width: 325px; height: 325px;">
                             {{/if}}
                         </div>
                     </blockquote>
@@ -197,7 +202,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12" style="text-align: center;">
-                    <img src="{{fileUrl web.testimonial_img 'main'}}" class="img-fluid" style="margin: auto; max-width: 80%;">
+                    <img src="{{web.testimonial_img}}" class="img-fluid" style="margin: auto; max-width: 80%;">
                 </div>
             </div>
         </div>
@@ -283,15 +288,13 @@
     </div>
 
     {{#each menu in menus}}
-
     <div class="modal fade" id="menu{{menu._id}}" tabindex="-1">
         <div class="modal-dialog modal-dialog-scrollable modal-xl modal-custom">
             <!-- modal-dialog-centered -->
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        {{#if get_lang "en"}}{{menu.title}}{{/if}}
-                        {{#if get_lang "pt"}}{{menu.title}}{{/if}}</h5>
+                        {{menu.title}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -312,7 +315,7 @@
                                 </div>
                             </div>
                             {{#if product.img}}
-                            <div class="item-image"><img src="{{fileUrl product.img 'thumb'}}" alt="" class="img-fluid">
+                            <div class="item-image"><img src="{{product.img}}" alt="" class="img-fluid">
                             </div>
                             {{/if}}
                         </div>

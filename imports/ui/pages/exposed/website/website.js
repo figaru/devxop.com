@@ -4,13 +4,45 @@ import { find } from 'highcharts';
 
 const PRODUCT_HIGHLIGHTS = "products.highlights";
 const PRODUCT_MENUS = "products.menus";
+const WEB = "website.public";
 
 Template.Website_public.onCreated(function () {
+
+    var endpoint = FlowRouter.getParam("endpoint");
+
+    console.log(endpoint);
+
+    Meteor.call("websites.public", endpoint, (error, data)=>{
+        if(data){
+            console.log(data);
+            Session.set(WEB, data);
+
+
+            setTimeout(function () {
+                $('.centernonloop').owlCarousel({
+                    center: true,
+                    items: 1,
+                    loop: false,
+                    margin: 10,
+                    dots: false,
+                    responsive: {
+                        300: {
+                            items: 2
+                        },
+                        600: {
+                            items: 4
+                        }
+                    }
+                });
+            }, 600);
+        }
+    });
+
     let self = this;
 
 
 
-    self.autorun(function () {
+    /* self.autorun(function () {
 
         let web = Websites.findOne();
 
@@ -22,15 +54,18 @@ Template.Website_public.onCreated(function () {
             if (collections.ready()) {
                 console.log("> Received collections. \n\n");
                 let productsArray = [];
-                Collections.find().fetch().forEach(collection => {
+                const collections = Collections.find().fetch();
+
+                collections.forEach(collection => {
                     productsArray = productsArray.concat(collection.products);
                 });
+
                 let products = self.subscribe("products.find", productsArray);
 
                 if (products.ready()) {
                     console.log("> Received products. \n\n");
 
-                    let filesArray = [web.content_menu_img, web.testimonial_img, web.logo, web.cover];
+                    let filesArray = [web.content_about_img, web.testimonial_img, web.logo, web.cover];
                     Products.find().fetch().forEach(product => {
                         //get product image
                         filesArray.push(product.img);
@@ -49,7 +84,7 @@ Template.Website_public.onCreated(function () {
 
     self.collections = function () {
         return Collections.find({});
-    }
+    } */
 });
 
 
@@ -89,7 +124,7 @@ Template.Website_public.onRendered(function () {
                             }
                         }
                     });
-                }, 400);
+                }, 1200);
             }
 
 
@@ -194,7 +229,7 @@ Template.Website_public.events({
 
 Template.Website_public.helpers({
     'web': function () {
-        return Websites.findOne();
+        return Session.get(WEB);
     },
     'get_img': function (id, key) {
         return fileUrl(id, "thumb");
@@ -223,79 +258,6 @@ Template.Website_public.helpers({
     },
     'get_lang': function (lang) {
         return lang == "pt";
-    },
-    'highlights': function () {
-        let web = Websites.findOne();
-
-        if (web) {
-            let collection = Collections.findOne({ _id: { $in: web.highlights } });
-
-            if (collection) {
-
-                let products = Products.find({ _id: { $in: collection.products } }).fetch();
-
-
-                if (products) {
-                    /* setTimeout(function () {
-                        $('.centernonloop').owlCarousel({
-                            center: true,
-                            items: 1,
-                            loop: false,
-                            margin: 10,
-                            dots: true,
-                            responsive: {
-                                300: {
-                                    items: 2
-                                },
-                                600: {
-                                    items: 4
-                                }
-                            }
-                        });
-                    }, 2000); */
-
-                    Session.set(PRODUCT_HIGHLIGHTS, products);
-                }
-
-
-            }
-        }
-
-
-        return Session.get(PRODUCT_HIGHLIGHTS);
-    },
-    "menus": function () {
-        let web = Websites.findOne();
-
-        if (web) {
-            let collections = Collections.find({ _id: { $in: web.menu } }).fetch();
-
-            if (collections) {
-                let menus = [];
-                collections.forEach(function (collection) {
-
-                    let products = Products.find({ _id: { $in: collection.products } }).fetch();
-
-                    let productImg = Products.findOne({ _id: { $in: collection.products }, img: { $exists: true, $not: { $size: 0 } } });
-
-                    if (productImg) {
-                        collection.img = productImg.img;
-                    }
-
-                    collection.products = products;
-                    menus.push(collection);
-                });
-
-                Session.set(PRODUCT_MENUS, menus);
-
-                console.log(menus);
-
-
-            }
-        }
-
-
-        return Session.get(PRODUCT_MENUS);
     }
 
 });

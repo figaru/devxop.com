@@ -202,7 +202,12 @@ Template.item_files.onRendered(function () {
 
             //load preload image and then follow to onLoad event above
             //elm.attr("src", fileUrls.preload);
-            self.src.set(fileUrls.preload);
+            if(file.is_video){
+                self.src.set(fileUrls.thumb);
+            }else if(file.is_image){
+                self.src.set(fileUrls.preload);
+            }
+            
         }
 
 

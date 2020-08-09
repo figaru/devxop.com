@@ -192,8 +192,9 @@
                                             </div>
                                             <div class="col-sm-12">
                                                 <label>Testimonial Image</label>
-                                                <p>Add an image of testimonials from your clients. 
-                                                    Think about creating a collage of all the comments, photos and ratings that your clients add in your social links.</p>
+                                                <p>Add an image of testimonials from your clients.
+                                                    Think about creating a collage of all the comments, photos and
+                                                    ratings that your clients add in your social links.</p>
                                                 <div class="input-group mb-3">
                                                     {{> select_files eventId="websiteEditEvent" modalId="websiteTestimonialImgSelect" key="testimonial_img" fileType="image"}}
                                                     <div class="image-select" data-toggle="modal"
@@ -350,33 +351,74 @@
                                 </div>
                                 <div class="col-sm-12 mb-3">
                                     <label>Highlights</label>
-                                    <select class="form-control js-highlight-select"
-                                        aria-label="Default select example">
-                                        {{#each collection in collections_list}}
-                                        <option {{highlight_selected collection._id}} value="{{collection._id}}">
-                                            {{collection.title}}</option>
-                                        {{/each}}
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-sm-12 d-flex flex-row justify-content-start">
+                                            
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton" data-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    Choose highlight...
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    {{#each collection in collections_list}}
+                                                    <li><a class="dropdown-item js-highlight-select"
+                                                            data-collection="{{collection._id}}">{{collection.title}}</a>
+                                                    </li>
+                                                    {{/each}}
+                                                </ul>
+                                            </div>
+
+                                            {{#with highlight_selected}}
+                                            <!-- return collection -->
+                                            <div class="tag">
+                                                <span>{{this.title}}</span>
+                                            </div>
+                                            {{/with}}
+                                        </div>
+                                    </div>
+
+
                                 </div>
                                 <div class="col-sm-12">
                                     <label>Menu</label>
                                     <div class="row">
-                                        {{#each collection in menu_collection}}
-                                        <div
-                                            class="col-sm-3 d-flex flex-column justify-content-center align-items-center">
-                                            {{collection.title}}
-                                            <button class="btn btn-danger js-remove-menu"
-                                                data-index="{{@index}}">Remove</button>
+                                        <div class="col-sm-12 mb-3 d-flex flex-row justify-content-start">
+
+                                            <div class="dropdown mr-3">
+                                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton" data-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    Add menu collection...
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    {{#each collection in collections_list}}
+                                                    <li><a class="dropdown-item js-menu-select"
+                                                            data-collection="{{collection._id}}">{{collection.title}}</a>
+                                                    </li>
+                                                    {{/each}}
+                                                </ul>
+                                            </div>
+
+                                            {{#each collection in menu_collection}}
+                                            <div class="tag">
+                                                <span>{{collection.title}}</span>
+                                                <i class="material-icons js-remove-menu"
+                                                    data-index="{{@index}}">close</i>
+                                            </div>
+                                            {{/each}}
+
+
                                         </div>
-                                        {{/each}}
-                                        <div class="col-sm-12">
+
+                                        <!-- <div class="col-sm-12">
                                             <select class="form-control js-menu-select"
                                                 aria-label="Default select example">
                                                 {{#each collection in collections_list}}
                                                 <option value="{{collection._id}}">{{collection.title}}</option>
                                                 {{/each}}
                                             </select>
-                                        </div>
+                                        </div> -->
                                     </div>
 
 

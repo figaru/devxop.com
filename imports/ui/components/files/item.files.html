@@ -14,50 +14,66 @@
             <img class="slide-item" src="{{url}}">
             {{/each}}
         </div>
-        {{else}}<!-- ELSEIF FILESS -->
-            <!-- IF ONLY CONTAINS SINGLE FILE -->
-            {{#if file}}
-                {{#if isOtherFile}}
-                <div class="thumbnail">
-                    <i class="material-icons">folder</i>
-                </div>
-                {{else}}
-                <div class="file-preview">
+        {{else}}
+        <!-- ELSEIF FILESS -->
+        <!-- IF ONLY CONTAINS SINGLE FILE -->
+        {{#if file}}
+            {{#if isOtherFile}}
+            <div class="thumbnail">
+                <i class="material-icons">folder</i>
+            </div>
+            {{else}}
+            <div class="file-preview">
                 <img class="{{classStyle}}" style="{{style}}" id="thumbnail-{{file._id}}" src="{{src}}">
-                </div>
-                {{/if}}
+            </div>
+            {{/if}}
 
-                {{#if this.fullscreen}}
-                <div class="thumbnail-hover js-fullscreen" data-link="">
-                    <i class="material-icons">pageview</i>
-                </div>
-                {{/if}}
+        
+            {{#if this.fullscreen}}
 
-                {{#if this.info}}
-                <!-- <div class="file-info">
-                    {{#if file.tilte}}
-                    <span>{{file.title}}</span>
-                    {{else}}
-                    <span>{{file.file.name}}</span>
-                    {{/if}}
-                </div> -->
-                <div class="info-hover">
-                    {{#if file.title}}
-                    <span>{{file.title}}</span>
-                    {{else}}
-                    <span>{{file.file.name}}</span>
-                    {{/if}}
-                </div>
-                {{/if}}
+            {{#if file.is_video}}
+            <div class="thumbnail-hover js-fullscreen" data-link="{{fileUrl file._id 'video'}}">
+                <i class="material-icons">pageview</i>
+            </div>
+            {{/if}}
 
-            {{else}}<!-- ELSEIF FILE -->
+            
+            {{#if file.is_image}}
+            <div class="thumbnail-hover js-fullscreen" data-link="{{fileUrl file._id 'main'}}">
+                <i class="material-icons">pageview</i>
+            </div>
+            {{/if}}
+            
+            {{/if}}
+
+            {{#if this.info}}
+            <!-- <div class="file-info">
+                        {{#if file.tilte}}
+                        <span>{{file.title}}</span>
+                        {{else}}
+                        <span>{{file.file.name}}</span>
+                        {{/if}}
+                    </div> -->
+            <div class="info-hover">
+                {{#if file.title}}
+                <span>{{file.title}}</span>
+                {{else}}
+                <span>{{file.file.name}}</span>
+                {{/if}}
+            </div>
+            {{/if}}
+
+            {{else}}
+            <!-- ELSEIF FILE -->
             <!-- NO FILES AND NO FILE PASSED -> SET EMPTY IMAGE -->
             <div class="file-preview">
                 <i class="material-icons">desktop_access_disabled</i>
             </div>
-            {{/if}}<!-- ENDIF FILE -->
+            {{/if}}
+            <!-- ENDIF FILE -->
 
-        {{/if}}<!-- ENDIF FILESS -->
+        {{/if}}
+        <!-- ENDIF FILESS -->
 
 
 
