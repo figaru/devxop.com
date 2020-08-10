@@ -90,6 +90,14 @@ Template.Website.helpers({
 });
 
 Template.Website.events({
+    'click .js-notify': function(){
+
+        let title = $("#inputNotificationTitle").val();
+        let text = $("#inputNotificationText").val();
+
+        let web = Websites.findOne();
+        Meteor.call("website.notifications.notify", web._id, title, text);
+    },
     'change .js-visible': function (e) {
         let target = $(e.target);
         let key = target.data("key");
