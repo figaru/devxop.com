@@ -1,7 +1,8 @@
 .tag{
     width: fit-content;
     height: fit-content;
-    background-color: var(--bs-gray);
+    background-color: var(--bs-light);
+    filter: brightness(0.9);
 
     border-radius: 15px;
     padding: 4px 8px;
@@ -11,21 +12,29 @@
     align-items: center;
     justify-content: center;
 
-    margin-right: 6px;
+    margin: 0px 6px;
 
-    >span{
+    box-shadow: var(--shadow-sm-strong);
+
+    >div{
         font-size: 16px;
         font-weight: 400;
         color: #fff;
-        margin-left: 4px;
+        margin: 0px 4px;
+
+        padding: 2px;
+        height: fit-content;
+
+        color: #333;
     }
 
     >i{
-        margin-left: 4px;
         padding: 2px;
+        padding-bottom: 0px;
         font-size: 16px;
         cursor: pointer;
         color: #fff;
+        color: #333;
 
     }
 }

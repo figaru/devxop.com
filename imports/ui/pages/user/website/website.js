@@ -37,6 +37,7 @@ Template.Website.onRendered(function () {
                 //key = "img";
             }
 
+
             data[key] = val;
 
             console.log(data);
@@ -68,7 +69,7 @@ Template.Website.helpers({
 
         }
 
-        return ;
+        return;
     },
     'menu_collection': function () {
         let website = Websites.findOne();
@@ -89,6 +90,23 @@ Template.Website.helpers({
 });
 
 Template.Website.events({
+    'change .js-visible': function (e) {
+        let target = $(e.target);
+        let key = target.data("key");
+        let checked = target.is(":checked");
+        let data = {};
+
+        if (key) {
+            data[key] = checked;
+
+            let website = Websites.findOne();
+
+            Websites.update(website._id, {
+                $set: data
+            })
+        }
+
+    },
     'change .js-edit-website': function (e) {
         let target = $(e.target);
 
@@ -98,6 +116,18 @@ Template.Website.events({
         let data = {}
 
         data[key] = val;
+
+        if (key == "endpoint") {
+            console.log(key);
+            var typeNumber = 4;
+            var errorCorrectionLevel = 'L';
+            var qr = qrCode(typeNumber, errorCorrectionLevel);
+            qr.addData('https://devxop.com/app/' + val);
+            qr.make();
+            /* document.getElementById('qrImage').innerHTML = qr.createImgTag(6);
+ */
+            data["endpoint_qr"] = qr.createDataURL(6, 1);
+        }
 
         Websites.update(website._id, {
             $set: data
@@ -137,7 +167,7 @@ Template.Website.events({
 
 
     },
-    'click .js-remove-menu': function(e){
+    'click .js-remove-menu': function (e) {
         let target = $(e.target);
 
         let website = Websites.findOne();

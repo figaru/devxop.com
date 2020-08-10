@@ -11,6 +11,9 @@
         }
     },
     "public": {
+        "app": {
+            "version": "1.1"
+        },
         "stripe": {
             "live_pk": "pk_live_eAD7xxLseev6EBCLoXyADzAw008lxrJfT4",
             "test_pk": "pk_test_HRvNyr6bS6a9upJyTleR63VN"

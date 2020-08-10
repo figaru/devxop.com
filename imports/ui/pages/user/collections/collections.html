@@ -17,22 +17,12 @@
                             <div class="col-sm-12 col-md-1 py-4 d-flex flex-column justify-content-center">
                                 <input type="checkbox" disabled>
                             </div>
-                            <div class="col-sm-12 col-md-8">
-                                <div class="row">
-                                    <div class="col-12 text-left">
-                                        <h4>{{collection.title}}</h4>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 text-left">
-                                        <label>{{collection.description}}</label>
-                                    </div>
-                                </div>
-
-
+                            <div class="col-sm-12 col-md-8 d-flex flex-column justify-content-center align-items-start">
+                                <h4>{{collection.title}}</h4>
+                                <label>{{collection.description}}</label>
                             </div>
                             <div class="col-sm-12 col-md-2 py-4 d-flex flex-column justify-content-center">
-                                <i class="material-icons js-edit-collection" data-collection="{{collection._id}}"
+                                <i class="material-icons btn-icon btn-edit js-edit-collection" data-collection="{{collection._id}}"
                                     data-toggle="modal" data-target="#modalEditCollection">edit</i>
                             </div>
                         </div>
@@ -96,7 +86,7 @@
                                                 <div class="card-body py-2">
 
                                                     <div class="row">
-                                                        
+
                                                         <div
                                                             class="col-sm-12 col-md-10 d-flex flex-column justify-content-center">
                                                             <div class="row">

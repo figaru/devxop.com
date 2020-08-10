@@ -15,10 +15,10 @@
                 <div class="card card-shadow p-0">
                     <div class="card-body text-center">
                         <div class="row">
-                            <div class="col-sm-12 col-md-1 py-4 d-flex flex-column justify-content-center">
+                            <div class="col-sm-12 col-md-1 d-flex flex-column justify-content-center">
                                 <input type="checkbox" disabled>
                             </div>
-                            <div class="col-sm-12 col-md-9 py-4">
+                            <div class="col-sm-12 col-md-9">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-4">
                                         {{>item_files file=product.img classStyle="img-full"}}
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-2 py-4 d-flex flex-column justify-content-center">
-                                <i class="material-icons js-edit-product" data-product="{{product._id}}"
+                                <i class="material-icons btn-icon btn-edit js-edit-product" data-product="{{product._id}}"
                                     data-toggle="modal" data-target="#modalEditProduct">edit</i>
                             </div>
                         </div>

@@ -33,7 +33,7 @@ Meteor.methods({
 
                 for(let z = 0; z < hightlights.products.length; z++){
                     let product = hightlights.products[z];
-                    hightlights.products[z].img = fileUrl(product.img, "main");
+                    hightlights.products[z].img = fileUrl(product.img, "thumb");
                 }
 
                 res.highlights = hightlights;                
@@ -52,7 +52,7 @@ Meteor.methods({
                     for(let z = 0; z < menuCollection.products.length; z++){
                         
                         let product = menuCollection.products[z];
-                        menuCollection.products[z].img = fileUrl(product.img, "main");
+                        menuCollection.products[z].img = fileUrl(product.img, "thumb");
 
                         if(z == 0){
                             //set a collection image from first produtc
@@ -70,8 +70,8 @@ Meteor.methods({
 
             //GET IMAGES FOR OTHER ITEMS
             //[web.content_about_img, web.testimonial_img, web.logo, web.cover];
-            res.content_about_img = fileUrl(web.content_about_img, "main");
-            res.testimonial_img = fileUrl(web.testimonial_img, "main");
+            res.content_about_img = fileUrl(web.content_about_img, "thumb");
+            res.testimonial_img = fileUrl(web.testimonial_img, "thumb");
             res.logo = fileUrl(web.logo, "main");
             res.cover = fileUrl(web.cover, "main");
 

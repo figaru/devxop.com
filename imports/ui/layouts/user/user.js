@@ -1,5 +1,11 @@
 import './user.html';
 
+Template.User_layout.helpers({
+    'app': function(){
+        return Meteor.settings.public.app;
+    }
+})
+
 Template.User_layout.events({
     'click .js-logout': function () {
         Meteor.logout(function () {

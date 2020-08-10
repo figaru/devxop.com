@@ -32,14 +32,15 @@
                 new google.translate.TranslateElement({ pageLanguage: 'pt', includedLanguages: 'en,es,pt,ru,fr,de,none', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
             }
         </script>
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
         <div class="banner-content">
             <div class="heading skiptranslate d-flex flex-column justify-content-center">
                 {{#if web.logo}}
-                    <img src="{{web.logo}}" style="width: 100%; min-width: 275px; max-width: 475px;">
+                <img src="{{web.logo}}" style="width: 100%; min-width: 275px; max-width: 475px;">
                 {{else}}
-                    {{web.title}}
+                {{web.title}}
                 {{/if}}
                 <!-- <img src="img/pl-branco.png"> -->
             </div>
@@ -79,10 +80,17 @@
 
             {{#each product in web.highlights.products}}
             <a class="item-dishes bright">
-                <div class="text d-flex flex-column justify-content-end" style="height: 100%;">
-                    <h5 class="dishes-heading d-flex flex-row justify-content-end mx-2" lang="pt">{{product.title}}</h5>
-                    <h4 class="dishes-heading d-flex flex-row justify-content-end mx-2 mb-1">{{product.price}}€</h4>
+                {{#if web.highlights_show_info}}
+                <div class="text d-flex flex-column justify-content-end align-items-end" style="height: 100%;">
+                    <div
+                        style="width: fit-content; height: fit-content; margin-bottom: 2%; padding: 4px; background-color: rgba(34, 34, 34, 0.5);">
+                        <h5 class="dishes-heading d-flex flex-row justify-content-end mx-2" lang="pt">{{product.title}}
+                        </h5>
+                        <h4 class="dishes-heading d-flex flex-row justify-content-end mx-2 mb-1">{{product.price}}€</h4>
+                    </div>
+
                 </div>
+                {{/if}}
                 <img src="{{product.img}}" alt="" class="img-fluid">
                 <!-- <h3 class="dishes-heading" lang="pt">{{product.title}}</h3>
                 <h4 class="dishes-heading">{{product.price}}</h4> -->
@@ -124,6 +132,7 @@
         </div>
     </section>
 
+    {{#if web.about_visible}}
     <section class="section bg-light element-animate fadeInUp element-animated my-5 py-5">
         <div class="clearfix mb-3 mt-5 pb-5">
             <div class="container-fluid">
@@ -142,7 +151,8 @@
                     <blockquote class="testimonial">
                         <div class="d-flex flex-row justify-content-center align-items-center author">
                             {{#if web.content_about_img}}
-                            <img src="{{web.content_about_img}}" alt="" class="mr-4" style="width: 325px; height: 325px;">
+                            <img src="{{web.content_about_img}}" alt="" class="mr-4"
+                                style="width: 325px; height: 325px;">
                             {{/if}}
                         </div>
                     </blockquote>
@@ -161,10 +171,11 @@
                         </div>
                     </blockquote>
                 </div>
-                
+
             </div>
         </div>
     </section>
+    {{/if}}
 
     <section class="section element-animate fadeInUp element-animated my-5 py-5">
         <div class="clearfix mb-5 pb-5">
@@ -176,21 +187,20 @@
                         <span class="back-text">
                             Deixe-nos a sua opinião em qualquer um dos nossos canais <br>
                             {{#if web.social_facebook}}
-                            <a href="{{web.social_facebook}}" target="_blank"
-                                style="text-decoration: none;"><b class="text-yellow skiptranslate">Facebook</b></a> /
-                            {{/if}}    
+                            <a href="{{web.social_facebook}}" target="_blank" style="text-decoration: none;"><b
+                                    class="text-yellow skiptranslate">Facebook</b></a> /
+                            {{/if}}
                             {{#if web.social_instagram}}
-                            <a href="{{web.social_instagram}}" target="_blank"
-                                style="text-decoration: none;"><b class="text-yellow skiptranslate">Instagram</b></a> /
+                            <a href="{{web.social_instagram}}" target="_blank" style="text-decoration: none;"><b
+                                    class="text-yellow skiptranslate">Instagram</b></a> /
                             {{/if}}
                             {{#if web.social_trip}}
-                            <a href="{{web.social_trip}}"
-                                target="_blank" style="text-decoration: none;"><b class="text-yellow skiptranslate">Trip
+                            <a href="{{web.social_trip}}" target="_blank" style="text-decoration: none;"><b
+                                    class="text-yellow skiptranslate">Trip
                                     Advisor</b></a> /
                             {{/if}}
                             {{#if web.social_google}}
-                            <a href="{{web.social_google}}"
-                                target="_blank" style="text-decoration: none;"><b
+                            <a href="{{web.social_google}}" target="_blank" style="text-decoration: none;"><b
                                     class="text-yellow skiptranslate">Google</b></a>
                             {{/if}}
                         </span>
@@ -213,10 +223,12 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-5 mb-5">
+                    {{#if web.about_visible}}
                     <h3>Sobre Nós</h3>
                     <p class="mb-5">
                         {{web.content_about}}
                     </p>
+                    {{/if}}
                     <ul class="list-unstyled footer-link d-flex footer-social skiptranslate">
                         {{#if web.social_facebook}}
                         <li><a href="{{web.social_facebook}}" target="_blank" class="p-2"><span
@@ -287,7 +299,7 @@
         </div>
     </div>
 
-    {{#each menu in menus}}
+    {{#each menu in web.menu}}
     <div class="modal fade" id="menu{{menu._id}}" tabindex="-1">
         <div class="modal-dialog modal-dialog-scrollable modal-xl modal-custom">
             <!-- modal-dialog-centered -->

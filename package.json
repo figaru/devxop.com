@@ -2,18 +2,20 @@
   "name": "devxop.com",
   "private": true,
   "scripts": {
-    "start": "meteor run",
+    "start": "meteor run --settings ./private/settings.json",
     "test": "meteor test --once --driver-package meteortesting:mocha"
   },
   "dependencies": {
-    "@babel/runtime": "^7.10.4",
+    "@babel/runtime": "^7.11.2",
     "bcrypt": "^5.0.0",
     "bootstrap": "^5.0.0-alpha1",
     "highcharts": "^8.1.2",
     "jquery": "^3.4.1",
-    "meteor-node-stubs": "^1.0.0",
+    "meteor-node-stubs": "^1.0.1",
     "popper.js": "^1.16.1",
-    "socket.io-client": "^2.3.0"
+    "qrcode-generator": "^1.4.4",
+    "socket.io-client": "^2.3.0",
+    "update": "^0.7.4"
   },
   "devDependencies": {
     "chai": "^4.1.2"

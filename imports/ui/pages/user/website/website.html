@@ -10,23 +10,26 @@
         </div>
         <div class="row mt-3">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card card-shadow">
                     <div class="card-body p-0">
                         <div class="row p-4">
                             <div class="col-sm-10 d-flex flex-column justify-content-center">
                                 <h5 class="mb-0">Setup</h5>
                             </div>
                             <div class="col-sm-2 d-flex flex-column justify-content-center align-items-center">
-                                <button
+                                <!-- <button
                                     class="btn btn-primary p-0 rounded-circle d-flex flex-column justify-content-center"
                                     type="button" data-toggle="collapse" data-target="#collapseSetup"
                                     aria-expanded="false" aria-controls="collapseSetup">
                                     <i class="material-icons p-2">keyboard_arrow_down</i>
-                                </button>
+                                </button> -->
+                                <i class="material-icons btn-icon btn-more" data-toggle="collapse"
+                                    data-target="#collapseSetup" aria-expanded="false" aria-controls="collapseSetup"
+                                    id="dropdownMenuButton">expand_more</i>
                             </div>
                         </div>
 
-                        <div class="collapse" id="collapseSetup">
+                        <div class="collapse show" id="collapseSetup">
                             <hr class="mt-0">
                             <div class="row p-4 pt-0">
                                 <div class="col-sm-12 mb-3">
@@ -53,12 +56,24 @@
                                     <label>Endpoint</label>
                                     <p>The endpoint is the link where your webpage will be accessed from.</p>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon3">https://devxop.com/</span>
+                                        <span class="input-group-text" id="basic-addon3">https://devxop.com/app/</span>
                                         <input type="text" class="form-control js-edit-website" data-key="endpoint"
                                             value="{{get_website.endpoint}}" id="basic-url"
                                             aria-describedby="basic-addon3">
+                                        <a href="https://devxop.com/app/{{get_website.endpoint}}" target="_blank"
+                                            class="btn btn-primary d-flex flex-column justify-content-center"><i
+                                                class="material-icons">launch</i></a>
                                     </div>
                                 </div>
+                                {{#if get_website.endpoint_qr}}
+                                <div class="col-sm-12 p-2 d-flex flex-column align-items-center">
+                                    <img src="{{get_website.endpoint_qr}}">
+                                </div>
+                                <div class="col-sm-12 p-2 d-flex flex-column align-items-center">
+                                    <a class="btn btn-success" href="{{get_website.endpoint_qr}}" target="_blank"
+                                        download="QRCODE_{{get_website.endpoint}}">Get QR Code</a>
+                                </div>
+                                {{/if}}
                             </div>
                         </div>
 
@@ -70,30 +85,33 @@
 
         <div class="row mt-3">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card card-shadow">
                     <div class="card-body p-0">
                         <div class="row p-4">
                             <div class="col-sm-10 d-flex flex-column justify-content-center">
                                 <h5 class="mb-0">Content</h5>
                             </div>
                             <div class="col-sm-2 d-flex flex-column justify-content-center align-items-center">
-                                <button
+                                <!-- <button
                                     class="btn btn-primary p-0 rounded-circle d-flex flex-column justify-content-center"
                                     type="button" data-toggle="collapse" data-target="#collapseContent"
                                     aria-expanded="false" aria-controls="collapseContent">
                                     <i class="material-icons p-2">keyboard_arrow_down</i>
-                                </button>
+                                </button> -->
+                                <i class="material-icons btn-icon btn-more" data-toggle="collapse"
+                                    data-target="#collapseContent" aria-expanded="false" aria-controls="collapseContent"
+                                    id="dropdownMenuButton">expand_more</i>
                             </div>
                         </div>
 
-                        <div class="collapse" id="collapseContent">
+                        <div class="collapse show" id="collapseContent">
                             <hr class="mt-0">
                             <div class="row p-4 pt-0">
 
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link active" id="info-tab" data-toggle="tab" href="#infoTab"
-                                            role="tab" aria-controls="home" aria-selected="true">General</a>
+                                            role="tab" aria-controls="home" aria-selected="true">About</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#socialTab"
@@ -111,6 +129,15 @@
                                             <div class="col-sm-12 mb-3">
                                                 <label>Information to populate the page with text regarding your
                                                     company.</label>
+                                            </div>
+                                            <div class="col-sm-12 py-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input p-0 js-visible" data-key="about_visible" type="checkbox"
+                                                        value="">
+                                                    <label class="form-check-label">
+                                                        About section visible
+                                                    </label>
+                                                </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <label>About Subtitle</label>
@@ -274,23 +301,27 @@
 
         <div class="row mt-3">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card card-shadow">
                     <div class="card-body p-0">
                         <div class="row p-4">
                             <div class="col-sm-10 d-flex flex-column justify-content-center">
                                 <h5 class="mb-0">Customize Your Look</h5>
                             </div>
                             <div class="col-sm-2 d-flex flex-column justify-content-center align-items-center">
-                                <button
+                                <!-- <button
                                     class="btn btn-primary p-0 rounded-circle d-flex flex-column justify-content-center"
                                     type="button" data-toggle="collapse" data-target="#collapseCustomizeLook"
                                     aria-expanded="false" aria-controls="collapseCustomizeLook">
                                     <i class="material-icons p-2">keyboard_arrow_down</i>
-                                </button>
+                                </button> -->
+
+                                <i class="material-icons btn-icon btn-more" data-toggle="collapse"
+                                    data-target="#collapseCustomizeLook" aria-expanded="false"
+                                    aria-controls="collapseCustomizeLook" id="dropdownMenuButton">expand_more</i>
                             </div>
                         </div>
 
-                        <div class="collapse" id="collapseCustomizeLook">
+                        <div class="collapse show" id="collapseCustomizeLook">
                             <hr class="mt-0">
                             <div class="row p-4 pt-0">
                                 <div class="col-sm-12 mb-3">
@@ -327,100 +358,96 @@
 
         <div class="row mt-3">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card card-shadow">
                     <div class="card-body p-0">
                         <div class="row p-4">
                             <div class="col-sm-10 d-flex flex-column justify-content-center">
                                 <h5 class="mb-0">Products</h5>
                             </div>
                             <div class="col-sm-2 d-flex flex-column justify-content-center align-items-center">
-                                <button
+                                <!-- <button
                                     class="btn btn-primary p-0 rounded-circle d-flex flex-column justify-content-center"
                                     type="button" data-toggle="collapse" data-target="#collapseProducts"
                                     aria-expanded="false" aria-controls="collapseProducts">
                                     <i class="material-icons p-2">keyboard_arrow_down</i>
-                                </button>
+                                </button> -->
+
+                                <i class="material-icons btn-icon btn-more" data-toggle="collapse"
+                                    data-target="#collapseProducts" aria-expanded="false"
+                                    aria-controls="collapseProducts" id="dropdownMenuButton">expand_more</i>
                             </div>
                         </div>
 
-                        <div class="collapse" id="collapseProducts">
+                        <div class="collapse show" id="collapseProducts">
                             <hr class="mt-0">
                             <div class="row p-4 pt-0">
                                 <div class="col-sm-12 mb-3">
                                     <label>Products you want to expose on your website</label>
                                 </div>
                                 <div class="col-sm-12 mb-3">
-                                    <label>Highlights</label>
-                                    <div class="row">
-                                        <div class="col-sm-12 d-flex flex-row justify-content-start">
-                                            
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                    Choose highlight...
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    {{#each collection in collections_list}}
-                                                    <li><a class="dropdown-item js-highlight-select"
-                                                            data-collection="{{collection._id}}">{{collection.title}}</a>
-                                                    </li>
-                                                    {{/each}}
-                                                </ul>
-                                            </div>
+                                    <div class="d-flex flex-row justify-content-start align-items-center">
+                                        <h5 class="mr-2">Highlights</h5>
+                                        <div class="dropdown">
+                                            <i class="material-icons btn-icon btn-add" id="dropdownMenuButton"
+                                                data-toggle="dropdown">add</i>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                {{#each collection in collections_list}}
+                                                <li><a class="dropdown-item js-highlight-select"
+                                                        data-collection="{{collection._id}}">{{collection.title}}</a>
+                                                </li>
+                                                {{/each}}
+                                            </ul>
+                                        </div>
+                                    </div>
 
+                                    <div class="row">
+                                        <div class="col-sm-12 py-3">
                                             {{#with highlight_selected}}
                                             <!-- return collection -->
                                             <div class="tag">
-                                                <span>{{this.title}}</span>
+                                                <div>{{this.title}}</div>
                                             </div>
                                             {{/with}}
+                                        </div>
+                                        <div class="col-sm-12 py-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input p-0 js-visible" data-key="highlights_show_info" type="checkbox"
+                                                    value="">
+                                                <label class="form-check-label">
+                                                    Show product info
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
 
 
                                 </div>
-                                <div class="col-sm-12">
-                                    <label>Menu</label>
-                                    <div class="row">
-                                        <div class="col-sm-12 mb-3 d-flex flex-row justify-content-start">
-
-                                            <div class="dropdown mr-3">
-                                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                    Add menu collection...
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    {{#each collection in collections_list}}
-                                                    <li><a class="dropdown-item js-menu-select"
-                                                            data-collection="{{collection._id}}">{{collection.title}}</a>
-                                                    </li>
-                                                    {{/each}}
-                                                </ul>
-                                            </div>
-
-                                            {{#each collection in menu_collection}}
-                                            <div class="tag">
-                                                <span>{{collection.title}}</span>
-                                                <i class="material-icons js-remove-menu"
-                                                    data-index="{{@index}}">close</i>
-                                            </div>
-                                            {{/each}}
-
-
-                                        </div>
-
-                                        <!-- <div class="col-sm-12">
-                                            <select class="form-control js-menu-select"
-                                                aria-label="Default select example">
+                                <div class="col-sm-12 mb-3">
+                                    <div class="d-flex flex-row justify-content-start align-items-center">
+                                        <h5 class="mr-2">Menu</h5>
+                                        <div class="dropdown mr-3">
+                                            <i class="material-icons btn-icon btn-add" id="dropdownMenuButton"
+                                                data-toggle="dropdown">add</i>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 {{#each collection in collections_list}}
-                                                <option value="{{collection._id}}">{{collection.title}}</option>
+                                                <li><a class="dropdown-item js-menu-select"
+                                                        data-collection="{{collection._id}}">{{collection.title}}</a>
+                                                </li>
                                                 {{/each}}
-                                            </select>
-                                        </div> -->
+                                            </ul>
+                                        </div>
                                     </div>
 
+
+                                </div>
+                                <div class="col-sm-12 mb-3 d-flex flex-row justify-content-start">
+
+                                    {{#each collection in menu_collection}}
+                                    <div class="tag">
+                                        <div>{{collection.title}}</div>
+                                        <i class="material-icons js-remove-menu" data-index="{{@index}}">close</i>
+                                    </div>
+                                    {{/each}}
 
                                 </div>
                             </div>
