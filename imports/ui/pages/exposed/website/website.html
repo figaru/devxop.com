@@ -55,11 +55,11 @@
             </div>
         </div>
 
-
+        {{> notify}}
         <img src="{{web.cover}}" class="bg">
     </div>
 
-    <section>
+    <!-- <section>
         <div class="clearfix mb-0 pb-5 mt-5">
             <div class="container-fluid">
                 <div class="row">
@@ -83,7 +83,7 @@
         </div>
 
         
-    </section>
+    </section> -->
 
     <section class="section bg-light element-animate py-5">
         <div class="clearfix mb-5 pb-5 mt-5">
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <div class="owl-carousel centernonloop">
+        <div class="owl-carousel centernonloop p-3">
 
             {{#each product in web.highlights.products}}
             <a class="item-dishes bright">

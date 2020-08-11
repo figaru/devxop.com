@@ -39,17 +39,20 @@ Template.User_layout.events({
             }
         }
     },
-    'click #toggle-drawer': function (e, tmpl) {
+    'click #toggle-drawer, click .drawer-overlay': function (e, tmpl) {
+        console.log(e);
         let drawer = tmpl.$(".layout-drawer");
+        let overlay = tmpl.$(".drawer-overlay");
         let content = tmpl.$(".layout-content");
 
         if (drawer.hasClass("toggled")) {
             drawer.removeClass("toggled");
+            overlay.removeClass("toggled");
 
             content.addClass("full");
         } else {
             drawer.addClass("toggled");
-
+            overlay.addClass("toggled");
             content.removeClass("full");
         }
     }

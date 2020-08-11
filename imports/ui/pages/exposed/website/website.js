@@ -26,15 +26,20 @@ Template.Website_public.onCreated(function () {
                     margin: 10,
                     dots: false,
                     responsive: {
-                        300: {
-                            items: 2
+                        350: {
+                            items: 1.2
                         },
                         600: {
+                            items: 3
+                        },
+                        800: {
                             items: 4
                         }
                     }
                 });
             }, 600);
+        }else{
+
         }
     });
 

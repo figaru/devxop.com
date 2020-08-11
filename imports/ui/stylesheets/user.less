@@ -44,6 +44,35 @@
     display: block;
 }
 
+@media (max-width: 576px) { 
+
+    .layout-drawer{
+        position: fixed !important;
+        z-index: 1050;
+        height: 100vh !important;
+    }
+
+
+    .drawer-overlay.toggled{
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        height: 100vh !important;
+
+        width: 100% !important;
+
+        min-width: 100%;
+        min-height: 100vh;
+        background-color: rgba(0,0,0,0.2);
+    }
+
+    .layout-content{
+        width: 100% !important;
+        left: 0px !important;
+    }
+}
+
 .layout-drawer {
     width: 240px;
     height: calc(100% - 64px);

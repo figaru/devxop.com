@@ -58,12 +58,17 @@ Template.Collections.events({
     "click .js-create-collection": function () {
         Collections.insert({ title: "New", products: [] })
     },
-    "click .js-remove-collection": function () {
-        let editCollection = Collections.findOne({ "_id": Session.get(COLLECTION_EDIT_ID) });
+    "click .js-remove-collection": function (e) {
+        let target = $(e.target);
+        console.log(target);
+        let id = $(e.target).data("collection");
 
-        if (editCollection) {
-            Collections.remove(editCollection._id);
-            hideModal("modalEditCollection");
+        console.log(id);
+        /* let editCollection = Collections.findOne({ "_id": Session.get(COLLECTION_EDIT_ID) }); */
+
+        if (id) {
+            Collections.remove(id);/* 
+            hideModal("modalEditCollection"); */
         }
     }
 });

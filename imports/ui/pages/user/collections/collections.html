@@ -14,16 +14,23 @@
                 <div class="card card-shadow p-0">
                     <div class="card-body text-center">
                         <div class="row">
-                            <div class="col-sm-12 col-md-1 py-4 d-flex flex-column justify-content-center">
+                            <!-- <div class="col-sm-12 col-md-1 py-4 d-flex flex-column justify-content-center">
                                 <input type="checkbox" disabled>
-                            </div>
+                            </div> -->
                             <div class="col-sm-12 col-md-8 d-flex flex-column justify-content-center align-items-start">
                                 <h4>{{collection.title}}</h4>
                                 <label>{{collection.description}}</label>
                             </div>
-                            <div class="col-sm-12 col-md-2 py-4 d-flex flex-column justify-content-center">
-                                <i class="material-icons btn-icon btn-edit js-edit-collection" data-collection="{{collection._id}}"
-                                    data-toggle="modal" data-target="#modalEditCollection">edit</i>
+                            <div
+                                class="col-sm-12 col-md-2 py-4 d-flex flex-row justify-content-center align-items-center">
+                                <i class="material-icons btn-icon btn-edit js-edit-collection mr-3"
+                                    data-collection="{{collection._id}}" data-toggle="modal"
+                                    data-target="#modalEditCollection">edit</i>
+
+
+                                <i class="material-icons btn-icon btn-remove js-remove-collection"
+                                    data-collection="{{collection._id}}">delete</i>
+                                
                             </div>
                         </div>
                     </div>
@@ -73,71 +80,45 @@
 
                             </div>
                             <div class="row">
-                                <div class="col-12">
-                                    <h4>Collection Products</h4>
+                                <div class="col-12 d-flex flex-row justify-content-start align-items-center">
+                                    {{> select_products modalId="collectionSelectProduct" eventId="collectionEditEvent" key="products"}}
+                                    <h4 class="mr-2">Collection Products</h4>
+                                    <button data-toggle="modal" data-target="#collectionSelectProduct"
+                                        class="btn-icon btn-add d-flex flex-column justify-content-center js-add-product">
+                                        <i class="material-icons">add</i>
+                                    </button>
                                 </div>
                             </div>
                             <div class="row p-2">
-                                <div class="col-12 p-2 px-4">
-                                    {{#each product in colletion_products_list}}
-                                    <div class="row mb-1">
-                                        <div class="col-sm-12">
-                                            <div class="card">
-                                                <div class="card-body py-2">
-
-                                                    <div class="row">
-
-                                                        <div
-                                                            class="col-sm-12 col-md-10 d-flex flex-column justify-content-center">
-                                                            <div class="row">
-                                                                <!-- <div class="col-sm-4 d-flex flex-column justify-content-center align-items-center">{{@index}}</div> -->
-                                                                <div
-                                                                    class="col-sm-8 d-flex flex-column justify-content-center">
-                                                                    {{product.title}}</div>
-                                                                <div
-                                                                    class="col-sm-2 d-flex flex-column justify-content-center">
-                                                                    {{product.price}}</div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div
-                                                            class="col-sm-12 col-md-2 d-flex flex-column justify-content-center align-items-center">
-                                                            <button
-                                                                class="btn btn-sm btn-danger d-flex flex-column justify-content-center js-remove-product"
-                                                                data-product="{{product._id}}" data-index="{{@index}}">
-                                                                <i class="material-icons">remove</i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                {{#each product in colletion_products_list}}
+                                <div class="col-sm-3">
+                                    <div class="card">
+                                        <img src="{{fileUrl product.img 'thumb'}}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{product.title}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{product.price}}€</h6>
+                                            <!-- <p class="card-text">{{product.description}}
+                                                    </p> -->
+                                            <div class="d-flex flex-column align-items-end">
+                                                <button
+                                                    class="btn-icon btn-danger d-flex flex-column justify-content-center js-remove-product"
+                                                    data-product="{{product._id}}" data-index="{{@index}}">
+                                                    <i class="material-icons">remove</i>
+                                                </button>
                                             </div>
-                                        </div>
-                                    </div>
-                                    {{/each}}
-                                    {{> select_products modalId="collectionSelectProduct" eventId="collectionEditEvent" key="products"}}
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="card" data-toggle="modal" data-target="#collectionSelectProduct"
-                                                style="background-color: var(--bs-primary);">
-                                                <div class="card-body p-2">
-                                                    <div
-                                                        class="col-sm-12 d-flex flex-column justify-content-center align-items-center">
-                                                        <i class="material-icons text-white">add</i>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
+                                {{/each}}
 
                             </div>
-                            <div class="row py-4">
+                            <!-- <div class="row py-4">
                                 <div class="col-12">
                                     <button class="btn btn-sm btn-danger js-remove-collection">Delete
                                         Collection</button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
         </div>
         <!-- We stretch middle div to remaining space Flex-grow: 2 -->
         <div class="h-col" style="flex-grow: 2;">
-            <h4>Devxop v{{app.version}}</h4>
+            <h4 class="d-flex flex-column justify-content-center">Devxop v{{app.version}}</h4>
             <!-- <div class="ahs-button">
                 <i class="material-icons">menu</i>
             </div> -->
@@ -76,6 +76,8 @@
             </div>
         </div>
     </div>
+
+    <div class="drawer-overlay toggled"></div>
 
     <div class="layout-content">
         {{> Template.dynamic template=main}}

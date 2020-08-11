@@ -15,9 +15,9 @@
                 <div class="card card-shadow p-0">
                     <div class="card-body text-center">
                         <div class="row">
-                            <div class="col-sm-12 col-md-1 d-flex flex-column justify-content-center">
+                            <!-- <div class="col-sm-12 col-md-1 d-flex flex-column justify-content-center">
                                 <input type="checkbox" disabled>
-                            </div>
+                            </div> -->
                             <div class="col-sm-12 col-md-9">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-4">
@@ -44,9 +44,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-2 py-4 d-flex flex-column justify-content-center">
-                                <i class="material-icons btn-icon btn-edit js-edit-product" data-product="{{product._id}}"
-                                    data-toggle="modal" data-target="#modalEditProduct">edit</i>
+                            <div class="col-sm-12 col-md-2 py-4 d-flex flex-row justify-content-center align-items-center">
+                                <i class="material-icons btn-icon btn-edit js-edit-product mr-3"
+                                    data-product="{{product._id}}" data-toggle="modal"
+                                    data-target="#modalEditProduct">edit</i>
+
+                                <i class="material-icons btn-icon btn-remove js-remove-product"
+                                    data-product="{{product._id}}">delete</i>
                             </div>
                         </div>
                     </div>
@@ -85,7 +89,7 @@
                                     <div class="label">Price</div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">€</span>
-                                        {{>number_input eventId="productCreateEvent" value=editing_product.price style="outline: none; box-shadow: none;" styleClass="form-control" maxLength=100 key="price" label="Price"}}
+                                        {{>number_input eventId="productEditEvent" value=editing_product.price style="outline: none; box-shadow: none;" styleClass="form-control" maxLength=100 key="price" label="Price"}}
                                         <!-- <span class="input-group-text"></span> -->
                                     </div>
 
@@ -115,9 +119,6 @@
                                     {{#if editing_product.price}}
                                     <h4>{{editing_product.price}}€</h4>
                                     {{/if}}
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-danger js-remove-product">Delete Product</button>
                                 </div>
                             </div>
                         </div>

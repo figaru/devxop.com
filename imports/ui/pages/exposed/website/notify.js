@@ -73,6 +73,7 @@ function updateBtn() {
   } else {
     pushButton.text('Receber');
     pushButton.removeClass("btn-danger");
+    subscribeUser();
     
   }
 

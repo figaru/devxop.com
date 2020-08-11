@@ -109,14 +109,14 @@ Template.Products.events({
         Session.set(PRODUCT_EDIT_ID, productId);
     },
     'click .js-remove-product': function (e, tmpl) {
-        let product = Products.findOne({ "_id": Session.get(PRODUCT_EDIT_ID) });
 
-        if (product) {
-            Products.remove(product._id);
+        let id = $(e.currentTarget).data("product");
 
-            let elemClose = tmpl.$(".close");
+        if (id) {
+            Products.remove(id);
+            /* let elemClose = tmpl.$(".close");
             elemClose.data("saved", true);
-            elemClose.click();
+            elemClose.click(); */
         }
     },
     'click .js-create-product': function (e, tmpl) {
