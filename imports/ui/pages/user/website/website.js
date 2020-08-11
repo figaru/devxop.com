@@ -40,7 +40,7 @@ Template.Website.onRendered(function () {
 
             data[key] = val;
 
-            console.log(data);
+            /* console.log(data); */
         }
 
 
@@ -51,6 +51,9 @@ Template.Website.onRendered(function () {
 });
 
 Template.Website.helpers({
+    'get_checked': function(val){
+        return val ? "checked" : "";
+    },
     'get_website': function () {
         return Websites.findOne();
     },
@@ -90,6 +93,22 @@ Template.Website.helpers({
 });
 
 Template.Website.events({
+    'click .js-clear-image': function (e) {
+        let target = $(e.target);
+        let key = target.data("key");
+        let data = {};
+
+        if (key) {
+            data[key] = null;
+
+            let website = Websites.findOne();
+
+            Websites.update(website._id, {
+                $set: data
+            })
+        }
+
+    },
     'change .js-visible': function (e) {
         let target = $(e.target);
         let key = target.data("key");

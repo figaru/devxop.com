@@ -132,8 +132,9 @@
                                             </div>
                                             <div class="col-sm-12 py-3">
                                                 <div class="form-check">
-                                                    <input class="form-check-input p-0 js-visible" data-key="about_visible" type="checkbox"
-                                                        value="">
+                                                    <input class="form-check-input p-0 js-visible"
+                                                        data-key="about_visible" type="checkbox"
+                                                        {{get_checked get_website.about_visible}} value="">
                                                     <label class="form-check-label">
                                                         About section visible
                                                     </label>
@@ -155,7 +156,7 @@
 
                                                 </div>
                                                 <label>About Image</label>
-                                                <div class="input-group mb-3">
+                                                <div class="input-group mb-2">
                                                     {{> select_files eventId="websiteEditEvent" modalId="websiteAboutImgSelect" key="content_about_img" fileType="image"}}
                                                     <div class="image-select" data-toggle="modal"
                                                         data-target="#websiteAboutImgSelect"
@@ -165,6 +166,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <button class="btn btn-danger mb-2 js-clear-image"
+                                                    data-key="content_about_img">Clear About</button>
+                                                <br>
                                                 <label>About Note</label>
                                                 <div class="input-group mb-3">
                                                     <input type="text" class="form-control js-edit-website"
@@ -231,7 +235,10 @@
                                                             <i class="material-icons">add</i>
                                                         </div>
                                                     </div>
+
                                                 </div>
+                                                <button class="btn btn-danger my-2 js-clear-image"
+                                                    data-key="testimonial_img">Clear Testimonial</button>
                                             </div>
 
                                         </div>
@@ -336,6 +343,8 @@
                                             <i class="material-icons">add</i>
                                         </div>
                                     </div>
+                                    <button class="btn btn-danger my-2 js-clear-image" data-key="cover">Clear
+                                        Cover</button>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Logo</label>
@@ -346,7 +355,11 @@
                                             <i class="material-icons">add</i>
                                         </div>
                                     </div>
+                                    <button class="btn btn-danger my-2 js-clear-image" data-key="logo">Clear
+                                        Logo</button>
                                 </div>
+
+
                             </div>
                         </div>
 
@@ -411,8 +424,9 @@
                                         </div>
                                         <div class="col-sm-12 py-3">
                                             <div class="form-check">
-                                                <input class="form-check-input p-0 js-visible" data-key="highlights_show_info" type="checkbox"
-                                                    value="">
+                                                <input class="form-check-input p-0 js-visible"
+                                                    data-key="highlights_show_info" type="checkbox"
+                                                    {{get_checked get_website.highlights_show_info}} value="">
                                                 <label class="form-check-label">
                                                     Show product info
                                                 </label>
