@@ -40,7 +40,7 @@ Template.Website.onRendered(function () {
 
             data[key] = val;
 
-            /* console.log(data); */
+            console.log(data);
         }
 
 
@@ -93,6 +93,7 @@ Template.Website.helpers({
 });
 
 Template.Website.events({
+<<<<<<< HEAD
     'click .js-clear-image': function (e) {
         let target = $(e.target);
         let key = target.data("key");
@@ -108,6 +109,15 @@ Template.Website.events({
             })
         }
 
+=======
+    'click .js-notify': function(){
+
+        let title = $("#inputNotificationTitle").val();
+        let text = $("#inputNotificationText").val();
+
+        let web = Websites.findOne();
+        Meteor.call("website.notifications.notify", web._id, title, text);
+>>>>>>> 6ace1a58c2ffdf692a2be4fa192efb3402ee84a3
     },
     'change .js-visible': function (e) {
         let target = $(e.target);

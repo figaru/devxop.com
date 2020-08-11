@@ -3,6 +3,7 @@
 import { Mongo } from 'meteor/mongo';
 
 Websites = new Mongo.Collection('websites');
+WebsitesPush = new Mongo.Collection('websitesPush');//push notification
 
 Websites.allow({
     insert: function (userId, doc) {
