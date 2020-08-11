@@ -47,10 +47,11 @@
             <div class="sub-heading skiptranslate">{{web.sub_title}}</div>
             <div class="banner-actions">
                 <a href="#specialsJump" class="btn btn-outline-light">
-                    Pratos Especiais</a>
+                    Novidades!</a>
                 <a href="#menuJump" class="btn btn-outline-light">
                     A Nossa Ementa
                 </a>
+
             </div>
         </div>
 
@@ -58,8 +59,30 @@
         <img src="{{web.cover}}" class="bg">
     </div>
 
-    <section class="section">
-        {{>notify}}
+    <section>
+        <div class="clearfix mb-0 pb-5 mt-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 text-center heading-wrap">
+                        <h2 id="specialsJump">
+                            Receber Notificações?
+                        </h2>
+                        <p>Receba notificacões de novidades onde quer que esteja!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix mb-5 pb-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        {{>notify}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
     </section>
 
     <section class="section bg-light element-animate py-5">
@@ -68,8 +91,7 @@
                 <div class="row">
                     <div class="col-md-12 text-center heading-wrap">
                         <h2 id="specialsJump">
-                            {{#if get_lang "en"}}Special Dishes{{/if}}
-                            {{#if get_lang "pt"}}Pratos Especiais{{/if}}
+                            Novidades!
                         </h2>
                     </div>
                 </div>

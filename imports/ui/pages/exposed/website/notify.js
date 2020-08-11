@@ -66,12 +66,12 @@ function updateBtn() {
   }
 
   if (isSubscribed) {
-    pushButton.text('Disable');
+    pushButton.text('Remover');
     pushButton.addClass("btn-danger");
     /* pushButton.hide(); */
 
   } else {
-    pushButton.text('Enable');
+    pushButton.text('Receber');
     pushButton.removeClass("btn-danger");
     
   }

@@ -69,7 +69,7 @@ Meteor.methods({
                 let data = {
                     title: title,
                     text: text,
-                    link: "https://devxop.com/app" + website.endpoint,
+                    link: "https://devxop.com/app/" + website.endpoint,
                     icon: logo,
                     badge: logo
                 }
