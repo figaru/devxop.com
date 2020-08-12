@@ -34,7 +34,7 @@ Template.Products.onRendered(function () {
                 val = target.data("value");
             }
 
-            if(key == "file"){
+            if (key == "file") {
                 let file = target.data("file");
                 val = file;
                 key = "img";
@@ -71,7 +71,7 @@ Template.Products.onRendered(function () {
                 val = target.data("value");
             }
 
-            if(key == "file"){
+            if (key == "file") {
                 let file = target.data("file");
                 val = file;
                 key = "img";
@@ -109,15 +109,18 @@ Template.Products.events({
         Session.set(PRODUCT_EDIT_ID, productId);
     },
     'click .js-remove-product': function (e, tmpl) {
+        confirm(function (canceled, confirmed) {
+            if (canceled) {
+                
+            } else {
+                let id = $(e.currentTarget).data("product");
 
-        let id = $(e.currentTarget).data("product");
+                if (id) {
 
-        if (id) {
-            Products.remove(id);
-            /* let elemClose = tmpl.$(".close");
-            elemClose.data("saved", true);
-            elemClose.click(); */
-        }
+                    Products.remove(id);
+                }
+            }
+        });
     },
     'click .js-create-product': function (e, tmpl) {
         let temp = TempProduct.findOne();

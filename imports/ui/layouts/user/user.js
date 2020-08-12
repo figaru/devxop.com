@@ -40,7 +40,6 @@ Template.User_layout.events({
         }
     },
     'click #toggle-drawer, click .drawer-overlay': function (e, tmpl) {
-        console.log(e);
         let drawer = tmpl.$(".layout-drawer");
         let overlay = tmpl.$(".drawer-overlay");
         let content = tmpl.$(".layout-content");

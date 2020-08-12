@@ -74,15 +74,9 @@ Template.Collections.events({
                 console.log(canceled);
             } else {
                 let target = $(e.target);
-                console.log(target);
                 let id = $(e.target).data("collection");
-
-                console.log(id);
-                /* let editCollection = Collections.findOne({ "_id": Session.get(COLLECTION_EDIT_ID) }); */
-
                 if (id) {
-                    Collections.remove(id);/* 
-            hideModal("modalEditCollection"); */
+                    Collections.remove(id);
                 }
             }
         });

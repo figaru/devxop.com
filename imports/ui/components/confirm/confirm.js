@@ -6,14 +6,14 @@ confirm = function (callback) {
 
 
 
-    $(".js-popup-confirm").on("click", function(){
+    $(".js-action-confirm").on("click", function(){
 
         hideModal("confirmPopupModal");
 
         return callback(null, true);
     });
 
-    $(".js-popup-cancel").on("click", function(){
+    $(".js-action-cancel").on("click", function(){
 
         return callback(true, null);
     });
