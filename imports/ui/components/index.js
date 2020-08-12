@@ -11,6 +11,8 @@ import './form/dropdown.input.js';
 import './form/progress.input.js';
 import "./jobs/bar.jobs";
 
+import "./confirm/confirm.js";
+
 import './media/media.upload.js';
 
 

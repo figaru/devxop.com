@@ -40,16 +40,26 @@ Template.Collections.onRendered(function () {
 
 Template.Collections.events({
     'click .js-remove-product': function (e) {
-        let target = $(e.currentTarget);
-        let editCollection = Collections.findOne({ "_id": Session.get(COLLECTION_EDIT_ID) });
-        let index = target.data("index");
 
-        let productsList = editCollection.products;
-        productsList.splice(index, 1);
 
-        Collections.update(editCollection._id, {
-            $set: { products: productsList }
+        confirm(function (canceled, confirmed) {
+            if (canceled) {
+                console.log(canceled);
+            } else {
+                let target = $(e.currentTarget);
+                let editCollection = Collections.findOne({ "_id": Session.get(COLLECTION_EDIT_ID) });
+                let index = target.data("index");
+
+                let productsList = editCollection.products;
+                productsList.splice(index, 1);
+
+                Collections.update(editCollection._id, {
+                    $set: { products: productsList }
+                });
+            }
         });
+
+
     },
     'click .js-edit-collection': function (e, tmpl) {
         let id = $(e.currentTarget).data("collection");
@@ -59,17 +69,23 @@ Template.Collections.events({
         Collections.insert({ title: "New", products: [] })
     },
     "click .js-remove-collection": function (e) {
-        let target = $(e.target);
-        console.log(target);
-        let id = $(e.target).data("collection");
+        confirm(function (canceled, confirmed) {
+            if (canceled) {
+                console.log(canceled);
+            } else {
+                let target = $(e.target);
+                console.log(target);
+                let id = $(e.target).data("collection");
 
-        console.log(id);
-        /* let editCollection = Collections.findOne({ "_id": Session.get(COLLECTION_EDIT_ID) }); */
+                console.log(id);
+                /* let editCollection = Collections.findOne({ "_id": Session.get(COLLECTION_EDIT_ID) }); */
 
-        if (id) {
-            Collections.remove(id);/* 
+                if (id) {
+                    Collections.remove(id);/* 
             hideModal("modalEditCollection"); */
-        }
+                }
+            }
+        });
     }
 });
 
