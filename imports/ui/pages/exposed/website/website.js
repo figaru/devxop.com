@@ -73,11 +73,11 @@ Template.Website_public.onRendered(function () {
                 }, { offset: '95%' });
             }, 600);
 
-            $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
-                /* console.log(JSON.stringify(data, null, 2)); */
+            /* $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
                 //console.log(data);
                 Meteor.call("website.analytics.register", endpoint, Session.get("fingerprint"), data);
-            });
+            }); */
+            Meteor.call("website.analytics.register", endpoint, Session.get("fingerprint"), {});
         } else {
 
         }
