@@ -8,6 +8,35 @@
                 <label>Keep your customers engaged with your public webpage.</label>
             </div>
         </div>
+        <div class="row px-1 pt-5">
+            <div class="col-md-12 col-lg-6 mb-3">
+                <div class="card card-shadow p-3 h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Page Requests</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Clients/Users that have accessed you webpage</h6>
+                        <p class="card-text">{{get_website.analytics.views}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6 mb-3">
+                <div class="card card-shadow p-3 h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Notifications</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">How many people will receive your notifications</h6>
+                        <p class="card-text">{{get_website_push.length}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-12 col-lg-4 mb-3">
+                <div class="card card-shadow p-3 h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Quota</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"></h6>
+                        <p class="card-text">1Gb</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
         <div class="row mt-3">
             <div class="col-sm-12">
                 <div class="card card-shadow">
@@ -57,7 +86,7 @@
                                     <p>The endpoint is the link where your webpage will be accessed from.</p>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon3">https://devxop.com/app/</span>
-                                        <input type="text" class="form-control js-edit-website" data-key="endpoint"
+                                        <input type="text" class="form-control js-edit-website" style="min-width: 203px;" data-key="endpoint"
                                             value="{{get_website.endpoint}}" id="basic-url"
                                             aria-describedby="basic-addon3">
                                         <a href="https://devxop.com/app/{{get_website.endpoint}}" target="_blank"
@@ -502,6 +531,10 @@
                             <div class="row p-4 pt-0">
                                 <div class="col-sm-12 mb-3">
                                     <label>Send a notification to all clients that have registered to receive updates</label>
+                                </div>
+
+                                <div class="col-sm-12 mb-3">
+                                    <h4>Clients to notify ({{get_website_push.length}})</h4>
                                 </div>
                                 <div class="col-sm-12 mb-3">
                                     <div class="row g-3 align-items-center">

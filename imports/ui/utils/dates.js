@@ -1,3 +1,8 @@
+const { data } = require("jquery");
+
+
+
+
 Template.registerHelper("parseDate", function (d) { return parseDate(d); });
 parseDate = function (d) {
     d = new Date(d);
@@ -21,23 +26,23 @@ runtimeFromDate = function (oldDate) {
 
     //$("#time").text("Time until new year:\nDays: " + days + " Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds);
 
-    if(days > 0){
-        if(hours == 1){
+    if (days > 0) {
+        if (hours == 1) {
             return hours + " day ago"
         }
         return days + " days and " + hours + " hours ago"
-    }else if(hours > 0 && hours <= 23){
-        if(hours == 1){
+    } else if (hours > 0 && hours <= 23) {
+        if (hours == 1) {
             return hours + " hour ago"
         }
         return hours + " hours and " + minutes + " minutes ago";
-    }else if(minutes > 0 && minutes <=59){
-        if(minutes == 1){
+    } else if (minutes > 0 && minutes <= 59) {
+        if (minutes == 1) {
             return minutes + " minute ago"
         }
         return minutes + " minutes ago"
-    }else{
-        if(seconds == 1){
+    } else {
+        if (seconds == 1) {
             return seconds + " second ago"
         }
         return seconds + " seconds ago"
@@ -57,6 +62,8 @@ Date.prototype.addDays = function (days) {
     result.setDate(result.getDate() + days);
     return result;
 }
+
+
 
 getDaysFromSeconds = function (seconds) {
 

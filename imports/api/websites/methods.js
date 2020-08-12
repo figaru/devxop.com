@@ -23,6 +23,39 @@ webpush.setVapidDetails(
 );
 
 Meteor.methods({
+    'website.analytics.crunch': function(){
+        let web = Websites.findOne({ "user_id": this.userId });
+
+        if(web){
+            let analytics = WebsitesAnalytics.find({website: web._id});
+            let data = {
+                analytics: {
+                    views: analytics.count()
+                }
+            }
+
+            Websites.update(web._id, {
+                $set: data
+            });
+        }
+        
+    },
+    'website.analytics.register': function (endpoint, fingerprint, geoData) {
+
+        let web = Websites.findOne({ "endpoint": endpoint });
+        if (web && !Meteor.isDevelopment) {
+            let data = {
+                "website": web._id,
+                "user_fingerprint": fingerprint,
+                "geo": geoData,
+                "stamp": getDocumentStamp()
+            }
+
+            WebsitesAnalytics.insert(data);
+        }
+
+
+    },
     'website.notifications.validate': function (data) {
 
         let sub = WebsitesPush.findOne(data);
@@ -56,7 +89,7 @@ Meteor.methods({
     'website.notifications.notify': function (websiteId, title, text) {
         let website = Websites.findOne(websiteId);
 
-        
+
 
         if (website) {
 

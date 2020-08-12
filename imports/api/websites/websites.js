@@ -4,6 +4,7 @@ import { Mongo } from 'meteor/mongo';
 
 Websites = new Mongo.Collection('websites');
 WebsitesPush = new Mongo.Collection('websitesPush');//push notification
+WebsitesAnalytics = new Mongo.Collection('websitesAnalytics');//push notification
 
 Websites.allow({
     insert: function (userId, doc) {

@@ -5,7 +5,7 @@ import '../../../stylesheets/templates/website.less';
 Template.Website.onRendered(function () {
     //function will create document if website does not exist
     Meteor.call("website.exists");
-
+    Meteor.call("website.analytics.crunch");
 
 
     $(document).on('websiteEditEvent', function (e, elem) {
@@ -56,6 +56,9 @@ Template.Website.helpers({
     },
     'get_website': function () {
         return Websites.findOne();
+    },
+    'get_website_push': function () {
+        return WebsitesPush.find().fetch();
     },
     'collections_list': function () {
         return Collections.find().fetch();

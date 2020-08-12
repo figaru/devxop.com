@@ -1,5 +1,8 @@
 // Register your apis here
 
+/* _UTILS */
+import '../../api/_utils/date.js';
+
 /* COMPANIES */
 import '../../api/companies/methods.js';
 import '../../api/companies/server/publications.js';
