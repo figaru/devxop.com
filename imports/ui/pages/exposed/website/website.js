@@ -19,7 +19,7 @@ Template.Website_public.onRendered(function () {
     Meteor.call("websites.public", endpoint, (error, data) => {
         if (data) {
             Session.set(WEB, data);
-
+            document.title = data.title;
             setTimeout(function () {
                 $('.centernonloop').owlCarousel({
                     center: true,
