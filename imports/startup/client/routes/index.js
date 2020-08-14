@@ -12,3 +12,4 @@ import './user/devices';
 import './user/products';
 import './user/collections';
 import './user/websites';
+import './user/modals';
