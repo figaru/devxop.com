@@ -1,0 +1,122 @@
+<template name="Modules">
+    <div class="container p-3 py-4">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h3>Modules</h3>
+            </div>
+            <div class="col-sm-12 col-md-6 d-flex justify-content-end">
+                <button class="btn btn-primary js-create-module">Create Module</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            {{#each module in list_modules}}
+            <div class="col-sm-12 mb-3">
+                <div class="card card-shadow p-0">
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <!-- <div class="col-sm-12 col-md-1 py-4 d-flex flex-column justify-content-center">
+                                <input type="checkbox" disabled>
+                            </div> -->
+                            <div class="col-sm-12 col-md-8 d-flex flex-column justify-content-center align-items-start">
+                                <h4>{{module.title}}</h4>
+                                <label>{{module.description}}</label>
+                            </div>
+                            <div
+                                class="col-sm-12 col-md-2 py-4 d-flex flex-row justify-content-center align-items-center">
+                                <i class="material-icons btn-icon btn-edit js-edit-module mr-3"
+                                    data-module="{{module._id}}" data-toggle="modal"
+                                    data-target="#modalEditModule">edit</i>
+
+
+                                <i class="material-icons btn-icon btn-remove js-remove-module"
+                                    data-module="{{module._id}}">delete</i>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalEditModule" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl shadow-lg">
+            <div class="modal-content mb-3">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{editing_module.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 pb-3">
+                                            {{> text_input eventId="moduleEditEvent" maxLength=100 key="title" value=editing_module.title placeholder="Module name..."
+                                            label="Title"}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mb-3">
+                                    <div class="d-flex flex-row justify-content-start align-items-center">
+                                        <h5 class="mr-2">Collections</h5>
+                                        <div class="dropdown mr-3">
+                                            <i class="material-icons btn-icon btn-add" id="dropdownCollectionButton"
+                                                data-toggle="dropdown">add</i>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownCollectionButton">
+                                                {{#each collection in list_collections}}
+                                                <li><a class="dropdown-item js-collection-select"
+                                                        data-collection="{{collection._id}}">{{collection.title}}</a>
+                                                </li>
+                                                {{/each}}
+                                            </ul>
+                                        </div>
+                                    </div>
+        
+        
+                                </div>
+                                <div class="col-sm-12 mb-3 d-flex flex-row justify-content-start">
+        
+                                    {{#each collection in module_list_collections}}
+                                    <div class="tag">
+                                        <div>{{collection.title}}</div>
+                                        <i class="material-icons js-remove-menu" data-index="{{@index}}">close</i>
+                                    </div>
+                                    {{/each}}
+        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div id="canvas" class="module-lab">
+                                <div class="module-background">
+                                    <img src="/img/test.jpg">
+                                </div>
+                                <div class="module-content">
+                                    {{#each collection in module_list_collections}}
+                                        <div class="collection">
+                                            <div class="title">{{collection.title}}</div>
+                                        </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary js-generate">ToCanvas</button>
+                            <img id="image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</template>

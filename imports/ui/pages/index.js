@@ -14,6 +14,6 @@ import './user/collections/collections';
 import './user/media/media';
 import './user/media/media.drive';
 import './user/website/website';
-import './user/modals/modals';
+import './user/modules/modules';
 
 
