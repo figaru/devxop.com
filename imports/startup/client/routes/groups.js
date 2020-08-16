@@ -13,6 +13,7 @@ UserRouter = FlowRouter.group({
         this.register('allProducts', Meteor.subscribe('products.all'));
         this.register('allCollections', Meteor.subscribe('collections.all'));
         this.register('allWebsites', Meteor.subscribe('websites.all'));
+        this.register('allModules', Meteor.subscribe('modules.all'));
         this.register('allWebsitesPush', Meteor.subscribe('websites.push.all'));
     },
     triggersEnter: [function () {

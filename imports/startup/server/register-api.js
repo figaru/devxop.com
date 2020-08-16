@@ -16,6 +16,11 @@ import '../../api/files/server/publications.js';
 /* import '../../api/jobs/jobs.methods.js';
 import '../../api/jobs/server/publications.js'; */
 
+/* MODULES */
+import '../../api/modules/methods.js';
+import '../../api/modules/server/publications.js';
+
+
 /* DEVICES */
 import '../../api/devices/methods.js';
 import '../../api/devices/server/publications.js';

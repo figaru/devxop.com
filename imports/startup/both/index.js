@@ -11,3 +11,5 @@ import '../../api/products/products.js';
 import '../../api/collections/collections.js';
 
 import '../../api/websites/websites.js';
+
+import '../../api/modules/modules.js';

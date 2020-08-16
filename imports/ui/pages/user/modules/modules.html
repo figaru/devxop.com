@@ -94,23 +94,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div id="canvas" class="module-lab">
-                                <div class="module-background">
-                                    <img src="/img/test.jpg">
-                                </div>
-                                <div class="module-content">
-                                    {{#each collection in module_list_collections}}
-                                        <div class="collection">
-                                            <div class="title">{{collection.title}}</div>
-                                        </div>
-                                    {{/each}}
-                                </div>
-                            </div>
+                        <div class="col-sm-12 col-md-6"> <!-- style="opacity: 0; z-index: -1;" -->
+                            <iframe id="module-iframe"></iframe>
                         </div>
                         <div class="col-sm-12">
                             <button class="btn btn-primary js-generate">ToCanvas</button>
-                            <img id="image">
+                            <img id="image" width="100%">
                         </div>
                     </div>
                 </div>
@@ -119,4 +108,20 @@
     </div>
 
 
+</template>
+
+
+<template name="Modules_preview">
+    <div id="canvas" class="module-lab">
+        <div class="module-background">
+            <img src="/img/test.jpg">
+        </div>
+        <div class="module-content">
+            {{#each collection in module_list_collections}}
+                <div class="collection">
+                    <div class="title">{{collection.title}}</div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
 </template>
