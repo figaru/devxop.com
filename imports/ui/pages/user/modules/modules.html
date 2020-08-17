@@ -100,7 +100,7 @@
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <!-- style="opacity: 0; z-index: -1;" -->
-                            <iframe id="module-iframe" style="border: 0; width: 278px; height: 483px;"></iframe>
+                            <iframe id="module-iframe" style="border: 0; width: 405px; height: 720px;"></iframe>
                         </div>
                         <div class="col-sm-12">
                             <button class="btn btn-primary js-generate">ToCanvas</button>
@@ -128,8 +128,7 @@
             <div class="collection">
                 <div class="title">
                     <span class="main">{{collection.title}}</span>
-                    <span class="secondary">test</span>
-                    {{#if secondary_title}}
+                    {{#if collection.secondary_title}}
                     <span class="secondary">{{collection.secondary_title}}</span>
                     {{/if}}
                 </div>
@@ -152,11 +151,11 @@
                         </div>
                         <div class="right">
                             <div class="price">
-                                {{this.price}}
+                                {{this.price}}€
                             </div>
-                            <div class="tags">
+                            <!-- <div class="tags">
                                 tag
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
