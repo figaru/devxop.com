@@ -84,11 +84,15 @@
                                 </div>
                                 <div class="col-sm-12 mb-3 d-flex flex-row justify-content-start">
 
-                                    {{#each collection in module_list_collections}}
+                                    {{#each collectionId in editing_module.collections}}
+                                    {{#let index=@index}}
+                                    {{#with get_collection collectionId}}
                                     <div class="tag">
-                                        <div>{{collection.title}}</div>
-                                        <i class="material-icons js-remove-menu" data-index="{{@index}}">close</i>
+                                        <div>{{this.title}}</div>
+                                        <i class="material-icons js-remove-collection" data-index="{{index}}">close</i>
                                     </div>
+                                    {{/with}}
+                                    {{/let}}
                                     {{/each}}
 
                                 </div>
@@ -118,9 +122,21 @@
             <img src="/img/test.jpg">
         </div>
         <div class="module-content">
-            {{#each collection in module_list_collections}}
+            {{#each collectionId in editing_module.collections}}
+            {{#with get_collection collectionId}}
+            {{#let collection=this}}
             <div class="collection">
-                <div class="title">{{collection.title}}</div>
+                <div class="title">
+                    <span class="main">{{collection.title}}</span>
+                    <span class="secondary">test</span>
+                    {{#if secondary_title}}
+                    <span class="secondary">{{collection.secondary_title}}</span>
+                    {{/if}}
+                </div>
+                <div class="underline">
+                    <div>{{collection.title}}</div>
+                    <div>{{collection.title}}</div>
+                </div>
                 <div class="products">
                     {{#each productId in collection.products}}
                     {{#with get_product productId}}
@@ -132,6 +148,7 @@
                             <span class="description">
                                 {{this.description}}
                             </span>
+
                         </div>
                         <div class="right">
                             <div class="price">
@@ -147,6 +164,8 @@
                     {{/each}}
                 </div>
             </div>
+            {{/let}}
+            {{/with}}
             {{/each}}
         </div>
     </div>

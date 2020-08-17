@@ -19,6 +19,9 @@ Template.Modules.helpers({
     'editing_module': function () {
         return Modules.findOne({ "_id": Session.get(EDITING_MODULE) });
     },
+    'get_collection': function(id){
+        return Collections.findOne(id);
+    },
     'module_list_collections': function () {
         let module = Modules.findOne({ "_id": Session.get(EDITING_MODULE) });
 
@@ -32,11 +35,11 @@ Template.Modules.helpers({
 
 Template.Modules.events({
     'click .js-generate': function () {
-        let elem = $("#canvas");
+        let elem = $("#module-iframe").contents().find('#canvas');
 
-        elem.css({ "width": "1080px", "height": "1920px" });
+        $("#module-iframe").css({ "width": "1080px", "height": "1920px" });
         toCanvas(elem[0], { width: 1080, height: 1920 }).then(function (canvas) {
-            elem.css({ "width": "inherit", "height": "inherit" });
+            $("#module-iframe").css({ "width": "278px", "height": "483px" });
 
             /* console.log(canvas.toDataURL()); */
 
@@ -92,6 +95,26 @@ Template.Modules.events({
 
 
     },
+    'click .js-remove-collection': function (e) {
+        let target = $(e.target);
+
+        let module = Modules.findOne({ "_id": Session.get(EDITING_MODULE) });
+
+        if(!module)
+            return;
+
+        let index = target.data("index");
+        let collections = module.collections;
+        let data = {};
+        collections.splice(index, 1);
+
+        data["collections"] = collections;
+
+        Modules.update(module._id, {
+            $set: data
+        })
+
+    }
 });
 
 
@@ -105,6 +128,9 @@ Template.Modules_preview.helpers({
         if (module) {
             return Collections.find({ _id: { $in: module.collections } }).fetch();
         }
+    },
+    'get_collection': function(id){
+        return Collections.findOne(id);
     },
     'get_product': function(id){
         return Products.findOne(id);
