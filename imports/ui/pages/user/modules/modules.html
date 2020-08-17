@@ -79,22 +79,23 @@
                                             </ul>
                                         </div>
                                     </div>
-        
-        
+
+
                                 </div>
                                 <div class="col-sm-12 mb-3 d-flex flex-row justify-content-start">
-        
+
                                     {{#each collection in module_list_collections}}
                                     <div class="tag">
                                         <div>{{collection.title}}</div>
                                         <i class="material-icons js-remove-menu" data-index="{{@index}}">close</i>
                                     </div>
                                     {{/each}}
-        
+
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6"> <!-- style="opacity: 0; z-index: -1;" -->
+                        <div class="col-sm-12 col-md-6">
+                            <!-- style="opacity: 0; z-index: -1;" -->
                             <iframe id="module-iframe" style="border: 0; width: 278px; height: 483px;"></iframe>
                         </div>
                         <div class="col-sm-12">
@@ -118,9 +119,34 @@
         </div>
         <div class="module-content">
             {{#each collection in module_list_collections}}
-                <div class="collection">
-                    <div class="title">{{collection.title}}</div>
+            <div class="collection">
+                <div class="title">{{collection.title}}</div>
+                <div class="products">
+                    {{#each productId in collection.products}}
+                    {{#with get_product productId}}
+                    <div class="product">
+                        <div class="left">
+                            <span class="title">
+                                {{this.title}}
+                            </span>
+                            <span class="description">
+                                {{this.description}}
+                            </span>
+                        </div>
+                        <div class="right">
+                            <div class="price">
+                                {{this.price}}
+                            </div>
+                            <div class="tags">
+                                tag
+                            </div>
+                        </div>
+                    </div>
+
+                    {{/with}}
+                    {{/each}}
                 </div>
+            </div>
             {{/each}}
         </div>
     </div>

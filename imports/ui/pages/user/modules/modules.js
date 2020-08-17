@@ -105,6 +105,9 @@ Template.Modules_preview.helpers({
         if (module) {
             return Collections.find({ _id: { $in: module.collections } }).fetch();
         }
+    },
+    'get_product': function(id){
+        return Products.findOne(id);
     }
 
 });
