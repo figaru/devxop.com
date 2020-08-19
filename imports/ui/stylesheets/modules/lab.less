@@ -20,6 +20,34 @@
         }
     }
 
+    >.module-label {
+        position: absolute;
+        padding: 3vh 6vw;
+        width: 100vw;
+        bottom: 0;
+
+        >.label {
+            color: #fff;
+            font-size: 2vw;
+            line-height: 2vw;
+            font-weight: bolder;
+
+            width: 100%;
+        }
+
+        >.label.left {
+            text-align: left;
+        }
+
+        >.label.right {
+            text-align: right;
+        }
+
+        >.label.center {
+            text-align: center;
+        }
+    }
+
     >.module-content {
         position: absolute;
         height: 100vh;
@@ -109,6 +137,7 @@
                         float: left;
                         line-height: 4vw;
                         text-align: justify;
+
                         >.title {
                             color: #fff;
                             font-weight: bolder;
@@ -131,6 +160,7 @@
 
                     >.right {
                         width: 15%;
+                        position: relative;
 
                         >.price {
                             width: 100%;
@@ -138,14 +168,37 @@
                             font-weight: bolder;
                             text-align: center;
                             color: #fff;
+                            line-height: 3.6vw;
+                            padding-top: 1vw;
+                            padding-bottom: 0.2vw;
                         }
 
                         >.tags {
                             width: 100%;
-                            background-color: green;
                             font-size: 2vw;
                             font-weight: bolder;
                             text-align: center;
+
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            align-items: center;
+
+                            >.new {
+                                width: 100%;
+                                color: #85ffc2;
+                                font-size: 2vw;
+                            }
+
+                            >.icon {
+                                width: 2.5vw;
+                                height: 2.5vw;
+                                background-position: center;
+                                background-repeat: no-repeat;
+                                background-size: cover;
+                                margin: 0vw 0.2vw;
+                            }
                         }
                     }
 

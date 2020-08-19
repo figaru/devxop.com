@@ -104,6 +104,23 @@ Template.Products.helpers({
 });
 
 Template.Products.events({
+    'change .js-tag': function (e) {
+        let target = $(e.target);
+        let key = target.data("key");
+        let checked = target.is(":checked");
+        let data = {};
+
+        if (key) {
+            data[key] = checked;
+
+            let product = Products.findOne({ "_id": Session.get(PRODUCT_EDIT_ID) });
+
+            Products.update(product._id, {
+                $set: data
+            });
+        }
+
+    },
     'click .js-edit-product': function (e, tmpl) {
         let productId = $(e.currentTarget).data("product");
         Session.set(PRODUCT_EDIT_ID, productId);

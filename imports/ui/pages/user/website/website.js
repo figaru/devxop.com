@@ -51,9 +51,6 @@ Template.Website.onRendered(function () {
 });
 
 Template.Website.helpers({
-    'get_checked': function (val) {
-        return val ? "checked" : "";
-    },
     'get_website': function () {
         return Websites.findOne();
     },

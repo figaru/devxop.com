@@ -7,6 +7,29 @@ Template.Modules.onRendered(function () {
 
 
     $("#module-iframe").attr("src", "/modules/" + Session.get(EDITING_MODULE));
+
+    $(document).on('moduleEditEvent', function (e, elem) {
+        //subscribers = $('.subscribers-testEvent');
+        //subscribers.trigger('testEventHandler', [eventInfo]);
+        let module = Modules.findOne({ "_id": Session.get(EDITING_MODULE) });
+        let target = $(elem);
+        let key = target.data("key");
+        let val = target.val();
+        let data = {};
+
+        if (target.is('div')) {
+            //then it does not have value attr use data-value=""
+            val = target.data("value");
+        }
+
+        data[key] = val;
+
+        if (!$.isEmptyObject(data)) {
+            Modules.update(module._id, {
+                $set: data
+            });
+        }
+    });
 })
 
 Template.Modules.helpers({
@@ -19,7 +42,7 @@ Template.Modules.helpers({
     'editing_module': function () {
         return Modules.findOne({ "_id": Session.get(EDITING_MODULE) });
     },
-    'get_collection': function(id){
+    'get_collection': function (id) {
         return Collections.findOne(id);
     },
     'module_list_collections': function () {
@@ -34,6 +57,23 @@ Template.Modules.helpers({
 
 
 Template.Modules.events({
+    'change .js-visible': function (e) {
+        let target = $(e.target);
+        let key = target.data("key");
+        let checked = target.is(":checked");
+        let data = {};
+
+        if (key) {
+            data[key] = checked;
+
+            let module = Modules.findOne({ "_id": Session.get(EDITING_MODULE) });
+
+            Modules.update(module._id, {
+                $set: data
+            });
+        }
+
+    },
     'click .js-generate': function () {
         let elem = $("#module-iframe").contents().find('#canvas');
 
@@ -100,7 +140,7 @@ Template.Modules.events({
 
         let module = Modules.findOne({ "_id": Session.get(EDITING_MODULE) });
 
-        if(!module)
+        if (!module)
             return;
 
         let index = target.data("index");
@@ -123,16 +163,16 @@ Template.Modules_preview.helpers({
         return Modules.findOne({ "editing": true });
     },
     'module_list_collections': function () {
-        let module = Modules.findOne({ "editing": true});
+        let module = Modules.findOne({ "editing": true });
 
         if (module) {
             return Collections.find({ _id: { $in: module.collections } }).fetch();
         }
     },
-    'get_collection': function(id){
+    'get_collection': function (id) {
         return Collections.findOne(id);
     },
-    'get_product': function(id){
+    'get_product': function (id) {
         return Products.findOne(id);
     }
 
