@@ -51,12 +51,55 @@ Template.Modules.helpers({
         if (module) {
             return Collections.find({ _id: { $in: module.collections } }).fetch();
         }
+    },
+    "is_two_column": function (id, returnClass) {
+        let module = Modules.findOne({ "_id": Session.get(EDITING_MODULE) });
+
+        if (module) {
+            return module.two_column.includes(id);
+        }
+
+        return false;
     }
 
 });
 
 
 Template.Modules.events({
+    'change .js-two-column': function (e) {
+        let target = $(e.target);
+        let key = target.data("key");
+        let collection = target.data("collection");
+        let checked = target.is(":checked");
+        let data = {};
+
+        if (key) {
+
+            let module = Modules.findOne({ "_id": Session.get(EDITING_MODULE) });
+
+            let array = module.two_column
+
+            if (checked) {
+
+                if (array.includes(collection)) {
+                    //do nothing
+                } else {
+                    array.push(collection);
+                }
+
+            } else {
+                if (array.includes(collection)) {
+                    array.splice(array.indexOf(collection), 1);
+                }
+            }
+
+            data["two_column"] = array;
+            Modules.update(module._id, {
+                $set: data
+            });
+        }
+
+    },
     'change .js-visible': function (e) {
         let target = $(e.target);
         let key = target.data("key");
@@ -112,7 +155,7 @@ Template.Modules.events({
         Session.set(EDITING_MODULE, moduleId);
     },
     'click .js-create-module': function (e) {
-        Modules.insert({ title: "New", type: "menu", collections: [] });
+        Modules.insert({ title: "New", type: "menu", collections: [], two_column: [] });
     },
     'click .js-collection-select': function (e) {
         let target = $(e.target);
@@ -174,6 +217,17 @@ Template.Modules_preview.helpers({
     },
     'get_product': function (id) {
         return Products.findOne(id);
+    },
+    "is_two_column": function (id) {
+        let module = Modules.findOne({ "editing": true });
+
+        if (module) {
+            return module.two_column.includes(id) ? "two-column" : "";
+        }
+
+        return;
+
+
     }
 
 });

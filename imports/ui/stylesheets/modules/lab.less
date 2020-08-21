@@ -92,7 +92,7 @@
                 flex-direction: column;
                 justify-content: flex-start;
                 padding-top: 0.2vw;
-                padding-left: 0.3vw;
+                /* padding-left: 0.3vw; */
                 padding-bottom: 2vw;
 
                 >div {
@@ -117,6 +117,28 @@
             }
 
 
+            >.products.two-column{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                >.product{
+                    width: 50%;
+
+                    >.left{
+                        width: 75%;
+                    }
+
+                    >.right{
+                        width: 25%;
+
+                        >.price{
+                            font-size: 3vw;
+                            line-height: 3vw;
+                        }
+                    }
+                }
+            }
             >.products {
                 padding: 0;
                 margin: 0;
@@ -164,11 +186,11 @@
 
                         >.price {
                             width: 100%;
-                            font-size: 3.6vw;
+                            font-size: 3.4vw;
                             font-weight: bolder;
                             text-align: center;
                             color: #fff;
-                            line-height: 3.6vw;
+                            line-height: 3.4vw;
                             padding-top: 1vw;
                             padding-bottom: 0.2vw;
                         }

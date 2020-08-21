@@ -95,10 +95,14 @@
 
                                 </div>
                                 <div class="col-sm-12 mb-3 d-flex flex-row justify-content-start">
-
+                                    <p>By checking the the collection, the listing of products for that specific collection will be shown in two columns.</p>
                                     {{#each collectionId in editing_module.collections}}
                                     {{#let index=@index}}
                                     {{#with get_collection collectionId}}
+                                    <div class="form-check">
+                                        <input class="form-check-input p-0 js-two-column" data-key="two_column" data-collection="{{this._id}}"
+                                            type="checkbox" checked="{{is_two_column this._id}}" value="">
+                                    </div>
                                     <div class="tag">
                                         <div>{{this.title}}</div>
                                         <i class="material-icons js-remove-collection" data-index="{{index}}">close</i>
@@ -148,7 +152,7 @@
                     <div>{{collection.title}}</div>
                     <div>{{collection.title}}</div>
                 </div>
-                <div class="products">
+                <div class="products two_column {{is_two_column collection._id}}">
                     {{#each productId in collection.products}}
                     {{#with get_product productId}}
                     <div class="product">
@@ -167,19 +171,19 @@
                             </div>
                             <div class="tags">
                                 {{#if this.tag_new}}
-                                    <div class="new">Novo/New</div>
+                                <div class="new">Novo/New</div>
                                 {{/if}}
 
                                 {{#if this.tag_gluten}}
-                                    <div class="icon" style="background-image: url(/img/svg/gluten.svg);"></div>
+                                <div class="icon" style="background-image: url(/img/svg/gluten.svg);"></div>
                                 {{/if}}
 
                                 {{#if this.tag_organic}}
-                                    <div class="icon" style="background-image: url(/img/svg/organic.svg);"></div>
+                                <div class="icon" style="background-image: url(/img/svg/organic.svg);"></div>
                                 {{/if}}
 
                                 {{#if this.tag_vegan}}
-                                    <div class="icon" style="background-image: url(/img/svg/vegan.svg);"></div>
+                                <div class="icon" style="background-image: url(/img/svg/vegan.svg);"></div>
                                 {{/if}}
                             </div>
                         </div>
