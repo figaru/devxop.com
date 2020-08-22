@@ -3,7 +3,7 @@ import './media.html';
 
 Template.Media.helpers({
     'stats': function () {
-        let files = Files.find({ "deleting": { $exists: false } }).fetch();
+        let files = Files.find({ "deleting": { $exists: false }, "module": {$exists: false} }).fetch();
         // do something
         let data = {
             "storage_used": 0,

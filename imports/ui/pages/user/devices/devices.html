@@ -160,6 +160,30 @@
                                 </div>
                             </div>
                             {{/if}}
+                            {{#if displayViewEdit "module"}}
+                            <!-- <a class="btn btn-success" pd-popup-open="popupFileSelect" href="#">Open Modal</a> -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="dropdown mr-3">
+                                        <i class="material-icons btn-icon btn-add" id="dropdownModuleButton"
+                                            data-toggle="dropdown">add</i>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownModuleButton">
+                                            {{#each module in modules_list}}
+                                            <li><a class="dropdown-item js-module-select"
+                                                    data-module="{{module._id}}">{{module.title}}</a>
+                                            </li>
+                                            {{/each}}
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-12 mb-3 d-flex flex-row justify-content-start">
+                                    {{selected_module}}
+                                </div>
+
+                            </div>
+                            
+                            {{/if}}
                             {{#if this.selected_view}}
                             <div class="row">
                                 <div class="col-xs-12 pb-4 pt-4">

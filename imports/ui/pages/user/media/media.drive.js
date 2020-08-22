@@ -240,9 +240,9 @@ Template.Media_drive.helpers({
         let queryType = fileType.substring(0, 3);
 
         if (fileType == "other") {
-            return Files.find({ "is_video": false, "is_image": false, "deleting": { $exists: false } });
+            return Files.find({ "is_video": false, "is_image": false, "deleting": { $exists: false }, "module": {$exists: false} });
         } else {
-            return Files.find({ "file.mimetype": { $regex: ".*" + queryType + ".*" }, "deleting": { $exists: false } })
+            return Files.find({ "file.mimetype": { $regex: ".*" + queryType + ".*" }, "deleting": { $exists: false }, "module": {$exists: false} })
         }
     },
     'editingFile': function () {

@@ -152,7 +152,7 @@
                     <div>{{collection.title}}</div>
                     <div>{{collection.title}}</div>
                 </div>
-                <div class="products two_column {{is_two_column collection._id}}">
+                <div class="products {{is_two_column collection._id}}">
                     {{#each productId in collection.products}}
                     {{#with get_product productId}}
                     <div class="product">

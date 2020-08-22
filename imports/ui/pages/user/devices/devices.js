@@ -22,8 +22,8 @@ Template.Devices.onRendered(function () {
         let device = Devices.findOne(deviceId);
         let view = Session.get(SELECTED_VIEW);
         if (device) {
-            if(!view) view = device.published_view;
-            
+            if (!view) view = device.published_view;
+
             device["selected_view"] = view;
             DeviceEdit.remove({});
             DeviceEdit.insert(device);
@@ -106,14 +106,31 @@ Template.Devices.helpers({
     'editing_device': function () {
         return DeviceEdit.findOne();
     },
+    'selected_module': function () {
+
+    },
+    "modules_list": function () {
+        return Modules.find().fetch();
+    },
     "get_view_files": function (device) {
         //let device = Template.instance().data.device;
         if (device && device.published_view) {
 
-            if(device.published_view in device.views){
+            if (device.published_view in device.views) {
+
+                if (device.published_view == "module") {
+                    let module = Modules.findOne(device.views[device.published_view].id);
+
+                    if (module) {
+                        return [module.file];
+                    }
+
+                    return [];
+                }
+
                 return device.views[device.published_view].files;
             }
-            
+
         }
 
         return [];
@@ -123,7 +140,18 @@ Template.Devices.helpers({
         let device = DeviceEdit.findOne();
         //let view = tmpl.selectedDisplayView.get();
         if (device && device.published_view) {
-            if(device.published_view in device.views){
+            if (device.published_view in device.views) {
+
+                if (device.published_view == "module") {
+                    let module = Modules.findOne(device.views[device.published_view].id);
+
+                    if (module) {
+                        return [module.file];
+                    }
+
+                    return [];
+                }
+
                 return device.views[device.published_view].files;
             }
         }
@@ -193,6 +221,11 @@ Template.Devices.helpers({
                 "key": "display_view",
                 "value": "image",
                 "label": "Image"
+            },
+            {
+                "key": "display_view",
+                "value": "module",
+                "label": "Module"
             }
         ];
     },
@@ -221,6 +254,21 @@ Template.Devices.events({
     'click .js-device-edit': function (e, tmpl) {
         let deviceId = $(e.currentTarget).data("device");
         Session.set(DEVICE_EDIT_ID, deviceId);
+    },
+    'click .js-module-select': function (e) {
+        let target = $(e.currentTarget);
+        let moduleId = target.data("module");
+        let device = DeviceEdit.findOne();
+
+        let data = {};
+        data["views.module"] = {
+            "id": moduleId,
+            "files": []
+        };
+
+        Devices.update(device._id, {
+            $set: data
+        });
     },
     'click .js-remove-file': function (e, tmpl) {
         let target = $(e.currentTarget);
