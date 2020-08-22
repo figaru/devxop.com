@@ -120,16 +120,37 @@ Template.Modules.events({
     'click .js-generate': function () {
         let elem = $("#module-iframe").contents().find('#canvas');
 
-        $("#module-iframe").css({ "width": "1080px", "height": "1920px" });
+        $("#module-iframe").css({ "width": "1080px", "height": "1920px", "transform": "translateX(-1000%)" });
         toCanvas(elem[0], { width: 1080, height: 1920 }).then(function (canvas) {
-            $("#module-iframe").css({ "width": "278px", "height": "483px" });
+            $("#module-iframe").css({ "width": "278px", "height": "483px", "transform": "translateX(0)" });
 
             /* console.log(canvas.toDataURL()); */
 
             canvas.toBlob(function (blob) {
                 const img_from_canvas = document.getElementById("image");
                 let url = URL.createObjectURL(blob);
-                img_from_canvas.src = url;
+                /* img_from_canvas.src = url; */
+
+                Jimp.read(url)
+                    .then(image => {
+                        // Do stuff with the image.
+                        image.rotate(-90);
+                        image.getBase64Async(Jimp.MIME_JPEG).then(data => {
+
+                            fetch(data)
+                                .then(res => {
+                                    res.blob().then(blob => {
+                                        let blobUrl = URL.createObjectURL(blob);
+                                        console.log(blobUrl);
+                                        img_from_canvas.src = blobUrl;
+                                    });
+
+                                })
+                        });
+                    })
+                    .catch(err => {
+                        // Handle an exception.
+                    });
             });
         });
     },
