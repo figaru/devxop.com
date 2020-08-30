@@ -307,15 +307,20 @@ Template.Devices.events({
         let device = DeviceEdit.findOne();
         if (device) {
             target.attr("disabled", true);
-
+            Devices.update(device._id, {
+                $set: {
+                    "system_force": true
+                }
+            });
             setTimeout(function () {
-                Meteor.call("devices.emit.restart", device._id, function (err) {
+                /* Meteor.call("devices.emit.restart", device._id, function (err) {
                     if (err) {
                         console.log("an error ocurred");
                     }
 
-                    target.removeAttr("disabled");
-                });
+                    
+                }); */
+                target.removeAttr("disabled");
             }, 2000)
 
         }

@@ -12,14 +12,18 @@ Meteor.methods({
             //reset version
             Devices.update(deviceId, {
                 $set: {
-                    "v_id": 0
+                    "v_id": 0,
+                    "update": true
                 }
             })
         } else {
             //increment
             Devices.update(deviceId, {
+                $set:{
+                    "update": true
+                },
                 $inc: {
-                    "v_id": 1
+                    "v_id": 1,
                 }
             });
         }
