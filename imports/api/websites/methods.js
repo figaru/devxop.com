@@ -155,11 +155,12 @@ Meteor.methods({
                 for (let i = 0; i < menus.length; i++) {
                     let menuCollection = menus[i];
 
-                    menuCollection.products = Products.find({ _id: { $in: menuCollection.products } }).fetch();
+                    //menuCollection.products = Products.find({ _id: { $in: menuCollection.products } }).fetch();
 
                     for (let z = 0; z < menuCollection.products.length; z++) {
 
-                        let product = menuCollection.products[z];
+                        let product = Products.findOne(menuCollection.products[z]);
+                        menuCollection.products[z] = product;
                         menuCollection.products[z].img = fileUrl(product.img, "thumb");
 
                         if (z == 0) {
