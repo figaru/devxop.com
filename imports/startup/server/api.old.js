@@ -48,7 +48,7 @@ module.exports = function (Router) {
                         let fileId = views.video.files[0];
                         let file = Files.findOne({ '_id': fileId });
                         if (file) {
-                            let fileDownloadObject = fileUrlSmall(file._id, "video");
+                            let fileDownloadObject = downloadFile(file._id, "video");
 
                             data.display = "video";
                             data.url = fileDownloadObject;
@@ -62,7 +62,7 @@ module.exports = function (Router) {
                         let fileId = views.image.files[0];
                         let file = Files.findOne({ '_id': fileId });
                         if (file) {
-                            let fileDownloadObject = fileUrlSmall(file._id, "main");
+                            let fileDownloadObject = downloadFile(file._id, "main");
                             data.display = "image";
                             data.url = fileDownloadObject;
                         }
@@ -78,7 +78,7 @@ module.exports = function (Router) {
                         if (module) {
                             let file = Files.findOne({ '_id': module.file });
                             if (file) {
-                                let fileDownloadObject = fileUrlSmall(file._id, "main");
+                                let fileDownloadObject = downloadFile(file._id, "main");
 
                                 data.display = "image";
                                 data.url = fileDownloadObject;

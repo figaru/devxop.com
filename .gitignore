@@ -2,3 +2,4 @@ node_modules/
 private/
 public/.well-known/
 .deploy/
+output/
