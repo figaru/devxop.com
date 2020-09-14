@@ -141,7 +141,7 @@ Meteor.methods({
 
                 for (let z = 0; z < hightlights.products.length; z++) {
                     let product = hightlights.products[z];
-                    hightlights.products[z].img = fileUrl(product.img, "thumb");
+                    hightlights.products[z].img = fileUrl(product.img, "main");
                 }
 
                 res.highlights = hightlights;
@@ -171,8 +171,8 @@ Meteor.methods({
                     finalMenu.push(menuCollection);
 
                 }
-                menus.products = Products.find({ _id: { $in: hightlights.products } }).fetch();
-                res.highlights = hightlights;
+                /* menus.products = Products.find({ _id: { $in: hightlights.products } }).fetch();
+                res.highlights = hightlights; */
                 res.menu = finalMenu;
 
             }
